@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body{
+    width: 100%;
+    height:100%;
+    display: block;
+    position: relative;
+    background-color: #14181C;
+}
+
+.navbar .nav-item {
+    font-size: 1.4rem;
+    font-family: Kelly Slab, cursive;
+}
+
+#carousel {
+    width: 100%;
+    height: 450px;
+    background:
+    url(../IMAGES/pseudophoto.jpg);
+    background-size: cover;
+    box-shadow: 10px 20px 40px 40px #14181C inset, -10px -20px 40px 40px #14181C inset;
+    margin-top: 20px;
+}
+.row{
+    margin-top: -45px;
+}
+
+h1{
+    color: white;
+    font-size: 2rem;
+    font-family: Kelly Slab, cursive;
+    font-weight: 400;
+}
+p, h5{
+    color: #9ab;
+    font-size: 1.2rem;
+}
+
+
