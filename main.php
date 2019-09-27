@@ -18,6 +18,7 @@ require 'config/config.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -40,7 +41,7 @@ require 'config/config.php';
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Your Watchlist</a>
-                    </li>
+                    </li>z
                     <li class="nav-item">
                         <a href="#" class="nav-link">Login</a>
                     </li>

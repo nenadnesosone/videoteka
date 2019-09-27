@@ -9,7 +9,7 @@ body{
     display: block;
     position: relative;
     background-color: #14181C;
-
+    font-family: Forum, cursive;
 }
 
 .navbar .nav-item {
