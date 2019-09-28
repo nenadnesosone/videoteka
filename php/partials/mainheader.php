@@ -27,5 +27,5 @@
            </div>
        </div>
    </nav>';
-
+///userpage.php link sam stavio samo radi testiranja, kada se uspesno uloguje korisnik bi trebalo odmah da se preusmeri ka toj stranici, ili bar link da se pojavi
 ?>
