@@ -36,7 +36,7 @@ require 'includes/form_handlers/login_handler.php';
             </script>
         ';
     }
-    ?>\
+    ?>
 
 
     <!-- NAV -->
