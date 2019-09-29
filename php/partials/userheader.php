@@ -1,5 +1,6 @@
 <?php
-
+/// zakomentarisao sam jer $username nije definisan tj. nemogu da se ulogujem :)
+/// $_SESSION['username'] = $username;
 
 // umesto Your Wachlist bi trebalo staviti "naziv korisinika" Wachlist
    echo '    <!-- NAV -->
@@ -18,7 +19,7 @@
                        <a href="main.php" class="nav-link">Home</a>
                    </li>
                    <li class="nav-item">
-                       <a href="userlist.php" class="nav-link">Your Watchlist</a>
+                   <a href="userlist.php" class="nav-link">'; /*. $_SESSION['username'] . */ echo ' Watchlist</a>
                    </li>
                    <li class="nav-item">
                        <a href="signout.php" class="nav-link">Sign Out</a>
