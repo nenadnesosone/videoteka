@@ -1,5 +1,5 @@
 <?php
-/// zakomentarisao sam jer $username nije definisan tj. nemogu da se ulogujem :)
+/// zakomentarisao sam jer $username nije definisan tj. ne mogu da se ulogujem :)
 /// $_SESSION['username'] = $username;
 
 // umesto Your Wachlist bi trebalo staviti "naziv korisinika" Wachlist

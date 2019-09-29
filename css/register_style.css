@@ -20,7 +20,7 @@ a {
     display: inline-block;
     margin-bottom: 7px;
 }
-a:hover {
+.wrapper a:hover {
     color: #456 !important;
     transform: scale(1.05);
     transition: transfrom 0.5s;

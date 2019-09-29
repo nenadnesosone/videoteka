@@ -5,7 +5,7 @@ class UserData{
 
     public $userId;
     public $fname;
-    public $$lname;
+    public $lname;
     public $username;
     public $em;
     public $password;
