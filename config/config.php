@@ -3,7 +3,12 @@ ob_start();
 session_start();
 $timezone = date_default_timezone_set("Europe/Belgrade");
     //konekcija sa bazom
-class Database {
+    $con = mysqli_connect("localhost", "root", "", "cinema");
+    if (mysqli_connect_errno()) {
+        echo "Failed to connect: " . mysqli_connect_errno();
+    }
+
+/*class Database {
     // Ova promenljiva ce drzati konekciju ka bazi podataka.
     private $con;
     
@@ -56,6 +61,6 @@ class Database {
 	public function getConnection() {
 		return $this->con;
 	}
-}
+}*/
 
 ?>
