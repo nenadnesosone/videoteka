@@ -81,8 +81,8 @@ class UserData{
         $date = $reg['RegistrationDate'];
         $profile_picture = $reg['ProfilePicture'];
 
-        $query = "INSERT INTO users_data ('UserId','FirstName','LastName','UserName','Email','Password','RegistrationDate','ProfilePicture') 
-        VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')";
+        $query = "INSERT INTO users_data (`UserId`,`FirstName`,`LastName`,`UserName`,`Email`,`Password`,`RegistrationDate`,`ProfilePicture`) 
+        VALUES (DEFAULT, '$fname', '$lname','$username','$em','$password','$date','$profile_picture')";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;

@@ -64,7 +64,7 @@ class UserMovieData{
         $userId = $selected['Userid'];
         $movieId = $selected['MovieId'];
         
-        $query = "INSERT INTO users_movies ('UserId','MovieId') VALUES ('$userId', '$movieId')";
+        $query = "INSERT INTO users_movies (`UserId`,`MovieId`) VALUES ('$userId', '$movieId')";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;

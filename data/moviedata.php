@@ -92,8 +92,8 @@ class MovieData{
         $image = $newfilm['Image'];
 
         // ubacivanje filmova u bazu 	 	 	
-        $query = "INSERT INTO movies ('MovieId ', 'Title', ' ReleaseYear', 'Genre', 'Director', 'LeadingActor', 'Country', 'Language', 'Summary', 'ImdbRating', 'ImageUrl', 'Image') 
-        VALUES ('', '$title', ' $releaseYear', '$genre', '$director', '$leadingActor', '$country', '$language', '$summary', '$imdbRating', '$imageUrl', '$image')";
+        $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image`) 
+        VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image')";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;
