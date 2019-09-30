@@ -1,6 +1,7 @@
 <?php
-require 'config\config.php';
+require_once 'config\config.php';
 
+// klasa uz ciju pomoc cemo pristupati podacima o filmovima
 class MovieData{
 
     //deklarisanje varijabli

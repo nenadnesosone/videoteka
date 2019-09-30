@@ -14,7 +14,7 @@ if (isset($_POST['reset_request_submit'])) {
     $userEmail = $_POST['reset_email'];
 
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
-    $stmt = mysqli_stmt_init($con);
+    $stmt = mysqli_stmt_init(Database::getInstance()->getConnection());
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "There was an error!";
         exit();
@@ -24,7 +24,7 @@ if (isset($_POST['reset_request_submit'])) {
     }
 
     $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($con);
+    $stmt = mysqli_stmt_init(Database::getInstance()->getConnection());
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "There was an error!";
         exit();
@@ -35,7 +35,7 @@ if (isset($_POST['reset_request_submit'])) {
     }
 
     mysqli_stmt_close($stmt);
-    mysqli_close($con);
+    mysqli_close(Database::getInstance()->getConnection());
 
     $to = $userEmail;
 

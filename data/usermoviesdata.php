@@ -1,6 +1,7 @@
 <?php
-require 'config\config.php';
+require_once 'config\config.php';
 
+// klasa uz ciju pomoc cemo pristupati korisnickim podacima i njihovim filmovima
 class UserMovieData{
 
     //deklarisanje varijabli

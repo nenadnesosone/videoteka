@@ -1,6 +1,7 @@
 <?php
-require 'config\config.php';
+require_once 'config\config.php';
 
+// klasa uz ciju pomoc cemo pristupati korisnickim podacima
 class UserData{
 
     public $userId;
@@ -67,19 +68,11 @@ class UserData{
     }
 
 
-    // funkcija za ubacivanje korisnika u bazu ako zelimo da je koristimo 
-    public static function CreateUser($reg)
+    // funkcija za ubacivanje korisnika u bazu
+    public static function CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
-
-        $fname = $reg['FirstName'];
-        $lname = $reg['LastName'];
-        $username = $reg['UserName'];
-        $em = $reg['Email'];
-        $password = $reg['Password'];
-        $date = $reg['RegistrationDate'];
-        $profile_picture = $reg['ProfilePicture'];
 
         $query = "INSERT INTO users_data (`UserId`,`FirstName`,`LastName`,`UserName`,`Email`,`Password`,`RegistrationDate`,`ProfilePicture`) 
         VALUES (DEFAULT, '$fname', '$lname','$username','$em','$password','$date','$profile_picture')";
@@ -91,7 +84,7 @@ class UserData{
         }
     }
 
-    // funkcija za brisanje korisnika iz bazu ako zelimo da je koristimo
+    // funkcija za brisanje korisnika iz baze ako zelimo da je koristimo
     public static function DeleteOneUser($userId)
     {
         //povezujemo se s bazom
@@ -113,14 +106,14 @@ class UserData{
     }
 
     // funkcija za update korisnika iz bazu ako zelimo da je koristimo
-    public static function UpdateOneUser($userId, $newem)
+    public static function UpdateUserEmail($userId, $newem)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
 
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
-        // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
+        //  update emaila u bazi	 	 	 	 	 	 	 	 	 	
         $query = "UPDATE users_data WHERE UserId=$userId SET Email=$newem";
         $result = mysqli_query($db, $query);
         if ($result) {
@@ -130,10 +123,46 @@ class UserData{
         }
     }
 
+    //provera da li email vec postoji u bazi
+    public static function CheckEmail($em)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
 
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
+        // odaberemo konkretan email
+        $query = "SELECT Email FROM users_data WHERE Email ='$em'";
+        $e_check = mysqli_query($db, $query);
+        $num_rows = mysqli_num_rows($e_check);
+        //ako ima vise redova od 0 postoji u bazi
+        if ($num_rows>0) {
+            return false;
+        } else{
+            return true;
+        }
     
-}
+    }
+
+    // provera da li je username postoji u bazi
+    public static function CheckUsername($username)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca $username
+
+        // odaberemo konkretnog korisnika
+        $query = "SELECT UserName FROM users_data WHERE UserName = '$username'";
+        $check_username_query = mysqli_query($db, $query);
+        $i = 0;
+        // Ako postoji u bazi username, dodati mu broj
+        while (mysqli_num_rows($check_username_query) !=0) {
+            $i++;
+            $username = $username . "_" . $i;
+            $check_username_query = mysqli_query($db, $query);
+        }
+    }
 	 		 	 	 	 	 	 	 	 	
 
 ?>
