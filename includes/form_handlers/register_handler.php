@@ -50,7 +50,6 @@ if (isset($_POST['register_button'])) {
             $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
             //provera da li je vec koriscen taj email
-            UserData::CheckEmail($em);
 
             /*$e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
             $num_rows = mysqli_num_rows($e_check);*/
