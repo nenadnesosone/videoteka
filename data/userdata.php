@@ -163,6 +163,7 @@ class UserData{
             $check_username_query = mysqli_query($db, $query);
         }
     }
-	 		 	 	 	 	 	 	 	 	
+	
+}
 
 ?>
