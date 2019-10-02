@@ -15,13 +15,10 @@
                        <a href="main.php" class="nav-link">Home</a>
                    </li>
                    <li class="nav-item">
-                       <a href="userpage.php" class="nav-link">Your Watchlist</a>
+                       <a href="watchlist.php" class="nav-link">Your Watchlist</a>
                    </li>
                    <li class="nav-item">
-                       <a href="register.php" class="nav-link">Login</a>
-                   </li>
-                   <li class="nav-item">
-                       <a href="register.php" class="nav-link">Sign Up</a>
+                       <a href="register.php" class="nav-link">Login/SignUp</a>
                    </li>
                </ul>
            </div>

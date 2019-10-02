@@ -21,6 +21,7 @@ require 'config/config.php';
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 
+
 </head>
 
 <body>
@@ -39,7 +40,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button role="button" class="btn btn-small"> <a href="singleMovie.php" class="btn-link">More Info</a></button>
                         </div>
                     </div>
@@ -54,7 +55,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -69,7 +70,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -84,7 +85,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -99,7 +100,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -114,7 +115,7 @@ require 'config/config.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -130,4 +131,8 @@ require 'config/config.php';
 
 
 
-</body>
+    <script src="js/main.js" type="text/javascript"> </script>
+    <?php
+    require 'php\partials\footer.php';
+    
+    ?>

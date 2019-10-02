@@ -16,7 +16,7 @@
                        <a href="main.php" class="nav-link">Home</a>
                    </li>
                    <li class="nav-item">
-                   <a href="userlist.php" class="nav-link">'. $_SESSION['username'] . ' Watchlist</a>
+                   <a href="watchlist.php" class="nav-link">'. $_SESSION['username'] . ' Watchlist</a>
                    </li>
                    <li class="nav-item">
                        <a href="signout.php" class="nav-link">Sign Out</a>

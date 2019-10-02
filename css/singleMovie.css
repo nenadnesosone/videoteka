@@ -25,7 +25,7 @@ body{
     url(../IMAGES/pseudophoto.jpg);
     background-size: cover;
     box-shadow: 10px 20px 40px 40px #14181C inset, -10px -20px 40px 40px #14181C inset;
-    margin-top: 20px;
+    margin-top: -45px;
 }
 .row{
     margin-top: -45px;
@@ -40,6 +40,16 @@ h1{
 p, h5{
     color: #9ab;
     font-size: 1.2rem;
+}
+
+.page-footer {
+    margin-top: 10px;
+    background-color: #2c3440;
+}
+
+.page-footer a, .footer-copyright {
+    text-decoration: none !important;
+    color: #9ab;
 }
 
 

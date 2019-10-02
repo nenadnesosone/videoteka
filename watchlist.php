@@ -24,11 +24,11 @@ require 'config/config.php';
 </head>
 
 <body>
-    
 
-<?php
-require 'php\partials\userheader.php';
-?>
+
+    <?php
+    require 'php\partials\userheader.php';
+    ?>
     <!-- GALERIJA -->
     <!--- Ovde bi trebalo staviti funkcionalnosti pravljenja liste kad se klikne na add to watchlist--->
     <div class="container m-auto">
@@ -37,7 +37,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button role="button" class="btn btn-small"> <a href="singleMovie.php" class="btn-link">More Info</a></button>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -68,7 +68,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -98,7 +98,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ require 'php\partials\userheader.php';
                 <div class="card border-0">
                     <div class="modal">
                         <div class="modal-content">
-                            <button class="btn btn-small mb-2">Add To Watchlist</button>
+                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
                             <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
                         </div>
                     </div>
@@ -129,4 +129,8 @@ require 'php\partials\userheader.php';
 
 
 
-</body>
+    <script src="js/main.js" type="text/javascript"> </script>
+    <?php
+    require 'php\partials\footer.php';
+
+    ?>

@@ -52,4 +52,8 @@ require 'config/config.php';
             </div>
         </div>
     </div>
-</body>
+
+    <?php
+    require 'php\partials\footer.php';
+    
+    ?>
