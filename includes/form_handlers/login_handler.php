@@ -17,7 +17,7 @@ if (isset($_POST['login_button'])) {
 
         $_SESSION['username'] = $username;
         $_SESSION['userid'] = $userid;
-        header("Location: userpage.php");
+        header("Location: watchlist.php");
         
         $_SESSION['log_email'] = "";
 
