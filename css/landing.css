@@ -64,12 +64,6 @@ body{
   animation-delay: 40s; 
 }
 
-
-
-
-
-
-
 @keyframes imageAnimation { 
   0% { 
     opacity: 0; 
@@ -84,5 +78,52 @@ body{
   }
   30% {
     opacity: 0
+  }
+}
+
+.wrap {
+  position: absolute;
+  top: 59.2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.text {
+  color: #fb1717;
+  display: inline-block;
+  margin-left: 5px;
+}
+.bounceball {
+  position: relative;
+  display: inline-block;
+  height: 37px;
+  width: 15px;
+  opacity: 0.8;
+}
+.bounceball:before {
+  position: absolute;
+  content: '';
+  display: block;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #fb1717;
+  transform-origin: 50%;
+  animation: bounce 500ms alternate infinite ease;
+}
+@keyframes bounce {
+  0% {
+    top: 30px;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: 15px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
   }
 }

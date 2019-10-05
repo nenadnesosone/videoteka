@@ -19,7 +19,7 @@
                    <a href="watchlist.php" class="nav-link">'. $_SESSION['username'] . ' Watchlist</a>
                    </li>
                    <li class="nav-item">
-                       <a href="signout.php" class="nav-link">Sign Out</a>
+                       <a href="profile.php" class="nav-link">Profile</a>
                    </li>
                </ul>
            </div>

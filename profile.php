@@ -28,7 +28,21 @@ require 'includes/form_handlers/profile_handler.php';
     if (isset($_POST['delete_button'])) {
         header('Location: main.php');
     }
+
+
+    if (isset($_POST['update_button'])) {
+        echo '
+            <script>
+            $(document).ready(function() {
+                $("#first").hide();
+                $("#second").show();
+            });
+            </script>
+        ';
+    }
     ?>
+
+
 
 
     <!-- NAV -->
@@ -125,9 +139,10 @@ require 'includes/form_handlers/profile_handler.php';
                                                                     }
 
                                                                 ?>
-                    <input type="submit" name="delete_button" value="Delete">
-                    <?php if (in_array("<span style='color:#14C800;'>You have updated your account!</span><br>", $error_array)) echo "<span style='color:#14C800;'>You have updated your account!</span><br>"; ?>
-                    <br>
+                    <input type="submit" name="delete_button" value="Delete"><br>
+                    <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
+                    <?php if (in_array("You have updated your Last Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Last Name!</span><br>"; ?>
+                    <?php if (in_array("You have updated your Password!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Password!</span><br>"; ?>
                     <a href="reset_password.php">Forgot your password?</a>
                     <br>
                     <a href="#" id="update" class="update">You want to Sign out?</a>

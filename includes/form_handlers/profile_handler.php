@@ -38,7 +38,6 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
             //brisemo podatke iz sesije i brisemo korisnika
             session_destroy();
             Userdata::DeleteOneUser($userId);
-            header('Location: ../../main.php');
         } else {
             if(!empty($_POST['update_fname'])){
 
@@ -67,6 +66,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     $_SESSION['username'] = $username;
                     // menjamo podatke
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                    array_push($error_array, "You have updated your First Name!");
                 }
             }
             if(!empty($_POST['update_lname'])){
@@ -97,6 +97,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     $_SESSION['username'] = $username;
                     // menjamo podatke
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                    array_push($error_array, "You have updated your Last Name!");
                 }
                 
             }
@@ -113,7 +114,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     //lozinka moze da sadrzi samo slova i brojeve
                     array_push($error_array,  "Your password can only contain english characters and numbers");
                 }else if(strlen($newpassword) >30 || strlen($newpassword) < 5) {
-                    //odgovarajuca duzina lozinke
+                    //neodgovarajuca duzina lozinke
                     array_push($error_array, "Your password must be between 5 and 30 characters"); 
                 } else {
                     $newpassword = md5($newpassword);    //enkripcija lozinke
@@ -122,6 +123,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
 
                     // menjamo podatke
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                    array_push($error_array, "You have updated your Password!");
                 }
             }            
         }
