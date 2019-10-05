@@ -1,7 +1,5 @@
 <?php
 
-require_once 'data\userdata.php';
-
 //Deklarisanje varijabli
 $fname = "";
 $lname = "";
@@ -15,33 +13,33 @@ $error_array = array();
 if (isset($_POST['register_button'])) {
     
     //Ime
-    $fname = htmlspecialchars(strip_tags($_POST['reg_fname'])); //uklanja HTML elemente
+    $fname = strip_tags($_POST['reg_fname']); //uklanja HTML elemente
     $fname = str_replace(' ', '', $fname); //uklanja razmake
     $fname = ucfirst(strtolower($fname)); //ostavlja samo prvo slovo veliko
     $_SESSION['reg_fname'] = $fname; //cuva se u sesiji ime
 
     //Prezime
-    $lname = htmlspecialchars(strip_tags($_POST['reg_lname'])); //uklanja HTML elemente
+    $lname = strip_tags($_POST['reg_lname']); //uklanja HTML elemente
     $lname = str_replace(' ', '', $lname); //uklanja razmake
     $lname = ucfirst(strtolower($lname)); //ostavlja samo prvo slovo veliko
     $_SESSION['reg_lname'] = $lname; //cuva se u sesiji prezime
     
     //Email
-    $em = htmlspecialchars(strip_tags($_POST['reg_email'])); //uklanja HTML elemente
+    $em = strip_tags($_POST['reg_email']); //uklanja HTML elemente
     $em = str_replace(' ', '', $em); //uklanja razmake
     // $em = ucfirst(strtolower($em));
     $_SESSION['reg_email'] = $em; //cuva se u sesiji email
 
 
     //email 2
-    $em2 = htmlspecialchars(strip_tags($_POST['reg_email2'])); //uklanja HTML elemente
+    $em2 = strip_tags($_POST['reg_email2']); //uklanja HTML elemente
     $em2 = str_replace(' ', '', $em2); //uklanja razmake
     // $em2= ucfirst(strtolower($em2));
     $_SESSION['reg_email2'] = $em2; //cuva se u sesiji email2
 
     //Lozinka
-    $password = htmlspecialchars(strip_tags($_POST['reg_password'])); //uklanja HTML elemente
-    $password2 = htmlspecialchars(strip_tags($_POST['reg_password2'])); //uklanja HTML elemente
+    $password = strip_tags($_POST['reg_password']); //uklanja HTML elemente
+    $password2 = strip_tags($_POST['reg_password2']); //uklanja HTML elemente
 
     $date = date("Y-m-d"); //uzima trenutni datum
 
@@ -50,11 +48,10 @@ if (isset($_POST['register_button'])) {
             $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
             //provera da li je vec koriscen taj email
+            $e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
+            $num_rows = mysqli_num_rows($e_check);
 
-            /*$e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
-            $num_rows = mysqli_num_rows($e_check);*/
-
-            if (!UserData::CheckEmail($em)) {
+            if ($num_rows>0) {
                 array_push($error_array, "Email already in use");
             }
 
@@ -75,7 +72,7 @@ if (isset($_POST['register_button'])) {
     }
     //password i password2 moraju da budu isti
     if ($password != $password2) {
-        array_push($error_array, "Your passwords do not match");
+        array_push($error_array, "Your password do not match");
     }else {
         //lozinka moze da sadrzi samo slova i brojeve
         if (preg_match('/[^A-Za-z0-9]/', $password)) {
@@ -92,16 +89,13 @@ if (isset($_POST['register_button'])) {
 
         //povezivanje imena i prezimena u username
         $username = strtolower($fname . "_" . $lname);
-        // Ako postoji u bazi username, dodati mu broj
-        UserData::CheckUsername($username);
-        
-        /*$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");*/
+        $check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         $i = 0;
-        
-        while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {
+        // Ako postoji u bazi username, dodati mu broj
+        while (mysqli_num_rows($check_username_query) !=0) {
             $i++;
             $username = $username . "_" . $i;
-            UserData::CheckUsername($username);
+            $check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         }
 
         //dodeljujemo korisniku random profilnu sliku 
@@ -113,8 +107,8 @@ if (isset($_POST['register_button'])) {
         }
 
         //unos podataka u bazu
-        UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
-     
+        $query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture', '')");
+        
         array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>");
 
         //brisanje podataka iz sesija
@@ -127,3 +121,4 @@ if (isset($_POST['register_button'])) {
 
 
 ?>
+

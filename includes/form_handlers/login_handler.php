@@ -7,7 +7,7 @@ if (isset($_POST['login_button'])) {
     $password = md5($_POST['log_password']);
 
     //provera da li se uneti podaci slazu sa podacima u bazi
-    $check_database_query = mysqli_query(Database::getInstance()->getConnection(), "SELECT * FROM users_data WHERE email='$email' AND password='$password'");
+    $check_database_query = mysqli_query($con, "SELECT * FROM users_data WHERE email='$email' AND password='$password'");
     $check_login_query = mysqli_num_rows($check_database_query);
 
     if ($check_login_query == 1) {

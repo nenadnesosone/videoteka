@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2019 at 05:51 PM
+-- Generation Time: Oct 05, 2019 at 10:23 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.1.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
--- 
+--
 -- Database: `cinema`
 --
 
@@ -46,16 +46,23 @@ CREATE TABLE `movies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pwdtable`
+-- Table structure for table `password_reset`
 --
 
-CREATE TABLE `pwdtable` (
-  `pwdResetId` int(11) NOT NULL,
-  `pwdResetEmail` text COLLATE utf8_unicode_ci NOT NULL,
-  `pwdResetSelector` text COLLATE utf8_unicode_ci NOT NULL,
-  `pwdResetToken` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `pwdResetExpires` text COLLATE utf8_unicode_ci NOT NULL
+CREATE TABLE `password_reset` (
+  `Email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `expDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `password_reset`
+--
+
+INSERT INTO `password_reset` (`Email`, `token`, `expDate`) VALUES
+('ljubica@gmail.com', 'sw0dffihhj', '2019-10-06 21:20:30'),
+('marko@gmail.com', '67hpls2foc', '2019-10-06 22:23:12'),
+('petar@gmail.com', '780m5o4fkf', '2019-10-06 22:16:17');
 
 -- --------------------------------------------------------
 
@@ -71,20 +78,23 @@ CREATE TABLE `users_data` (
   `Email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `RegistrationDate` date NOT NULL,
-  `ProfilePicture` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `ProfilePicture` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Token` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users_data`
 --
 
-INSERT INTO `users_data` (`UserId`, `FirstName`, `LastName`, `UserName`, `Email`, `Password`, `RegistrationDate`, `ProfilePicture`) VALUES
-(3, 'Ljubica', 'Zeravic', 'ljubica_zeravic', 'ljubica@gmail.com', 'a3bf9648867756398784b458496abd09', '2019-09-15', 'images/profile_pictures/head_alizarin.png'),
-(4, 'Ljubica', 'Zeravic', 'ljubica_zeravic_1', 'ljubica1@gmail.com', '59593f7f0164c0aeddaf393c670bc321', '2019-09-15', 'images/profile_pictures/head_belize_hole.png'),
-(5, 'Mickey', 'Mouse', 'mickey_mouse', 'mickey@gmail.com', '4d5257e5acc7fcac2f5dcd66c4e78f9a', '2019-09-15', 'images/profile_pictures/head_belize_hole.png'),
-(6, 'Mickey', 'Mouse', 'mickey_mouse_1', 'mickey1@gmail.com', '40203abe6e81ed98cbc97cdd6ec4f144', '2019-09-15', 'images/profile_pictures/head_belize_hole.png'),
-(7, 'Petar', 'Petrovic', 'petar_petrovic', 'petar@gmail.com', '597e3b12820151caa6062612caec8056', '2019-09-15', 'images/profile_pictures/head_belize_hole.png'),
-(8, 'Marko', 'Markovic', 'marko_markovic', 'marko@gmail.com', 'c28aa76990994587b0e907683792297c', '2019-09-18', 'images/profile_pictures/head_alizarin.png');
+INSERT INTO `users_data` (`UserId`, `FirstName`, `LastName`, `UserName`, `Email`, `Password`, `RegistrationDate`, `ProfilePicture`, `Token`) VALUES
+(3, 'Ljubica', 'Zeravic', 'ljubica_zeravic', 'ljubica@gmail.com', 'a3bf9648867756398784b458496abd09', '2019-09-15', 'images/profile_pictures/head_alizarin.png', 'wf38o2xafc'),
+(4, 'Ljubica', 'Zeravic', 'ljubica_zeravic_1', 'ljubica1@gmail.com', '59593f7f0164c0aeddaf393c670bc321', '2019-09-15', 'images/profile_pictures/head_belize_hole.png', ''),
+(5, 'Mickey', 'Mouse', 'mickey_mouse', 'mickey@gmail.com', '4d5257e5acc7fcac2f5dcd66c4e78f9a', '2019-09-15', 'images/profile_pictures/head_belize_hole.png', ''),
+(7, 'Petar', 'Petrovic', 'petar_petrovic', 'petar@gmail.com', '597e3b12820151caa6062612caec8056', '2019-09-15', 'images/profile_pictures/head_belize_hole.png', ''),
+(8, 'Marko', 'Markovic', 'marko_markovic', 'marko@gmail.com', 'c28aa76990994587b0e907683792297c', '2019-09-18', 'images/profile_pictures/head_alizarin.png', ''),
+(11, 'Ljubica', 'Zeravic', 'ljubica_zeravic_1_2', 'ljubicazeravic@gmail.com', '59593f7f0164c0aeddaf393c670bc321', '2019-09-27', 'images/profile_pictures/head_alizarin.png', '8fcfhkcip4'),
+(15, 'Petar', 'Petrovic', 'petar_petrovic_1', 'petarp@gmail.com', 'ac0cec0839270d344bda468cb14f3190', '2019-10-03', 'images/profile_pictures/head_belize_hole.png', ''),
+(18, 'Marko', 'Markovic', 'marko_markovic_1', 'fdsaaf@gmail.com', 'fa3e98adb3b88f10d29e494232b1e5f8', '2019-10-05', 'images/profile_pictures/head_alizarin.png', '');
 
 -- --------------------------------------------------------
 
@@ -108,16 +118,17 @@ ALTER TABLE `movies`
   ADD PRIMARY KEY (`MovieId`);
 
 --
--- Indexes for table `pwdtable`
+-- Indexes for table `password_reset`
 --
-ALTER TABLE `pwdtable`
-  ADD PRIMARY KEY (`pwdResetId`);
+ALTER TABLE `password_reset`
+  ADD PRIMARY KEY (`Email`);
 
 --
 -- Indexes for table `users_data`
 --
 ALTER TABLE `users_data`
-  ADD PRIMARY KEY (`UserId`);
+  ADD PRIMARY KEY (`UserId`),
+  ADD KEY `Email` (`Email`);
 
 --
 -- Indexes for table `users_movies`
@@ -137,20 +148,20 @@ ALTER TABLE `movies`
   MODIFY `MovieId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `pwdtable`
---
-ALTER TABLE `pwdtable`
-  MODIFY `pwdResetId` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users_data`
 --
 ALTER TABLE `users_data`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `password_reset`
+--
+ALTER TABLE `password_reset`
+  ADD CONSTRAINT `password_reset_ibfk_1` FOREIGN KEY (`Email`) REFERENCES `users_data` (`Email`);
 
 --
 -- Constraints for table `users_movies`
