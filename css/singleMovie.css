@@ -56,6 +56,117 @@ button:hover {
     color: #fff !important;
     text-decoration: none !important;
 }
+
+.slides img {
+    height: 400px;
+}
+
+.demo {
+    height: 100px;
+    width: 130px;
+}
+.column {
+    float: left;
+    width: 20%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin: auto;
+    padding: 0;
+    width: 700px;
+    display: block;
+}
+
+.close {
+    color: #999;
+    position: absolute;
+    top: 0;
+    right: 20;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.slides {
+    display: none;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #14181C;
+}
+
+.numbertext {
+    color: #999;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 10;
+}
+
+.caption-container {
+    text-align: center;
+    padding: 2px 16px;
+    
+}
+
+img.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+img.hover-shadow {
+    transition: 0.3s;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .page-footer {
     margin-top: 10px;
     background-color: #2c3440;
@@ -65,6 +176,5 @@ button:hover {
     text-decoration: none !important;
     color: #9ab;
 }
-
 
 
