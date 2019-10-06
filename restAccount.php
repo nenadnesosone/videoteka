@@ -93,7 +93,7 @@ require 'includes/form_handlers/profile_handler.php';
                 </div>
 
             <div id="second">
-                <form action="profile.php" method="POST">
+                <form action="restAccount.php" method="POST">
                     <input type="email" name="profile_email" placeholder="Email Address" value="<?php
                                                                                             if (isset($_SESSION['profile_email'])) {
                                                                                                 echo $_SESSION['profile_email'];

@@ -21,11 +21,11 @@
                    <li class="nav-item dropdown">
                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UserName</a>
                    <div class="dropdown-menu">
-                     <a class="dropdown-item" href="profile.php">Profile</a>
+                     <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
                      <a class="dropdown-item" href="#">Another action</a>
                      <a class="dropdown-item" href="#">Something else here</a>
                      <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="signout.php">Logout</a>
+                     <a class="dropdown-item" href="signout.php">Sign Out</a>
                    </div>
                  </li>
                </ul>
