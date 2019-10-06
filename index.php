@@ -10,7 +10,8 @@ require 'config/config.php';
         <link rel="stylesheet" href="css/landing.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
         <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
-        
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+        <script type='text/javascript' src='js\loading.js'></script>
 
     </head>
     <body>
@@ -27,6 +28,13 @@ require 'config/config.php';
       <li></li>
       <li></li>
     </ul>
+
+    <div class="wrap">
+      <div class="loading">
+        <div class="bounceball"></div>
+        <div class="text">NOW LOADING...</div>
+      </div>
+    </div>
 
 	</body>
 </html>

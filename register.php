@@ -79,9 +79,9 @@ require 'includes/form_handlers/login_handler.php';
             <div id="first">
                 <form action="register.php" method="POST">
                     <input type="email" name="log_email" placeholder="Email address" value="<?php
-                                                                                            if (isset($_SESSION['log_email'])) {
-                                                                                                echo $_SESSION['log_email'];
-                                                                                            } ?>" required>
+                    if (isset($_SESSION['log_email'])) {
+                        echo $_SESSION['log_email'];
+                     } ?>" required>
                     <br>
                     <input type="password" name="log_password" placeholder="Password">
                     <br>
@@ -93,15 +93,15 @@ require 'includes/form_handlers/login_handler.php';
                     <br>
                     <?php
 
-                    if (isset($_POST["newpwd"])) {
-                        if ($_POST["newpwd"] == "passwordupdated") {
-                            echo '<p class="signupsuccess">Your password has been reset!</p>';
-                        }
-                    }
+                    // if (isset($_POST["newpwd"])) {
+                    //     if ($_POST["newpwd"] == "passwordupdated") {
+                    //         echo '<p class="signupsuccess">Your password has been reset!</p>';
+                    //     }
+                    // }
 
                     ?>
-                    <a href="reset_password.php">Forgot your password?</a>
-                    <br>
+                    <a href="reset_password.php" id="reset_link" style="color:blue;display: flex;justify-content: flex-start;padding-left: 77px;margin-top: -65px;">Forgot your password?</a> 
+                    <br><br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
                 </form>
@@ -110,29 +110,29 @@ require 'includes/form_handlers/login_handler.php';
 
                 <form action="register.php" method="POST">
                     <input type="text" name="reg_fname" placeholder="First name" value="<?php
-                                                                                        if (isset($_SESSION['reg_fname'])) {
-                                                                                            echo $_SESSION['reg_fname'];
-                                                                                        } ?>" required>
+                    if (isset($_SESSION['reg_fname'])) {
+                        echo $_SESSION['reg_fname'];
+                    } ?>" required>
                     <br>
                     <?php if (in_array("Your first name must be between 2 and 25 characters", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
 
                     <input type="text" name="reg_lname" placeholder="Last name" value="<?php
-                                                                                        if (isset($_SESSION['reg_lname'])) {
-                                                                                            echo $_SESSION['reg_lname'];
-                                                                                        } ?>" required>
+                        if (isset($_SESSION['reg_lname'])) {
+                            echo $_SESSION['reg_lname'];
+                     } ?>" required>
                     <br>
                     <?php if (in_array("Your last name must be between 2 and 25 characters", $error_array)) echo  "Your last name must be between 2 and 25 characters<br>"; ?>
 
                     <input type="email" name="reg_email" placeholder="Email" value="<?php
-                                                                                    if (isset($_SESSION['reg_email'])) {
-                                                                                        echo $_SESSION['reg_email'];
-                                                                                    } ?>" required>
+                        if (isset($_SESSION['reg_email'])) {
+                         echo $_SESSION['reg_email'];
+                         } ?>" required>
                     <br>
 
                     <input type="email" name="reg_email2" placeholder="Confirm email" value="<?php
-                                                                                                if (isset($_SESSION['reg_email2'])) {
-                                                                                                    echo $_SESSION['reg_email2'];
-                                                                                                } ?>" required>
+                    if (isset($_SESSION['reg_email2'])) {
+                    echo $_SESSION['reg_email2'];
+                   } ?>" required>
                     <br>
                     <?php if (in_array("Email already in use", $error_array)) echo  "Email already in use<br>";
                     else if (in_array("Invalid email format", $error_array)) echo  "Invalid email format<br>";

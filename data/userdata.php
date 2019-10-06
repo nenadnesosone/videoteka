@@ -28,7 +28,7 @@ class UserData{
 
     }
 
-    // funcija koja ce prikupljati podatke o svim korisnicima iz baze (nisam siguran da li nam je potrebno)
+    // funcija koja ce prikupljati podatke o svim korisnicima iz baze
     public static function GetAllUsers()
     {
         //povezujemo se s bazom
@@ -48,7 +48,7 @@ class UserData{
         }
     }
 
-    // funcija koja ce prikupljati podatke o korisnicima iz baze koje cemo koristiti
+    // funcija koja ce prikupljati podatke o korisnicima iz baze
     public static function GetSomeUsers($userId)
     {
         //povezujemo se s bazom
@@ -57,7 +57,7 @@ class UserData{
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
         // odaberemo konkretnog korisnika
-        $query = "SELECT * FROM users_data WHERE userId=$userId";
+        $query = "SELECT * FROM users_data WHERE userId='$userId'";
         $result = mysqli_query($db, $query);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -84,7 +84,7 @@ class UserData{
         }
     }
 
-    // funkcija za brisanje korisnika iz baze ako zelimo da je koristimo
+    // funkcija za brisanje korisnika iz baze
     public static function DeleteOneUser($userId)
     {
         //povezujemo se s bazom
@@ -93,20 +93,17 @@ class UserData{
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
         // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
-        $query = "DELETE FROM users_data WHERE UserId=$userId";
+        $query = "DELETE FROM users_data WHERE UserId='$userId'";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;
-        // brise podatke u sesiji i vraca ga na pocetnu stranu
-            session_destroy();
-            header('Location: main.php');
         } else {
             return false;
         }
     }
 
-    // funkcija za update korisnika iz bazu ako zelimo da je koristimo
-    public static function UpdateUserEmail($userId, $newem)
+    // funkcija za update korisnika iz bazu
+    public static function UpdateUser($userId, $fname, $lname, $username, $password)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -114,7 +111,7 @@ class UserData{
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
         //  update emaila u bazi	 	 	 	 	 	 	 	 	 	
-        $query = "UPDATE users_data WHERE UserId=$userId SET Email=$newem";
+        $query = "UPDATE users_data SET FirstName='$fname', LastName='$lname', UserName='$username',  Password='$password' WHERE UserId='$userId'";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;
@@ -144,8 +141,47 @@ class UserData{
     
     }
 
-    // provera da li je username postoji u bazi
-    public static function CheckUsername($username)
+    // proverava da li postoji korisnik u bazi
+    public static function CheckUser($em, $password)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
+
+        // odaberemo konkretan email
+        $query = "SELECT Email FROM users_data WHERE Email ='$em' AND Password='$password'";
+        $e_check = mysqli_query($db, $query);
+        $num_rows = mysqli_num_rows($e_check);
+        //ako ima vise redova od 0 postoji u bazi
+        if ($num_rows>0) {
+            return true;
+        } else{
+            return false;
+        }
+    
+    }
+
+    // funcija koja ce prikupljati podatke o korisnicima iz baze koje cemo koristiti
+    public static function GetUserRow($em, $password)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
+
+        // odaberemo konkretnog korisnika
+        $query = "SELECT * FROM users_data WHERE Email ='$em' AND Password='$password'";
+        $result = mysqli_query($db, $query);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        } else {
+            return [];
+        }
+    }
+
+    public static function CheckUserName($username)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -155,13 +191,7 @@ class UserData{
         // odaberemo konkretnog korisnika
         $query = "SELECT UserName FROM users_data WHERE UserName = '$username'";
         $check_username_query = mysqli_query($db, $query);
-        $i = 0;
-        // Ako postoji u bazi username, dodati mu broj
-        while (mysqli_num_rows($check_username_query) !=0) {
-            $i++;
-            $username = $username . "_" . $i;
-            $check_username_query = mysqli_query($db, $query);
-        }
+        return $check_username_query;
     }
 	
 }

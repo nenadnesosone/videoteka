@@ -1,7 +1,5 @@
 <?php
 
-require_once 'data\userdata.php';
-
 //Deklarisanje varijabli
 $fname = "";
 $lname = "";
@@ -50,11 +48,10 @@ if (isset($_POST['register_button'])) {
             $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
             //provera da li je vec koriscen taj email
+            $e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
+            $num_rows = mysqli_num_rows($e_check);
 
-            /*$e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
-            $num_rows = mysqli_num_rows($e_check);*/
-
-            if (!UserData::CheckEmail($em)) {
+            if ($num_rows>0) {
                 array_push($error_array, "Email already in use");
             }
 
@@ -92,17 +89,14 @@ if (isset($_POST['register_button'])) {
 
         //povezivanje imena i prezimena u username
         $username = strtolower($fname . "_" . $lname);
-        // Ako postoji u bazi username, dodati mu broj
-        UserData::CheckUsername($username);
-        
-        /*$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
+        $check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         $i = 0;
-        
+        // Ako postoji u bazi username, dodati mu broj
         while (mysqli_num_rows($check_username_query) !=0) {
             $i++;
             $username = $username . "_" . $i;
             $check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
-        }*/
+        }
 
         //dodeljujemo korisniku random profilnu sliku 
         $rand = rand(1, 2);
@@ -112,9 +106,8 @@ if (isset($_POST['register_button'])) {
             $profile_picture = "images/profile_pictures/head_belize_hole.png";
         }
 
-        UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
         //unos podataka u bazu
-        /*$query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");*/
+        $query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture', '')");
         
         array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>");
 
@@ -128,3 +121,4 @@ if (isset($_POST['register_button'])) {
 
 
 ?>
+
