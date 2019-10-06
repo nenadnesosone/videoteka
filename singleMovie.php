@@ -19,6 +19,8 @@ require 'config/config.php';
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/singleMovie.css">
     <script src="js/gallery.js" type="text/javascript"></script>
+    
+    
 
 </head>
 
@@ -48,7 +50,7 @@ require 'config/config.php';
                 <p class="lead">A faded television actor and his stunt double strive to achieve fame and success in the
                     film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.
                 </p>
-                <button class="btn hover-shadow" onclick="openModal();currentSlide(1)">Show gallery</button>
+                <button class="btn hover-shadow" onclick="openModal();currentSlide(1)">Movie Cuts - View Gallery</button>
             </div>
         </div>
 
@@ -59,33 +61,33 @@ require 'config/config.php';
     <!-- slike ce biti iz baze -->
                 <div class="slides">
                     <div class="numbertext">1 / 5</div>
-                    <img src="images/demo1.jpg" style="width:100%">
+                    <img src="images/demo1.jpg" style="width:100%" class="rounded">
                 </div>
 
                 <div class="slides">
                     <div class="numbertext">2 / 5</div>
-                    <img src="images/demo2.jpg" style="width:100%">
+                    <img src="images/demo2.jpg" style="width:100%" class="rounded">
                 </div>
 
                 <div class="slides">
                     <div class="numbertext">3 / 5</div>
-                    <img src="images/demo3.jpg" style="width:100%">
+                    <img src="images/demo3.jpg" style="width:100%" class="rounded">
                 </div>
 
                 <div class="slides">
                     <div class="numbertext">4 / 5</div>
-                    <img src="images/demo4.jpg" style="width:100%">
+                    <img src="images/demo4.jpg" style="width:100%" class="rounded">
                 </div>
 
                 <div class="slides">
                     <div class="numbertext">5 / 5</div>
-                    <img src="images/demo5.jpg" style="width:100%">
+                    <img src="images/demo5.jpg" style="width:100%" class="rounded">
                 </div>
 
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-                <!--Ime filma iz baze -->
+                <!-- Ime filma iz baze -->
                 <div class="caption-container">
                     <p>Once Upon A Time In Hollywood</p>
                 </div>
@@ -112,6 +114,8 @@ require 'config/config.php';
             </div>
         </div>
     </div>
+
+
 
 </body>
 <?php
