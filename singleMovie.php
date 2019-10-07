@@ -18,9 +18,7 @@ require 'config/config.php';
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/singleMovie.css">
-    <script src="js/gallery.js" type="text/javascript"></script>
-    
-    
+    <script src="js/singleMovie.js" type="text/javascript"></script>
 
 </head>
 
@@ -38,10 +36,10 @@ require 'config/config.php';
         </div>
 
         <div class="row">
-            <div class="col-md-3 offset-1">
+            <div class="d-none d-md-block col-md-3 offset-1">
                 <img src="images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="250px" height="450px">
             </div>
-            <div class="col-sm-7">
+            <div class="col-md-4">
                 <!-- ime filma iz baze -->
                 <h1>Once Upon A Time In Hollywod</h1>
                 <!-- svi podaci iz baze -->
@@ -50,69 +48,76 @@ require 'config/config.php';
                 <p class="lead">A faded television actor and his stunt double strive to achieve fame and success in the
                     film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.
                 </p>
-                <button class="btn hover-shadow" onclick="openModal();currentSlide(1)">Movie Cuts - View Gallery</button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-block hover-shadow" onclick="openModal();currentSlide(1)">Movie Cuts - View Gallery</button>
+                <button class="btn btn-block hover-shadow" onclick="showLink()" id="shareOff">Share</button>
+                <button class="btn btn-block hover-shadow" id="shareOn" style="display:none" onmouseout="hideLink()">
+                <!-- link iz baze -->
+                 <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
             </div>
         </div>
+    </div>
 
 
-        <div id="modal" class="modal m-auto">
-            <span class="close cursor" onclick="closeModal()">&times;</span>
-            <div class="modal-content">
-    <!-- slike ce biti iz baze -->
-                <div class="slides">
-                    <div class="numbertext">1 / 5</div>
-                    <img src="images/demo1.jpg" style="width:100%" class="rounded">
-                </div>
+    <div id="modal" class="modal m-auto">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <!-- slike ce biti iz baze -->
+            <div class="slides">
+                <div class="numbertext">1 / 5</div>
+                <img src="images/demo1.jpg" style="width:100%" class="rounded">
+            </div>
 
-                <div class="slides">
-                    <div class="numbertext">2 / 5</div>
-                    <img src="images/demo2.jpg" style="width:100%" class="rounded">
-                </div>
+            <div class="slides">
+                <div class="numbertext">2 / 5</div>
+                <img src="images/demo2.jpg" style="width:100%" class="rounded">
+            </div>
 
-                <div class="slides">
-                    <div class="numbertext">3 / 5</div>
-                    <img src="images/demo3.jpg" style="width:100%" class="rounded">
-                </div>
+            <div class="slides">
+                <div class="numbertext">3 / 5</div>
+                <img src="images/demo3.jpg" style="width:100%" class="rounded">
+            </div>
 
-                <div class="slides">
-                    <div class="numbertext">4 / 5</div>
-                    <img src="images/demo4.jpg" style="width:100%" class="rounded">
-                </div>
+            <div class="slides">
+                <div class="numbertext">4 / 5</div>
+                <img src="images/demo4.jpg" style="width:100%" class="rounded">
+            </div>
 
-                <div class="slides">
-                    <div class="numbertext">5 / 5</div>
-                    <img src="images/demo5.jpg" style="width:100%" class="rounded">
-                </div>
+            <div class="slides">
+                <div class="numbertext">5 / 5</div>
+                <img src="images/demo5.jpg" style="width:100%" class="rounded">
+            </div>
 
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-                <!-- Ime filma iz baze -->
-                <div class="caption-container">
-                    <p>Once Upon A Time In Hollywood</p>
-                </div>
+            <!-- Ime filma iz baze -->
+            <div class="caption-container">
+                <p>Once Upon A Time In Hollywood</p>
+            </div>
 
-                <div class="column">
-                    <img class="demo" src="images/demo1.jpg" onclick="currentSlide(1)" alt="blabla">
-                </div>
+            <div class="column">
+                <img class="demo" src="images/demo1.jpg" onclick="currentSlide(1)" alt="blabla">
+            </div>
 
-                <div class="column">
-                    <img class="demo" src="images/demo2.jpg" onclick="currentSlide(2)" alt="img2">
-                </div>
+            <div class="column">
+                <img class="demo" src="images/demo2.jpg" onclick="currentSlide(2)" alt="img2">
+            </div>
 
-                <div class="column">
-                    <img class="demo" src="images/demo3.jpg" onclick="currentSlide(3)" alt="img3">
-                </div>
+            <div class="column">
+                <img class="demo" src="images/demo3.jpg" onclick="currentSlide(3)" alt="img3">
+            </div>
 
-                <div class="column">
-                    <img class="demo" src="images/demo4.jpg" onclick="currentSlide(4)" alt="img4">
-                </div>
+            <div class="column">
+                <img class="demo" src="images/demo4.jpg" onclick="currentSlide(4)" alt="img4">
+            </div>
 
-                <div class="column">
-                    <img class="demo" src="images/demo5.jpg" onclick="currentSlide(5)" alt="img5">
-                </div>
+            <div class="column">
+                <img class="demo" src="images/demo5.jpg" onclick="currentSlide(5)" alt="img5">
             </div>
         </div>
+    </div>
     </div>
 
 

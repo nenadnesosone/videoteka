@@ -56,6 +56,12 @@ button:hover {
     color: #fff !important;
     text-decoration: none !important;
 }
+input {
+    background-color: #456;
+    color: #bbccdd;
+    border: none;
+    padding: 3px;
+}
 
 .slides img {
     height: 400px;

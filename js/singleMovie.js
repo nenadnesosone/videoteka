@@ -1,5 +1,4 @@
 
-
 function openModal() {
     document.getElementById("modal").style.display = "block";
 }
@@ -8,7 +7,17 @@ function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 
-var slideIndex = 1;
+function showLink () {
+    document.getElementById('shareOff').style.display = "none";
+    document.getElementById('shareOn').style.display = "block";
+}
+
+function hideLink(){
+    document.getElementById('shareOn').style.display = "none";
+    document.getElementById('shareOff').style.display = "block";
+}
+
+let slideIndex = 1;
 showSlides(slideIndex);
 
 

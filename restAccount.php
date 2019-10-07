@@ -42,9 +42,6 @@ require 'includes/form_handlers/profile_handler.php';
     }
     ?>
 
-
-
-
     <!-- NAV -->
     <nav class="navbar fixed-top navbar-dark bg-transparent navbar-expand-md py-2" id="main-nav">
         <div class="container">
@@ -64,10 +61,7 @@ require 'includes/form_handlers/profile_handler.php';
                         <a href="#" class="nav-link">Your Watchlist</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Sign Up</a>
+                        <a href="register.php" class="nav-link">Login/Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -82,22 +76,13 @@ require 'includes/form_handlers/profile_handler.php';
                 <h2>MovieCamp</h2>
                 <p>Here you can update or delete your account!</p>
             </div>
+
             <div id="first">
-
-                <form action="signout.php" method="POST">
-                <input type="submit" name="sign_out" value="Sign Out">
-                    <br>
-
-                    <a href="#" id="signout" class="signout">You want do update or delete your account?</a>
-                </form>
-                </div>
-
-            <div id="second">
                 <form action="restAccount.php" method="POST">
                     <input type="email" name="profile_email" placeholder="Email Address" value="<?php
-                                                                                            if (isset($_SESSION['profile_email'])) {
-                                                                                                echo $_SESSION['profile_email'];
-                                                                                            } ?>" required>
+                        if (isset($_SESSION['profile_email'])) {
+                            echo $_SESSION['profile_email'];
+                        } ?>" required>
                     <br>
                     <input type="password" name="profile_password" placeholder="Password">
                     <br>
@@ -106,16 +91,16 @@ require 'includes/form_handlers/profile_handler.php';
                     } ?>
                     <br>
                     <input type="text" name="update_fname" placeholder="New First Name" value="<?php
-                                                                                        if (isset($_SESSION['update_fname'])) {
-                                                                                            echo $_SESSION['update_fname'];
-                                                                                        } ?>">
+                        if (isset($_SESSION['update_fname'])) {
+                            echo $_SESSION['update_fname'];
+                        } ?>">
                     <br>
                     <?php if (in_array("Your first name must be between 2 and 25 characters", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
 
                     <input type="text" name="update_lname" placeholder="New Last Name" value="<?php
-                                                                                        if (isset($_SESSION['update_lname'])) {
-                                                                                            echo $_SESSION['update_lname'];
-                                                                                        } ?>">
+                        if (isset($_SESSION['update_lname'])) {
+                            echo $_SESSION['update_lname'];
+                        } ?>">
                     <br>
                     <?php if (in_array("Your last name must be between 2 and 25 characters", $error_array)) echo  "Your last name must be between 2 and 25 characters<br>"; ?>
 
@@ -129,24 +114,22 @@ require 'includes/form_handlers/profile_handler.php';
 
 
                     <input type="submit" name="update_button" value="Update">
-                    
-                                                                <?php
 
-                                                                    if (isset($_POST["newpwd"])) {
-                                                                        if ($_POST["newpwd"] == "passwordupdated") {
-                                                                            echo '<p class="signupsuccess">Your password has been reset!</p>';
-                                                                        }
-                                                                    }
+                    <?php
 
-                                                                ?>
+                    if (isset($_POST["newpwd"])) {
+                        if ($_POST["newpwd"] == "passwordupdated") {
+                            echo '<p class="signupsuccess">Your password has been reset!</p>';
+                        }
+                    }
+                    ?>
                     <input type="submit" name="delete_button" value="Delete"><br>
                     <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
                     <?php if (in_array("You have updated your Last Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Last Name!</span><br>"; ?>
                     <?php if (in_array("You have updated your Password!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Password!</span><br>"; ?>
                     <a href="reset_password.php">Forgot your password?</a>
                     <br>
-                    <a href="#" id="update" class="update">You want to Sign out?</a>
-
+                    <a href="signout.php" id="update" class="update">You want to Sign out?</a>
                 </form>
             </div>
 

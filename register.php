@@ -58,11 +58,9 @@ require 'includes/form_handlers/login_handler.php';
                         <a href="#" class="nav-link">Your Watchlist</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Login</a>
+                        <a href="register.php" class="nav-link">Login/Sign Up</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Sign Up</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -100,8 +98,8 @@ require 'includes/form_handlers/login_handler.php';
                     // }
 
                     ?>
-                    <a href="reset_password.php" id="reset_link" style="color:blue;display: flex;justify-content: flex-start;padding-left: 77px;margin-top: -65px;">Forgot your password?</a> 
-                    <br><br>
+                    <a href="reset_password.php" id="reset_link">Forgot your password?</a> 
+                    <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
                 </form>
