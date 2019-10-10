@@ -103,7 +103,7 @@ class UserData{
     }
 
     // funkcija za update korisnika iz bazu
-    public static function UpdateUser($userId, $fname, $lname, $username, $password)
+    public static function UpdateUser($userId, $fname, $lname, $username, $password, $userimage)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -111,7 +111,7 @@ class UserData{
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
         //  update emaila u bazi	 	 	 	 	 	 	 	 	 	
-        $query = "UPDATE users_data SET FirstName='$fname', LastName='$lname', UserName='$username',  Password='$password' WHERE UserId='$userId'";
+        $query = "UPDATE users_data SET FirstName='$fname', LastName='$lname', UserName='$username',  Password='$password', ProfilePicture='$userimage' WHERE UserId='$userId'";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;

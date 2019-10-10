@@ -14,7 +14,6 @@ require 'includes/form_handlers/profile_handler.php';
     <title>Welcome to MOVIECAMP</title>
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/profile.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -27,18 +26,6 @@ require 'includes/form_handlers/profile_handler.php';
 
     if (isset($_POST['delete_button'])) {
         header('Location: main.php');
-    }
-
-
-    if (isset($_POST['update_button'])) {
-        echo '
-            <script>
-            $(document).ready(function() {
-                $("#first").hide();
-                $("#second").show();
-            });
-            </script>
-        ';
     }
     ?>
 
@@ -78,7 +65,7 @@ require 'includes/form_handlers/profile_handler.php';
             </div>
 
             <div id="first">
-                <form action="restAccount.php" method="POST">
+                <form action="restAccount.php" method="POST" enctype="multipart/form-data">
                     <input type="email" name="profile_email" placeholder="Email Address" value="<?php
                         if (isset($_SESSION['profile_email'])) {
                             echo $_SESSION['profile_email'];
@@ -108,13 +95,22 @@ require 'includes/form_handlers/profile_handler.php';
                     <br>
                     <input type="password" name="new_password2" placeholder="Confirm New Password">
                     <br>
+                    <input type="file" name="new_image"><br>
+
                     <?php if (in_array("Your passwords do not match", $error_array)) echo "Your passwords do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
 
-
+                    <?php if (in_array("Your image is too large!", $error_array)) echo  "Your image is to large!<br>";
+                        else if (in_array("Extention must be JPEG, PNG or JPG!", $error_array)) echo "Extention must be JPEG, PNG or JPG!<br>"; 
+                        ?>
                     <input type="submit" name="update_button" value="Update">
-
+                    <input type="submit" name="delete_button" value="Delete"><br>
+                    <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
+                    <?php if (in_array("You have updated your Last Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Last Name!</span><br>"; ?>
+                    <?php if (in_array("You have updated your Password!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Password!</span><br>"; ?>
+                    <?php if (in_array("You have updated your image!", $error_array)) echo "<span style='color:#14C800;'>You have updated your image!</span><br>"; ?>
+                    
                     <?php
 
                     if (isset($_POST["newpwd"])) {
@@ -123,13 +119,7 @@ require 'includes/form_handlers/profile_handler.php';
                         }
                     }
                     ?>
-                    <input type="submit" name="delete_button" value="Delete"><br>
-                    <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
-                    <?php if (in_array("You have updated your Last Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Last Name!</span><br>"; ?>
-                    <?php if (in_array("You have updated your Password!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Password!</span><br>"; ?>
                     <a href="reset_password.php">Forgot your password?</a>
-                    <br>
-                    <a href="signout.php" id="update" class="update">You want to Sign out?</a>
                 </form>
             </div>
 
