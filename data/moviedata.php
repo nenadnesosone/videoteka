@@ -39,7 +39,7 @@ class MovieData{
         $this->summary = $summary;
         $this->imdbRating = $imdbRating;
         $this->imageUrl = $imageUrl;
-        $this->image = $image;/
+        $this->image = $image;
 /*
         $this->image2 = $image2;
         $this->image3 = $image3;
