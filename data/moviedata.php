@@ -44,14 +44,30 @@ class MovieData{
         $query = "SELECT * FROM movies";
         $result = mysqli_query($db, $query);
         if ($result) {
-            $movies = [];
+            // $movies = [];
             while ($row = mysqli_fetch_assoc($result))
             {
-                $movies [] = $row;
+                $title = $row['Title'];
+                $leadingActor = $row['LeadingActor'];
+                $imageUrl = $row['ImageUrl'];
+                echo   "<div class='col-md-6 col-lg-3'>
+                <div class='card border-0'>
+                    <div class='modal'>
+                        <div class='modal-content'>
+                            <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
+                            <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
+                        </div>
+                    </div>
+                    <img src='$imageUrl' alt='Card Image' class='card-img-top'>
+                    <div class='card-body'>
+                        <h6>" . $title . "</h6>
+                        <p class='text-muted card-text'> " . $leadingActor . "</p>
+                    </div>
+                </div>
+            </div> ";
             }
-            return $movies;
         } else {
-            return [];
+            echo "No Movies To Display";
         }
     }
 

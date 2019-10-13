@@ -1,5 +1,6 @@
 <?php
 require 'config/config.php';
+require 'data/moviedata.php';
 
 ?>
 
@@ -28,7 +29,7 @@ require 'config/config.php';
     <!-- NAV -->
     <?php
     require 'php\partials\mainheader.php';
-    
+
     ?>
 
     <!-- GALERIJA -->
@@ -36,96 +37,9 @@ require 'config/config.php';
 
     <div class="container m-auto">
         <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button role="button" class="btn btn-small"> <a href="singleMovie.php" class="btn-link">More Info</a></button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Amelie.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Amelie</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/TheAbyss.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>The Abyss</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/YTuMamaTambien.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Y Tu Mama Tambien</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Cube.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Cube</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Dune.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Dune</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/RunLolaRun.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Run Lola Run</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
+            <?php
+                MovieData::GetAllMovies();
+            ?>
         </div>
     </div>
 
@@ -134,5 +48,5 @@ require 'config/config.php';
     <script src="js/main.js" type="text/javascript"> </script>
     <?php
     require 'php\partials\footer.php';
-    
+
     ?>

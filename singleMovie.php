@@ -12,7 +12,7 @@ require 'config/config.php';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Title</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
@@ -49,19 +49,24 @@ require 'config/config.php';
                     film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.
                 </p>
             </div>
-            <div class="col-md-3">
-                <button class="btn btn-block hover-shadow" onclick="openModal();currentSlide(1)">Movie Cuts - View Gallery</button>
+            <div class="col-md-3" id="btn">
+
+                <button class="btn btn-block hover-shadow" onclick="currentSlide(1)" id="open">Movie Cuts - View Gallery</button>
+
                 <button class="btn btn-block hover-shadow" onclick="showLink()" id="shareOff">Share</button>
+
                 <button class="btn btn-block hover-shadow" id="shareOn" style="display:none" onmouseout="hideLink()">
-                <!-- link iz baze -->
-                 <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
+                    <!-- link iz baze -->
+                    <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
             </div>
         </div>
     </div>
 
 
+    <!-- galerija -->
+
     <div id="modal" class="modal m-auto">
-        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <span class="close cursor" id="close">&times;</span>
         <div class="modal-content">
             <!-- slike ce biti iz baze -->
             <div class="slides">
@@ -119,6 +124,16 @@ require 'config/config.php';
         </div>
     </div>
     </div>
+
+
+    <script>
+        $("#open").click(() => {
+            $("#modal").fadeIn('slow');
+        });
+        $("#close").click(() => {
+            $("#modal").fadeOut('slow');
+        });
+    </script>
 
 
 

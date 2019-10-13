@@ -56,6 +56,9 @@ button:hover {
     color: #fff !important;
     text-decoration: none !important;
 }
+#btn {
+    margin-top: 90px;
+}
 input {
     background-color: #456;
     color: #bbccdd;
@@ -134,18 +137,18 @@ input {
     font-weight: bold;
     font-size: 20px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 10px 10px 0;
 }
 
 .next {
     right: 0;
-    border-radius: 3px 0 0 3px;
+    border-radius: 10px 0 0 10px;
 }
 
 .prev:hover,
 .next:hover {
-    background-color: #14181C;
-    opacity: 0.5;
+    background-color: #456;
+    opacity: 0.7;
 }
 
 .numbertext {
