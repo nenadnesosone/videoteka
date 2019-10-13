@@ -89,17 +89,9 @@ require 'includes/form_handlers/login_handler.php';
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
-                    <?php
-
-                    // if (isset($_POST["newpwd"])) {
-                    //     if ($_POST["newpwd"] == "passwordupdated") {
-                    //         echo '<p class="signupsuccess">Your password has been reset!</p>';
-                    //     }
-                    // }
-
-                    ?>
-                    <a href="reset_password.php" id="reset_link">Forgot your password?</a> 
-                    <br>
+                    
+                    <a href="reset_password.php" id="reset_link" style="color:blue;display: flex;justify-content: flex-start;padding-left: 77px;margin-top: -65px;">Forgot your password?</a> 
+                    <br><br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
                 </form>

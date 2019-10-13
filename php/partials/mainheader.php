@@ -29,7 +29,14 @@
                         <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="signout.php">Sign Out</a>
                     </div>
-                </li>
+                    </li>
+                    <li>
+                        <form action="search.php" method="POST">
+                        <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%">
+                        <button type="submit" name="submit_search" class="btn btn-primary">Search</button>
+                        </form>
+                   </li>
+
                </ul>
            </div>
        </div>
