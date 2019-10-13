@@ -21,17 +21,17 @@
                        <a href="register.php" class="nav-link">Login/SignUp</a>
                    </li>
                    <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UserName</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
-      <a class="dropdown-item" href="#">Something</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="signout.php">Sign Out</a>
-    </div>
-  </li>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UserName</a>
+                    <div class="dropdown-menu">
+                            <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
+                            <a class="dropdown-item" href="#">Donate!</a>
+                            <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="signout.php">Sign Out</a>
+                    </div>
+                </li>
                </ul>
            </div>
        </div>
    </nav>';
-///userpage.php link sam stavio samo radi testiranja, kada se uspesno uloguje korisnik bi trebalo odmah da se preusmeri ka toj stranici, ili bar link da se pojavi
+?>

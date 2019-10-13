@@ -17,9 +17,16 @@ class MovieData{
     public $imdbRating;
     public $imageUrl;
     public $image;
+/*
+    public $image2;
+    public $image3;
+    public $image4;
+    public $image5;
+*/// za videoteka.sql
 
     // funkcija konstruktor
-    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image)
+    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image)// za cinema sql
+    //public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image, $image_2, $image_3, $image_4, $image_5)// za videoteka.sql
     {
         $this->movieId = $movieId; 
         $this->title = $title;
@@ -32,7 +39,14 @@ class MovieData{
         $this->summary = $summary;
         $this->imdbRating = $imdbRating;
         $this->imageUrl = $imageUrl;
-        $this->image = $image;
+        $this->image = $image;/
+/*
+        $this->image2 = $image2;
+        $this->image3 = $image3;
+        $this->image4 = $image4;
+        $this->image5 = $image5;
+        
+*/ // za videoteka.sql
 
     }
     // funcija koja ce prikupljati podatke o svim filmovima iz baze
@@ -107,10 +121,21 @@ class MovieData{
         $imdbRating = $newfilm['ImdbRating'];
         $imageUrl = $newfilm['ImageUrl'];
         $image = $newfilm['Image'];
+/*
+        $image2 = $newfilm['Image2'];
+        $image3 = $newfilm['Image3'];
+        $image4 = $newfilm['Image4'];
+        $image5 = $newfilm['Image5'];
+*/ // za videoteka.sql
 
         // ubacivanje filmova u bazu 	 	 	
         $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image`) 
         VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image')";
+/*
+        $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image_1`, `Image_2`, `Image_3`, `Image_4`, `Image_5`) 
+        VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image', '$image2','$image3','$image4','$image5')";
+*/ // za videoteka.sql
+
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;

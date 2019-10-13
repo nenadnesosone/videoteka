@@ -1,10 +1,15 @@
 <?php
 
 if (isset($_POST['login_button'])) {
+
     $email = filter_var($_POST['log_email'], FILTER_SANITIZE_EMAIL);
+    $email = htmlspecialchars(strip_tags($_POST['log_email'])); //uklanja HTML elemente
+    $email = str_replace(' ', '', $email); //uklanja razmake
     $_SESSION['log_email'] = $email; //cuva u sesiji email
 
-    $password = md5($_POST['log_password']);
+    $password = htmlspecialchars(strip_tags($_POST['log_password'])); //uklanja HTML elemente
+    $password = str_replace(' ', '', $password); //uklanja razmake
+    $password = md5($password);  //enkripcija lozinke
 
     //provera da li se uneti podaci slazu sa podacima u bazi
     $check_database_query = mysqli_query($con, "SELECT * FROM users_data WHERE email='$email' AND password='$password'");
@@ -12,11 +17,10 @@ if (isset($_POST['login_button'])) {
 
     if ($check_login_query == 1) {
         $row = mysqli_fetch_array($check_database_query);
-        $username = $row['UserName'];
-        $userid = $row['Userid'];
+        $_SESSION['username'] = $row['UserName'];
+        $_SESSION['userid'] = $row['Userid'];
+        $_SESSION['userimage'] = $row['ProfilePicture'];
 
-        $_SESSION['username'] = $username;
-        $_SESSION['userid'] = $userid;
         header("Location: watchlist.php");
         
         $_SESSION['log_email'] = "";

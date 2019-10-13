@@ -19,7 +19,9 @@
                    <a href="watchlist.php" class="nav-link">'. $_SESSION['username'] . ' Watchlist</a>
                    </li>
                    <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UserName</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="'. $_SESSION['userimage'] .'" width="75" height="75" alt="" class="img-fluid">
+                        </a>
                    <div class="dropdown-menu">
                      <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
                      <a class="dropdown-item" href="#">Something</a>
@@ -32,3 +34,4 @@
            </div>
        </div>
    </nav>';
+?>

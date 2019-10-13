@@ -12,14 +12,17 @@ $password = "";
 $newpassword = "";
 $newpassword2 = "";
 $error_array = array();
+$userimage = "";
+$uploadOK = 1;
 
 if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
     
     $em = filter_var($_POST['profile_email'], FILTER_SANITIZE_EMAIL);
-    $em = htmlspecialchars(strip_tags($_POST['profile_email'])); //uklanja HTML elemente
+    $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
     $em = str_replace(' ', '', $em); //uklanja razmake
 
     $password = htmlspecialchars(strip_tags($_POST['profile_password'])); //uklanja HTML elemente
+    $password = str_replace(' ', '', $password); //uklanja razmake
     $password = md5($password);    //enkripcija lozinke
 
     //provera da li postoji korisnik
@@ -28,12 +31,13 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
         
     }else{
         // uzimamo podatke iz baze
-        $row = userData::GetUserRow($em, $password);
+        $row = UserData::GetUserRow($em, $password);
         $userId = $row['UserId'];
         $fname = $row['FirstName'];
         $lname = $row['LastName'];
         $username = $row['UserName'];
         $password = $row['Password'];
+        $userimage = $row['ProfilePicture'];
         if(isset($_POST['delete_button'])){
             //brisemo podatke iz sesije i brisemo korisnika
             session_destroy();
@@ -64,8 +68,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     }
                     // menjamo podatke u sesiji
                     $_SESSION['username'] = $username;
-                    // menjamo podatke
-                    UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                   // menjamo podatke u bazi
+                    UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your First Name!");
                 }
             }
@@ -95,8 +99,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     }
                     // menjamo podatke u sesiji
                     $_SESSION['username'] = $username;
-                    // menjamo podatke
-                    UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                    // menjamo podatke u bazi
+                    UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your Last Name!");
                 }
                 
@@ -121,15 +125,54 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     
                     $password = $newpassword;// tek kad smo sve proverili menjamo lozinku
 
-                    // menjamo podatke
-                    UserData::UpdateUser($userId, $fname, $lname, $username, $password);
+                    // menjamo podatke u bazi
+                    UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your Password!");
                 }
-            }            
-        }
+            } 
+            if (isset($_FILES['new_image'])){
+
+                $file_name = $_FILES['new_image']['name'];
+                $file_size = $_FILES['new_image']['size'];
+                $file_tmp = $_FILES['new_image']['tmp_name'];
+                $file_type =  $_FILES['new_image']['type'];
+                $splitParts = explode('.',  $_FILES['new_image']['name']);
+                $file_ext = strtolower(end($splitParts));
+                $exts = array("jpg", "jpeg", "png");
+                $userphoto = $username. '.'.$file_ext;
+                $image_location = "images/profile_pictures/" .$userphoto;// gde cemo staviti sliku kad je ucitamo
         
+                //proveravamo da li je fajl prazan
+                if($file_size == 0) {
+                    $uploadOK = 0;
+                // proveravamo da li je slika odgovarajuce velicine
+                }else if($file_size > 10240){
+                    array_push($error_array,"Your image is too large!");
+                    $uploadOK = 0;
+                // proveravamo da li je extenzija dobra
+                }else if(in_array($file_ext, $exts) === false){
+                    array_push($error_array,"Extention must be JPEG, PNG or JPG!");
+                    $uploadOK = 0;
+                } else if($uploadOK !== 0){
+                    if(file_exists($image_location)){ 
+                        // brisemo predhodnu sluku ako je bilo takve slike s istim korisnickim imenom
+                        unlink($image_location);
+                    }
+                    // vrsi se upload u odredjeni folder
+                    move_uploaded_file($file_tmp, $image_location);
+                    $userimage = $image_location;
+                    // menjamo podatke u bazi
+                    UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
+                    $_SESSION['userimage'] = $userimage;
+                    array_push($error_array,"You have updated your image!");
+    
+                }
+        
+            }
+          
+        }
+
     } 
 }
-
 
 ?>
