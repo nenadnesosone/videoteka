@@ -31,7 +31,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
         
     }else{
         // uzimamo podatke iz baze
-        $row = userData::GetUserRow($em, $password);
+        $row = UserData::GetUserRow($em, $password);
         $userId = $row['UserId'];
         $fname = $row['FirstName'];
         $lname = $row['LastName'];

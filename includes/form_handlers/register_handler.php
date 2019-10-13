@@ -58,7 +58,7 @@ if (isset($_POST['register_button'])) {
             /*$e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
             $num_rows = mysqli_num_rows($e_check);*/
 
-            if (!UserData::CheckEmail($em)) {
+            if (UserData::CheckEmail($em)) {
                 array_push($error_array, "Email already in use");
             }
 
