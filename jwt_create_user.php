@@ -32,8 +32,8 @@ if(
 ){
 
     // deklarisanje promenljivih da nekucamo nonstop $this
-    $fname = $this->fname // $fname = $user->fname
-    $lname = $this->lname // $lname = $user->lname
+    $fname = $this->fname; // $fname = $user->fname
+    $lname = $this->lname; // $lname = $user->lname
     $em = $this->em; // $em = $user->em
     $em2 = $this->em2; // $em2 = $user->em2
     $password = $this->password; // $password = $user->password

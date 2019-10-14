@@ -1,4 +1,5 @@
 <?php
+
 require 'config/config.php';
 require 'includes/form_handlers/register_handler.php';
 require 'includes/form_handlers/login_handler.php';
@@ -53,24 +54,27 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
         $subject = "Password Recovery - Videoclub";
 
         $email_to =$email;
-        $fromserver = "ljubicazeravic@gmail.com";
-        require("PHPMailer/PHPMailerAutoload.php");
+        $fromserver = 'from@example.com';
+        require("PHPMailer-master/PHPMailerAutoload.php");
         $mail = new PHPMailer();
         $mail -> IsSMTP();
+        $mail ->SMTPDebug = 2; //no debug
         $mail ->Host="localhost";
         $mail ->SMTPAuth = true;
-        $email ->Username = "ljubicazeravic@gmail.com";
-        $email -> Password = "12345";
-        $email -> Port = 80;
-        $mail->From = "ljubicazeravic@gmail.com";
+        $mail ->Username = "ljubicazeravic@gmail.com";
+        $mail -> Password = "ljubica";
+        $mail -> Port = 465;
+        $mail->addCC("cc@example.com"); //CC i BCC polja
+        $mail->addBCC("bcc@example.com"); 
+        $mail->From = 'from@example.com';
         $mail->FromName = "Videoteka";
         $mail->Sender = $fromserver; 
         $mail->Subject = $subject;
         $mail->Body = $body;
         $mail->AddAddress($email_to);
-
-        if (!$email ->Send()) {
-            echo "Mailer error: " . $email->ErrorInfo;
+      
+        if (!$mail ->Send()) {
+            echo "Mailer error: " . $mail->ErrorInfo;
         }else{
             array_push($error_array, "<div class='error'>
             <p>An email has been sent to you with instructions on how to reset your password.</p>
@@ -88,13 +92,15 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to MOVIECAMP</title></title>
-    <link rel="stylesheet" href="css/register_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/register.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/register_style.css">
 </head>
 <body>
-
-    
     
 <div class="wrapper">
     <div class="login_box">
@@ -103,7 +109,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
             <p>An email will be sent to you with instructions on how to reset your password.</p>
         </div>
             <form action="reset_password.php" method="POST">
-                <input type="email" name="reset_email" id="reset_email" placeholder="Enter your email adress...">
+                <input type="email" name="reset_email" id="reset_email" placeholder="Enter your email adress..." required>
                 <br>
                 <?php if (in_array("<p>Invalid email adress. Please type valid format!</p>", $error_array)) echo  "<p>Invalid email adress. Please type valid format!</p>
                 <br><a href='javascript:history.go(-1)'>Go Back</a>"; ?>
@@ -119,7 +125,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
                 <br><a href='javascript:history.go(-1)'>Go Back</a>"; ?>
                 
                 <br>
-                <input type="submit" name="reset_request_submit" value="Receive new password by email.">
+                <input type="submit" name="reset_request_submit" value="Receive new password">
             </form>
 
             </div>

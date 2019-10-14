@@ -1,0 +1,11 @@
+.movie_container {
+    margin: auto;
+    width: 900px;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.article_box {
+    padding-bottom: 30px;
+    width: 100%;
+}

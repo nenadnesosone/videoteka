@@ -72,7 +72,7 @@ class MovieData{
                             <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
                         </div>
                     </div>
-                    <img src='$imageUrl' alt='Card Image' class='card-img-top'>
+                    <img src='data:image/jpeg;base64,".base64_encode( $row['Image_3'] )."' alt='Card Image' class='card-img-top'/>
                     <div class='card-body'>
                         <h6>" . $title . "</h6>
                         <p class='text-muted card-text'> " . $leadingActor . "</p>

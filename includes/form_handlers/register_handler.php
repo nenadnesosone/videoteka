@@ -127,8 +127,10 @@ if (isset($_POST['register_button'])) {
         }
 
         //unos podataka u bazu
-        UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
+        //UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
      
+         //unos podataka u bazu
+         $query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");
         array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>");
 
         //brisanje podataka iz sesija
