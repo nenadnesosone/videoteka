@@ -1,9 +1,11 @@
 <?php
-include 'config/config.php';
+require_once 'config/config.php';
+require_once 'data/moviedata.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,44 +20,25 @@ include 'config/config.php';
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/search.css">
 </head>
-    
+
 <body>
-<!-- NAV -->
-<?php
-    require 'php\partials\mainheader.php';
-    
- ?>
-
-<!-- <h1>Search page</h1> -->
-
-
-<div class="movie_container">
+    <!-- NAV -->
     <?php
-        if (isset($_POST['submit_search']))
-        $search  = mysqli_real_escape_string($con, $_POST['search']);
-        $sql = "SELECT * FROM movies WHERE Title LIKE '%$search%' OR ReleaseYear LIKE '%$search%' OR Genre  LIKE '%$search%' OR Country  LIKE '%$search%'";
-        $result = mysqli_query($con, $sql);
-        $queryResult = mysqli_num_rows($result);
+    require 'php\partials\mainheader.php';
 
-        if ($queryResult == 1) {
-            echo "There is ".$queryResult." result!";
-        }elseif($queryResult >1){
-        echo "There are ".$queryResult." results!";
-        }
-        if ($queryResult > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<a href='singleMovie.php?title=".$row['Title']."'><div class='article_box'>
-                    <h2>".$row['Title']."</h2>               
-                    <h3>".$row['ReleaseYear']."</h3>               
-                    <h3>".$row['Genre']."</h3>               
-                    <h3>".$row['Director']."</h3>               
-                    <h3>".$row['Country']."</h3>               
-                </div></a>";
-            }
-        }else{
-            echo "There are no results matching your search!";
-        }
     ?>
-</div>
+
+    <!-- <h1>Search page</h1> -->
+
+
+    <div class="container m-auto">
+        <div class="row">
+            <?php
+
+            MovieData::FindMovie();
+            ?>
+        </div>
+    </div>
 </body>
+
 </html>

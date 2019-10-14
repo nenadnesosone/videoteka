@@ -2,7 +2,8 @@
 require_once 'config\config.php';
 
 // klasa uz ciju pomoc cemo pristupati podacima o filmovima
-class MovieData{
+class MovieData
+{
 
     //deklarisanje varijabli
     public $movieId;
@@ -17,18 +18,18 @@ class MovieData{
     public $imdbRating;
     public $imageUrl;
     public $image;
-/*
+    /*
     public $image2;
     public $image3;
     public $image4;
     public $image5;
-*/// za videoteka.sql
+*/ // za videoteka.sql
 
     // funkcija konstruktor
-    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image)// za cinema sql
+    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image) // za cinema sql
     //public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image, $image_2, $image_3, $image_4, $image_5)// za videoteka.sql
     {
-        $this->movieId = $movieId; 
+        $this->movieId = $movieId;
         $this->title = $title;
         $this->releaseYear = $releaseYear;
         $this->genre = $genre;
@@ -40,7 +41,7 @@ class MovieData{
         $this->imdbRating = $imdbRating;
         $this->imageUrl = $imageUrl;
         $this->image = $image;
-/*
+        /*
         $this->image2 = $image2;
         $this->image3 = $image3;
         $this->image4 = $image4;
@@ -59,8 +60,7 @@ class MovieData{
         $result = mysqli_query($db, $query);
         if ($result) {
             // $movies = [];
-            while ($row = mysqli_fetch_assoc($result))
-            {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $title = $row['Title'];
                 $leadingActor = $row['LeadingActor'];
                 $imageUrl = $row['ImageUrl'];
@@ -72,7 +72,7 @@ class MovieData{
                             <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
                         </div>
                     </div>
-                    <img src='data:image/jpeg;base64,".base64_encode( $row['Image_3'] )."' alt='Card Image' class='card-img-top'/>
+                    <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
                     <div class='card-body'>
                         <h6>" . $title . "</h6>
                         <p class='text-muted card-text'> " . $leadingActor . "</p>
@@ -121,7 +121,7 @@ class MovieData{
         $imdbRating = $newfilm['ImdbRating'];
         $imageUrl = $newfilm['ImageUrl'];
         $image = $newfilm['Image'];
-/*
+        /*
         $image2 = $newfilm['Image2'];
         $image3 = $newfilm['Image3'];
         $image4 = $newfilm['Image4'];
@@ -131,7 +131,7 @@ class MovieData{
         // ubacivanje filmova u bazu 	 	 	
         $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image`) 
         VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image')";
-/*
+        /*
         $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image_1`, `Image_2`, `Image_3`, `Image_4`, `Image_5`) 
         VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image', '$image2','$image3','$image4','$image5')";
 */ // za videoteka.sql
@@ -162,7 +162,47 @@ class MovieData{
         }
     }
 
-}
-	 		 	 	 	 	 	 	 	 	
 
-?>
+    // pretraga filmova
+    public static function FindMovie()
+    {
+
+        $db = Database::getInstance()->getConnection();
+        if (isset($_POST['submit_search'])) {
+            $search  = mysqli_real_escape_string($db, $_POST['search']);
+            $sql = "SELECT * FROM movies WHERE Title LIKE '%$search%' OR ReleaseYear LIKE '%$search%' OR Genre  LIKE '%$search%' OR Country  LIKE '%$search%'";
+            $result = mysqli_query($db, $sql);
+            $queryResult = mysqli_num_rows($result);
+
+            if ($queryResult == 1) {
+                echo "<p class='lead text-white'>There is " . $queryResult . " result!</p>";
+            } elseif ($queryResult > 1) {
+                echo "<p class='lead text-white'>There are " . $queryResult . " results!</p>";
+            }
+            if ($queryResult > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $title = $row['Title'];
+                    $leadingActor = $row['LeadingActor'];
+                    $imageUrl = $row['ImageUrl'];
+                    echo   "<div class='col-md-6 col-lg-3'>
+                        <div class='card border-0'>
+                            <div class='modal'>
+                                <div class='modal-content'>
+                                    <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
+                                    <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
+                                </div>
+                            </div>
+                            <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
+                            <div class='card-body'>
+                                <h6>" . $title . "</h6>
+                                <p class='text-muted card-text'> " . $leadingActor . "</p>
+                            </div>
+                        </div>
+                    </div> ";
+                }
+            } else {
+                echo "There are no results matching your search!";
+            }
+        }
+    }
+};

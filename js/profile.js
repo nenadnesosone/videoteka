@@ -1,6 +1,6 @@
 $(document).ready(function(){
     /*
-        // zakomentarisano dok sve nebude gotovo
+        // zakomentarisano dok sve ne bude gotovo
      
         // Reference na input elemente iz kojih cemo citati podatke
     

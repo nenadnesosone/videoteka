@@ -32,8 +32,8 @@
                     </li>
                     <li>
                         <form action="search.php" method="POST">
-                        <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%">
-                        <button type="submit" name="submit_search" class="btn btn-primary">Search</button>
+                        <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:5px">
+                        <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-3px">Search</button>
                         </form>
                    </li>
 
