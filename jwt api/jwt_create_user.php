@@ -1,4 +1,5 @@
 <?php
+
 // headers da bi ovaj fajl prihvatao samo JSON data
 header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
@@ -117,7 +118,7 @@ if(
         // Ako postoji u bazi username, dodati mu broj
         UserData::CheckUsername($username);
         
-        /*$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");*/
+        //$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         $i = 0;
         
         while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {
@@ -242,8 +243,8 @@ else{
     // displej poruka da nije napravljen korisnik
     echo json_encode(array("message" => "Unable to create user."));
 }
-*/
 
+*/
 
 
 ?>

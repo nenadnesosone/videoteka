@@ -99,7 +99,7 @@ if (isset($_POST['register_button'])) {
         // Ako postoji u bazi username, dodati mu broj
         UserData::CheckUsername($username);
         
-        /*$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");*/
+        //$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         $i = 0;
         
         while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {
@@ -127,10 +127,10 @@ if (isset($_POST['register_button'])) {
         }
 
         //unos podataka u bazu
-        //UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
+        UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
      
          //unos podataka u bazu
-         $query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");
+         //$query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");
         array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>");
 
         //brisanje podataka iz sesija

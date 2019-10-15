@@ -1,24 +1,22 @@
 $(document).ready(function(){
-    /*
-        // zakomentarisano dok sve ne bude gotovo
-     
-        // Reference na input elemente iz kojih cemo citati podatke
-    
-        let em = $('#profile_email').val().trim();
-        let password = $('#profile_password').val().trim();
-        let fname = $('#update_fname"').val().trim();
-        let lname = $('#update_lname').val().trim();
-        let newpassword = $('#new_password').val().trim();
-        let newpassword2 = $('#new_password2').val().trim();
-        let newuserimage = $('#new_image').val().trim();
-    
-        // Server url - Konfigurisite ga u skladu sa vasim racunarem
-        const updateServerUrl = 'jwt_update_user.php';
-    
+
         // Reakcija na klik dugmeta
         $('#update_button').click(() => {
     
+            // Reference na input elemente iz kojih cemo citati podatke
+    
+            let em = $('#profile_email').val().trim();
+            let password = $('#profile_password').val().trim();
+            let fname = $('#update_fname"').val().trim();
+            let lname = $('#update_lname').val().trim();
+            let newpassword = $('#new_password').val().trim();
+            let newpassword2 = $('#new_password2').val().trim();
+            let newuserimage = $('#new_image').val().trim();
+    
+            // Server url - Konfigurisite ga u skladu sa vasim racunarem
+            const updateServerUrl = 'jwt_update_user.php';
             // Pravimo podatke koji ce biti poslati serveru
+            
             let data = {
                 'em': em,
                 'password': password,
@@ -41,13 +39,15 @@ $(document).ready(function(){
                     console.log(serverResponse);
                     if (serverResponse['success']) {
     
+                        // alert("update ok"); // alert za proveru
                         //  korisnik promenio svoje podatke
                     } else {
-    
+                        //alert("update not ok");// alert za proveru
                         // korisnik nije promenio svoje podatke
                     }
                 },
                 error: function(e) {
+                    //alert("error");// alert za proveru
                     console.log("error");
                     console.log(e);
                 }
@@ -55,14 +55,16 @@ $(document).ready(function(){
         });
     
     
-        // Reference na input elemente iz kojih cemo citati podatke navedene iznad
-    
-        // Server url - Konfigurisite ga u skladu sa vasim racunarem
-        const deleteServerUrl = 'jwt_delete_user.php'
-    
         // Reakcija na klik dugmeta
         $('#delete_button').click(() => {
     
+            // Reference na input elemente iz kojih cemo citati podatke navedene iznad
+            let em = $('#profile_email').val().trim();
+            let password = $('#profile_password').val().trim();
+
+            // Server url - Konfigurisite ga u skladu sa vasim racunarem
+            const deleteServerUrl = 'jwt_delete_user.php'
+
             // Pravimo podatke koji ce biti poslati serveru
             let data = {
                 'email': em,
@@ -80,14 +82,15 @@ $(document).ready(function(){
                     console.log("Odgovor servera");
                     console.log(serverResponse);
                     if (serverResponse['success']) {
-    
-                        // ulogovan je korisnik poruka koju treba da dobijemo od servera
+                        //alert("user deleted");// alert za proveru
+                        // obrisan je korisnik poruka koju treba da dobijemo od servera
                     } else {
-    
-                        // nije ulogovan korisnik poruka koju treba da dobijemo od servera
+                        //alert("user not deleted");// alert za proveru
+                        // nije obrisan korisnik poruka koju treba da dobijemo od servera
                     }
                 },
                 error: function(e) {
+                    //alert("error");// alert za proveru
                     console.log("error");
                     console.log(e);
                 }
@@ -96,7 +99,7 @@ $(document).ready(function(){
     
     
     
-    */
+    
     
     
     });

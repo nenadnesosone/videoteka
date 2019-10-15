@@ -34,10 +34,9 @@ class UserData{
     }
 
     // za jwt
-    /*
-    public function __construct($db){
-        $this->con = $db;
-    }*/
+    // public function __construct($db){
+    //     $this->con = $db;
+    // }
 
 
     // funcija koja ce prikupljati podatke o svim korisnicima iz baze
@@ -234,8 +233,8 @@ class UserData{
 	
 }
 
-    // ako neradi kod gore kod JWT
-/*
+    // ako nerade funkcije gore kod JWT probajte sledece
+
     function JWTCreateUser(){
     
         // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
@@ -383,8 +382,6 @@ class UserData{
         return false;
     }
 
-
-
     // da li postoji email u bazi
     function JWTCheckEmail(){
     
@@ -420,7 +417,7 @@ class UserData{
             $row = $stmt->fetch(mysqli::FETCH_ASSOC);
     
             // dodeljivanje vrednosti obejktu
-            $this->id = $row['UserId'];
+            $this->userId = $row['UserId'];
             $this->fname = $row['FirstName'];
             $this->lname = $row['LastName'];
             $this->username = $row['UserName'];
@@ -437,11 +434,9 @@ class UserData{
         return false;
     }
 
-    function rowCount();
-
-
-
     function JWTDeleteUser(){
+
+        $userId = $this->userId;//$userId = $user->userId;
 
         // delete query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
         $query = "DELETE " . $this->table_name . "
@@ -452,7 +447,7 @@ class UserData{
         $stmt = $this->con->prepare($query);
 
         // vezemo vrednost
-        $stmt->bindParam(':iserId', $userid);
+        $stmt->bindParam(':iserId', $userId);
 
         // izvrsavamo query i proveravamo da li je izvrsen
         if($stmt->execute()){
@@ -467,33 +462,57 @@ class UserData{
 
     function JWTUpdateUser(){
     
-        // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
+        // deklarisanje promenljivih da nekucamo nonstop $this
+        $em = $this->em; // $em = $user->em;
+        $fname = $this->fname; // $fname = $user->fname;
+        $lname = $this->lname; // $lname = $user->lname;
+        $password = $this->password; //$password = $user->password;
+        $newfname = $this->newfname; // $fname = $user->fname;
+        $newlname = $this->newlname; // $lname = $user->lname;
+        $newpassword = $this->newpassword; // $password = $user->password;
+        $newpassword2 = $this->newpassword2; // $password2 = $user->password2;
+        $newuserimage = $this->newuserimage; // $newpassword = $user-newuserimage;
+        $userId = $this->userId; //$userId = $user->userId;
+        $error_array = array();
+        $uploadOK = 1;
+
+        // ako treba dase promeni ...
+        $newfname_set = (!empty($newfname) && (strlen($newfname)<25 || strlen($newfname)>2)) ? ", FirstName = :fname" : "";
+        $newlname_set = (!empty($newlname) && (strlen($newlname)<25 || strlen($newlname)>2)) ? ", FirstName = :fname" : "";
+        $username_set = ((!empty($newfname) && (strlen($newfname)<25 || strlen($newfname)>2)) or (!empty($newlname) and (strlen($newlname)<25 || strlen($newlname)>2))) ? ", UserName = :username" : "";
+        $password_set = ((!empty($newpassword) && !empty($newpassword2)) && ($newpassword === $newpassword2) && (!preg_match('/[^A-Za-z0-9]/', $newpassword)) && (strlen($newpassword) < 30 || strlen($newpassword) > 5)) ? ", Password = :password" : "";
+        $newuserimage_set = ((!isset($newuserimage)) && ($file_size != 0) && ($file_size < 10240) && (in_array($file_ext, $exts) === true) && ($uploadOK !== 0)) ? ", ProfilePicture = :userimage" : "";
+    
+        
+        // jedini razlog zasto u query stoji Email = :em  jeste zbog zareza recimo {$newfname_set} ima zarez na pocetku koji mozemo obrisati, ali sta ako korisnik neukuca fname onda ce zarez kod lname da bude visak i ispaljivace gresku
         $query = "UPDATE" . $this->table_name . "
-                SET
-                    FirstName = :fname,
-                    LastName = :lname,
-                    UserName = :username,
-                    Password = :password,
-                    ProfilePicture = :userimage
-                WHERE
-                    UserId = :userid";
+            SET
+                Email = :em 
+                {$newfname_set}
+                {$newlname_set}
+                {$username_set}
+                {$password_set}
+                {$newuserimage_set}
+            WHERE
+                UserId = :userid";
+
+        // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
+        // ovaj query bi koristili kada bismo sve menjali ako je doslo do promene jednog podatka makar ponovo upisivali u bazu iste sve druge podatke 
+        // $query = "UPDATE" . $this->table_name . "
+        //         SET
+        //             FirstName = :fname,
+        //             LastName = :lname,
+        //             UserName = :username,
+        //             Password = :password,
+        //             ProfilePicture = :userimage
+        //         WHERE
+        //             UserId = :userid";
 
 
-        
-        
-        //provera da li postoji korisnik
-        if (!Userdata::CheckUser($em, $password)) {
+        //provera da li postoji korisnik // vec smo proverili preko jwt da postoji korisnik
+       if (!Userdata::CheckUser($em, $password)) {
             array_push($error_array,"Email or password was incorrect!<br>");
-        }else {
-
-            // deklarisanje promenljivih da nekucamo nonstop $this
-            $newfname = $this->newfname; // $fname = $user->fname
-            $newlname = $this->newlname; // $lname = $user->lname
-            $newpassword = $this->newpassword; // $password = $user->password
-            $newpassword2 = $this->newpassword2; // $password2 = $user->password2
-            $newuserimage = $this->newuserimage; // $newpassword = $user-newuserimage
-            $error_array = array();
-            $uploadOK = 1;
+        } 
 
             if(!empty($newfname)){
 
@@ -566,7 +585,7 @@ class UserData{
                 $newpassword = htmlspecialchars(strip_tags($newpassword)); //uklanja HTML elemente
                 $newpassword2 = htmlspecialchars(strip_tags($newpassword2)); //uklanja HTML elemente
 
-                if ($newpassword != $newpassword2) {
+                if ($newpassword !== $newpassword2) {
                     array_push($error_array, "Your passwords do not match");
                 }else if (preg_match('/[^A-Za-z0-9]/', $newpassword)) {
                     //lozinka moze da sadrzi samo slova i brojeve
@@ -630,7 +649,8 @@ class UserData{
     
         // vezemo vrednosti
         $stmt->bindParam(':userid', $userId);///parametar zamenjujemo konkretnom vrednoscu
-        $stmt->bindParam(':ftname', $fname);///parametar zamenjujemo konkretnom vrednoscu
+        $stmt->bindParam(':em', $em);///parametar zamenjujemo konkretnom vrednoscu
+        $stmt->bindParam(':fname', $fname);///parametar zamenjujemo konkretnom vrednoscu
         $stmt->bindParam(':lname', $lname);
         $stmt->bindParam(':lname', $username );
         $stmt->bindParam(':password', $password);//hashovana
@@ -639,14 +659,53 @@ class UserData{
     
         // izvrsavamo query i proveravamo da li je izvrsen
         if($stmt->execute()){
+
+            // vracamo dogovore korisniku
+            if (!Userdata::CheckUser($em, $password)) {
+                array_push($error_array,"Email or password was incorrect!<br>");/// ovaj deo se cini visak jer ako nije prosao proveru jwt nije ni dosao dovde
+            }
+            if (!empty($newfname) && (strlen($newfname)<25 || strlen($newfname)>2)){
+                array_push($error_array, "You have updated your First Name!");
+            }
+            if (!empty($newlname) && (strlen($newlname)<25 || strlen($newlname)>2)) {
+                array_push($error_array, "You have updated your Last Name!");
+            }
+           if ((!empty($newpassword) && !empty($newpassword2)) && ($newpassword === $newpassword2) && (!preg_match('/[^A-Za-z0-9]/', $newpassword)) && (strlen($newpassword) < 30 || strlen($newpassword) > 5)) {
+            array_push($error_array, "You have updated your Password!");
+           }
+           if ((!isset($newuserimage)) && ($file_size != 0) && ($file_size < 10240) && (in_array($file_ext, $exts) === true) && ($uploadOK !== 0)) {
+            array_push($error_array,"You have updated your image!");
+           }
             return true;
         }
     
+        // vracamo odgovore korisniku
+
+        if ((!empty($newfname)) && (strlen($newfname)>25 || strlen($newfname)<2)) {
+            array_push($error_array,  "Your first name must be between 2 and 25 characters");
+        } 
+        if ((!empty($newlname)) && (strlen($newlname)>25 || strlen($newlname)<2)) {
+            array_push($error_array, "Your last name must be between 2 and 25 characters"); 
+        }
+        if (((!empty($newpassword)) && (!empty($newpassword2))) && ($newpassword !== $newpassword2)) {
+            array_push($error_array, "Your passwords do not match");
+        } else if (preg_match('/[^A-Za-z0-9]/', $newpassword)) {
+            //lozinka moze da sadrzi samo slova i brojeve
+            array_push($error_array,  "Your password can only contain english characters and numbers");
+        } else if(strlen($newpassword) >30 || strlen($newpassword) < 5) {
+            //neodgovarajuca duzina lozinke
+            array_push($error_array, "Your password must be between 5 and 30 characters"); 
+        }
+        if((isset($newuserimage)) && ($file_size != 0) && ($file_size > 10240)){
+            array_push($error_array,"Your image is too large!");
+        } else if(in_array($file_ext, $exts) === false){
+            array_push($error_array,"Extention must be JPEG, PNG or JPG!");
+        }
+
         return false;
     }
 
-*/
-
+}
 
 
 

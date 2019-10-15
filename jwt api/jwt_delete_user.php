@@ -42,43 +42,8 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
     // uzimamo podatke iz baze
     $row = UserData::GetUserRow($em, $password);
     $this->id = $row['UserId'];
-    /*$this->firstname = $row['FirstName'];
-    $this->lastname = $row['LastName'];
-    $this->username = $row['UserName'];
-    $this->userimage = $row['ProfilePicture'];*/
-
     $userId = $this->id;
 
-    // da li nam je zaista potreban ovaj deo?
-    /*
-    $token = array(
-       "iss" => $iss,
-       "aud" => $aud,
-       "iat" => $iat,
-       "nbf" => $nbf,
-       "data" => array(
-           "UserId" => $user->id,// $this->id
-           "FirstName" => $user->firstname,// $this->firstname
-           "LastName" => $user->lastname,// $this->lastname
-           "UserName" => $user->username,// $this->username
-           "Email" => $user->email// $this-email
-           "ProfilePicture" => $user->userimage// $this->userimage
-       )
-    );
- 
-
-    // kod pozitivnog odgovora
-    http_response_code(200);
- 
-    // generisemo jwt
-    $jwt = JWT::encode($token, $key);
-    echo json_encode(
-            array(
-                "message" => "Successful deletion.",
-                "jwt" => $jwt
-            )
-        );
-        */
     //brisemo podatke iz sesije i brisemo korisnika
     // token nemozemo obrisati, jer bi to znacilo brisanje na klijentskoj strani, token ce isteci, a posto je korisnik obrisan nece se moci ponovo ulogovati
     session_destroy();
@@ -123,66 +88,51 @@ $user = new UserData($db);
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
+// uzimamo jwt
+$jwt = isset($data->jwt) ? $data->jwt : "";
 
-$user->email = $data->email; // prikupljamo email iz podataka
+// ako jwt nije prazan
+if($jwt){
+ 
+    // ako nije prazan prikazati korisnicka podatke
+    try {
+ 
+        // dekodiramo jwt
+        $decoded = JWT::decode($jwt, $key, array('md5'));
+ 
+        // iz podataka koje postoje u jwt moze da dekodira i uzmu podaci koji ce nam trebati u funkciji JWTDeleteUser()
+        $user->userId = $decoded->data->userId;
+  
+        if($user->JWTDeleteUser()){
 
-$email_exists = $user->JWTCheckEmail();/// da li vec postoji email u bazi
- 
-$userid = $this->id;
-// generisemo json web token
-include_once 'config/core.php';
-include_once 'php-jwt-master/src/BeforeValidException.php';
-include_once 'php-jwt-master/src/ExpiredException.php';
-include_once 'php-jwt-master/src/SignatureInvalidException.php';
-include_once 'php-jwt-master/src/JWT.php';
-use \Firebase\JWT\JWT;/// jwt tako zovemo bazu
- 
-// check if email exists and if password is correct
-if(($email_exists) && password_verify($data->password, $user->password) && $user->JWTDeleteUser()){
- 
-    $token = array(
-       "iss" => $iss,
-       "aud" => $aud,
-       "iat" => $iat,
-       "nbf" => $nbf,
-       "data" => array(
-            "UserId" => $user->id,// $this->id
-            "FirstName" => $user->fname, // $this->firstname
-            "LastName" => $user->lname, // $this->lastname
-            "UserName" => $user->username, // $this->username
-            "Email" => $user->em, // $this-em
-            "Password" =>  $user->password, //$this-password
-            "ProfilePicture" => $user->userimage // $this->userimage
-       )
-    );
- 
-     // kod pozitivnog odgovora
-     http_response_code(200);
- 
-     // generisemo jwt
-     $jwt = JWT::encode($token, $key);
-     echo json_encode(
-             array(
-                 "message" => "Successful deleted.",
-                 "jwt" => $jwt
-             )
-         );
-    // brisemo podatke iz sesije
-    session_destroy();
-    // token nemozemo obrisati, jer bi to znacilo brisanje na klijentskoj strani, token ce isteci, a posto je korisnik obrisan nece se moci ponovo ulogovati
-}
- 
-// brisanje nije uspelo
-else{
- 
-    // kod za neautorizovan pokusaj brisanja
-    http_response_code(401);
- 
-    // reci korisniku da nije uspeo
-    array_push($error_array,"Email or password was incorrect!<br>");
-    echo json_encode(array("message" => "Delete failed."));
+            // kod pozitivnog odgovora
+            http_response_code(200);
+            // brisemo podatke iz sesije
+            session_destroy();
+            // token nemozemo obrisati, jer bi to znacilo brisanje na klijentskoj strani, token ce isteci, a posto je korisnik obrisan nece se moci ponovo ulogovati
+            header('Location: main.php');
+        }       
+        // brisanje nije uspelo
+        else{
+                // kod za neautorizovan pokusaj brisanja
+                http_response_code(401);
+            
+                // reci korisniku da nije uspeo
+                echo json_encode(array("message" => "Delete failed."));
+            }
+    }    
+    // ako nije uspelo
+    catch (Exception $e){
+    
+        // kod za odgovor
+        http_response_code(401);
+        
+        // poruka o gresci
+        echo json_encode(array(
+            "message" => "Access denied.",
+            "error" => $e->getMessage()
+        ));
+    }  
 }
 */
-
-
 ?>

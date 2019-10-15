@@ -217,12 +217,10 @@ $db = $database->getInstance()->getConnection();
  
 // pravimo nov objekat korisnika
 $user = new UserData($db);
- 
- 
+
 // prikupljamo podake preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
-// postavljamo vrenosti iz podataka
 $user->em = $data->em;
 $user->password = $data->password;
 $user->newfname = $data->newfname;
@@ -231,43 +229,80 @@ $user->newpassword = $data->newpassword;
 $user->newpassword2 = $data->newpassword2;
 $user->newuserimage = $data->newuserimage;
 
-$email_exists = $user->JWTCheckEmail();/// da li vec postoji email u bazi
+// uzimamo jwt
+$jwt = isset($data->jwt) ? $data->jwt : "";
 
-$userId = $this->userId; // $userid = $user->userId
-$em = $this->em; // $em = $user->em
-$password = $this->password; // $password = $user->password
-$fname = $this->fname; // $user->fname
-$lname = $this->lname; // $user->lname
-
-// generisemo json web token
-include_once 'config/core.php';
-include_once 'php-jwt-master/src/BeforeValidException.php';
-include_once 'php-jwt-master/src/ExpiredException.php';
-include_once 'php-jwt-master/src/SignatureInvalidException.php';
-include_once 'php-jwt-master/src/JWT.php';
-use \Firebase\JWT\JWT;/// jwt tako zovemo bazu
+// ako jwt nije prazan
+if($jwt){
  
-// check if email exists and if password is correct
-if(($email_exists) && password_verify($data->password, $user->password) && $user->JWTUpdateUser()){
-
-        // kod odgovora
-        http_response_code(200);
+    // ako nije prazan prikazati korisnicka podatke
+    try {
  
-    // display message: user was updated
-    echo json_encode(array("message" => "User was updated."));
+        // dekodiramo jwt
+        $decoded = JWT::decode($jwt, $key, array('md5'));
+ 
+        // iz podataka koje postoje u jwt moze da dekodira i uzmu podaci koji ce nam trebati u funkciji JWTUpdateUser()
+        $user->userId = $decoded->data->userId;
+        $user->fname = $decoded->data->fnaame;
+        $user->lname = $decoded->data->lname;
+
+        if($user->JWTUpdateUser()){
+
+            // regenerisan jwt posto je doslo do promene podataka
+            $token = array(
+                "iss" => $iss,
+                "aud" => $aud,
+                "iat" => $iat,
+                "nbf" => $nbf,
+                "data" => array(
+                    "UserId" => $user->userId,// $this->id
+                    "FirstName" => $user->fname, // $this->firstname
+                    "LastName" => $user->lname, // $this->lastname
+                    "UserName" => $user->username, // $this->username
+                    "Email" => $user->em, // $this-em
+                    "Password" =>  $user->password, //$this-password
+                    "ProfilePicture" => $user->userimage // $this->userimage
+
+                )
+             );
+             $jwt = JWT::encode($token, $key);
+              
+             // kod odgovora
+             http_response_code(200);
+              
+             // odgovor u json formatu
+
+             echo json_encode(
+                     array(
+                         "message" => "User was updated.",
+                         "jwt" => $jwt
+                     )
+                 );
+        }
+         
+        // ako korisnik nije mogao da promeni podatke
+        else{
+            // kod odgovora
+            http_response_code(401);
+         
+            // poruka o gresci
+            echo json_encode(array("message" => "Unable to update user."));
+        }
+
+    } // ako nije uspelo
+    catch (Exception $e){
+ 
+        // kod za odgovor
+        http_response_code(401);
+     
+        // poruka ogresci
+        echo json_encode(array(
+            "message" => "Access denied.",
+            "error" => $e->getMessage()
+        ));
+    }
 }
- 
-    // ako je korisnik
-else{
- 
-    // kod kad korisnik nije promenio podatke
-    http_response_code(400);
- 
-    // displej poruka da korisnik nije promenio podatke
-    echo json_encode(array("message" => "Unable to update user."));
-}
+
 */
-
-
 
 ?>
