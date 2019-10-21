@@ -23,7 +23,6 @@
                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">UserName</a>
                     <div class="dropdown-menu">
-                            <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
                             <a class="dropdown-item" href="#">Donate!</a>
                             <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
                         <div class="dropdown-divider"></div>

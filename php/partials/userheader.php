@@ -23,21 +23,49 @@
                             <img src="'. $_SESSION['userimage'] .'" width="75" height="75" alt="" class="img-fluid">
                         </a>
                    <div class="dropdown-menu">
-                     <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>
-                     <a class="dropdown-item" href="#">Something</a>
-                     <a class="dropdown-item" href="#">Something else here</a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="signout.php">Sign Out</a>
-                   </div>
-                 </li>
-                 <li>
-                 <form action="search.php" method="POST">
-                 <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
-                 <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" >Search</button>
-                 </form>
+                     <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>'; 
+                     if(($_SESSION['username'] == 'Rasha') || ($_SESSION['username'] == 'Natalie') || ($_SESSION['username'] == 'Ljubica') || ($_SESSION['username'] == 'Andjelka') || ($_SESSION['username'] == 'Nesa')){
+                        echo      
+                    '<a class="dropdown-item" href="#">Add movie in database</a>
+                    <a class="dropdown-item" href="#">View all users</a>
+                    <a class="dropdown-item" href="#">View users movie statistics</a>
+                    <a class="dropdown-item" href="#">Something</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="signout.php">Sign Out</a>
+                    </div>
+                </li>
+                <li>
+                <form action="search.php" method="POST">
+                <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
+                <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" >Search</button>
+                </form>
             </li>
-               </ul>
-           </div>
-       </div>
-   </nav>';
-?>
+                </ul>
+            </div>
+        </div>
+    </nav>';
+                     } else {
+                        echo
+                    '<a class="dropdown-item" href="#">Something</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="signout.php">Sign Out</a>
+                    </div>
+                </li>
+                <li>
+                <form action="search.php" method="POST">
+                <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
+                <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" >Search</button>
+                </form>
+            </li>
+                </ul>
+            </div>
+        </div>
+    </nav>';
+    }
+
+
+
+
+   ?>

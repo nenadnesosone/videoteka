@@ -293,7 +293,7 @@ class UserData{
                 $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
                 //provera da li je vec koriscen taj email
-                if (UserData::CheckEmail($em)) {/// posto smo vec u istoj clasi mozda netreba UserData
+                if (UserData::CheckEmail($em)) {
                     array_push($error_array, "Email already in use");
                 }
 
@@ -332,14 +332,14 @@ class UserData{
             //povezivanje imena i prezimena u username
             $username = strtolower($fname . "_" . $lname);
             // Ako postoji u bazi username, dodati mu broj
-            UserData::CheckUsername($username);/// posto smo vec u istoj clasi mozda netreba UserData
+            UserData::CheckUsername($username);
         
             $i = 0;
 
-            while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {/// posto smo vec u istoj clasi mozda netreba UserData
+            while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {
                 $i++;
                 $username = $username . "_" . $i;
-                UserData::CheckUsername($username);/// posto smo vec u istoj clasi mozda netreba UserData
+                UserData::CheckUsername($username);
             }
 
             //dodeljujemo korisniku random profilnu sliku 
@@ -498,6 +498,7 @@ class UserData{
 
         // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
         // ovaj query bi koristili kada bismo sve menjali ako je doslo do promene jednog podatka makar ponovo upisivali u bazu iste sve druge podatke 
+        // naravno tom slucaju bismo definisali sve podatke
         // $query = "UPDATE" . $this->table_name . "
         //         SET
         //             FirstName = :fname,
@@ -638,7 +639,7 @@ class UserData{
                     // menjamo podatke u bazi
                     //UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     $_SESSION['userimage'] = $userimage;
-                    array_push($error_array,"You have updated your image!");
+                    array_push($error_array,"You have updated your profile picture!");
 
                     }
             }
@@ -710,3 +711,4 @@ class UserData{
 
 
 ?>
+

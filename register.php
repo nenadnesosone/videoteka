@@ -76,7 +76,7 @@ require 'includes/form_handlers/login_handler.php';
             </div>
             <div id="first">
                 <form action="register.php" method="POST">
-                    <input id="log_email" type="email" name="log_email" placeholder="Email address" value="<?php
+                    <input id="log_email" type="email" name="log_email" placeholder="Email" value="<?php
                     if (isset($_SESSION['log_email'])) {
                         echo $_SESSION['log_email'];
                      } ?>" required>
@@ -86,12 +86,17 @@ require 'includes/form_handlers/login_handler.php';
                     <?php if (in_array("Email or password was incorrect!<br>", $error_array)) {
                         echo "Email or password was incorrect!<br>";
                     } ?>
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter code" required>
+                    <br>
+                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
+                    <br>
+                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
                     
-                    <a href="reset_password.php" id="reset_link" style="color:blue;display: flex;justify-content: flex-start;padding-left: 77px;margin-top: -65px;">Forgot your password?</a> 
-                    <br><br>
+                    <a href="reset_password.php" id="reset_link" style="color:blue;">Forgot your password?</a> 
+                    <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
                 </form>

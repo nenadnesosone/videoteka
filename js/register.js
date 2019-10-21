@@ -27,7 +27,7 @@ $(document).ready(function(){
     let password2 = $('#reg_password2').val().trim();
 
     // Server url - Konfigurisite ga u skladu sa vasim racunarem
-    const createServerUrl = 'jwt_create_user.php';
+    const createServerUrl = 'jwt-api/jwt_create_user.php';
 
         // Pravimo podatke koji ce biti poslati serveru
         let data = {
@@ -75,7 +75,7 @@ $(document).ready(function(){
         let password = $('#log_password').val().trim();
 
         // Server url - Konfigurisite ga u skladu sa vasim racunarem
-        let loginServerUrl = 'jwt_login_user.php';
+        let loginServerUrl = 'jwt-api/jwt_login_user.php';
 
         // Pravimo podatke koji ce biti poslati serveru
         let data = {
