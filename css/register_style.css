@@ -29,7 +29,7 @@
        background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/backgrounds/movie_background.jpg);
        width: 100%;
        height: 100vh;
-       min-width: 950px;
+       min-width: 435px;
        background-size: cover;
    }
    .login_box, .update_box{
@@ -45,7 +45,7 @@
    /* #802525, 693d3d */
    .login_header, .update_header{
        width: 100%;
-       height: 90px;
+       height: 20%;
        background-color: #456;
        color: #EDEDED;
        text-align: center;
@@ -57,6 +57,7 @@
        font-size: 1.7rem;
        line-height: 50px;
        color: #EDEDED;
+       overflow-wrap: break-word;
    }
    
    input[type="submit"] {
@@ -86,7 +87,11 @@
    #second {
        display: none;
    }
-   canvas{
-       pointer-events: none;
+   input[type="file"]{
+       padding-left: 30px;
    }
+   p{
+       margin-bottom: 0px;
+   }
+  
  

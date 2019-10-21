@@ -164,7 +164,7 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                     // menjamo podatke u bazi
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     $_SESSION['userimage'] = $userimage;
-                    array_push($error_array,"You have updated your image!");
+                    array_push($error_array,"You have updated your profile picture!");
     
                 }
         

@@ -63,7 +63,7 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
            "FirstName" => $user->firstname,// $this->firstname
            "LastName" => $user->lastname,// $this->lastname
            "UserName" => $user->username,// $this->username
-           "Email" => $user->email// $this-email
+           "Email" => $user->email,// $this-email
            "ProfilePicture" => $user->userimage// $this->userimage
        )
     );
@@ -80,8 +80,6 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
                 "jwt" => $jwt
             )
         );
-    header("Location: watchlist.php");
-    exit();
 
 }
  
@@ -122,7 +120,7 @@ $user = new UserData($db);
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
-
+// BREAKPOINT!!!
 $user->email = $data->email; // prikupljamo email iz podataka
 
 $email_exists = $user->JWTCheckEmail();/// da li vec postoji email u bazi
@@ -144,7 +142,7 @@ if($email_exists && password_verify($data->password, $user->password)){
        "iat" => $iat,
        "nbf" => $nbf,
        "data" => array(
-            "UserId" => $user->id,// $this->id
+            "UserId" => $user->userId,// $this->id
             "FirstName" => $user->fname, // $this->fname
             "LastName" => $user->lname, // $this->lname
             "UserName" => $user->username, // $this->username
@@ -164,10 +162,7 @@ if($email_exists && password_verify($data->password, $user->password)){
                  "message" => "Successful login.",
                  "jwt" => $jwt
              )
-         );
-     header("Location: watchlist.php");
-     exit();
- 
+
 }
  
 // ulogovanje nije uspelo

@@ -68,7 +68,7 @@ require 'includes/form_handlers/profile_handler.php';
 
             <div id="first">
                 <form action="restAccount.php" method="POST" enctype="multipart/form-data">
-                    <input id="profile_email" type="email" name="profile_email" placeholder="Email Address" value="<?php
+                    <input id="profile_email" type="email" name="profile_email" placeholder="Email" value="<?php
                         if (isset($_SESSION['profile_email'])) {
                             echo $_SESSION['profile_email'];
                         } ?>" required>
@@ -97,7 +97,8 @@ require 'includes/form_handlers/profile_handler.php';
                     <br>
                     <input id="new_password2" type="password" name="new_password2" placeholder="Confirm New Password">
                     <br>
-                    <input id="new_image" type="file" name="new_image"><br>
+                    <p>Add new profile picture?</p>
+                    <input id="new_image" type="file" name="new_image"><br><br>
 
                     <?php if (in_array("Your passwords do not match", $error_array)) echo "Your passwords do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
@@ -111,7 +112,7 @@ require 'includes/form_handlers/profile_handler.php';
                     <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
                     <?php if (in_array("You have updated your Last Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Last Name!</span><br>"; ?>
                     <?php if (in_array("You have updated your Password!", $error_array)) echo "<span style='color:#14C800;'>You have updated your Password!</span><br>"; ?>
-                    <?php if (in_array("You have updated your image!", $error_array)) echo "<span style='color:#14C800;'>You have updated your image!</span><br>"; ?>
+                    <?php if (in_array("You have updated your image!", $error_array)) echo "<span style='color:#14C800;'>You have updated your profile picture!</span><br>"; ?>
                     
                     <?php
 
@@ -121,7 +122,7 @@ require 'includes/form_handlers/profile_handler.php';
                         }
                     }
                     ?>
-                    <a href="reset_password.php">Forgot your password?</a>
+                    <a href="reset_password.php" style="color:blue;">Forgot your password?</a>
                 </form>
             </div>
 

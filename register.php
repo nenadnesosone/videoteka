@@ -76,21 +76,38 @@ require 'includes/form_handlers/login_handler.php';
             </div>
             <div id="first">
                 <form action="register.php" method="POST">
+<<<<<<< HEAD
                     <input id="log_email" type="email" name="log_email" placeholder="Email address" value="<?php
                                                                                                             if (isset($_SESSION['log_email'])) {
                                                                                                                 echo $_SESSION['log_email'];
                                                                                                             } ?>" required>
+=======
+                    <input id="log_email" type="email" name="log_email" placeholder="Email" value="<?php
+                    if (isset($_SESSION['log_email'])) {
+                        echo $_SESSION['log_email'];
+                     } ?>" required>
+>>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <br>
                     <input id="log_password" type="password" name="log_password" placeholder="Password">
                     <br>
                     <?php if (in_array("Email or password was incorrect!<br>", $error_array)) {
                         echo "Email or password was incorrect!<br>";
                     } ?>
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter code" required>
+                    <br>
+                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
+                    <br>
+                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
+<<<<<<< HEAD
 
                     <a href="reset_password.php" id="reset_link">Forgot your password?</a>
+=======
+                    
+                    <a href="reset_password.php" id="reset_link" style="color:blue;">Forgot your password?</a> 
+>>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
@@ -98,7 +115,11 @@ require 'includes/form_handlers/login_handler.php';
             </div>
             <div id="second">
 
+<<<<<<< HEAD
                 <form onsubmit="validateCaptcha()" action="register.php" method="POST">
+=======
+                <form action="register.php" method="POST" id="register">
+>>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <input id="reg_fname" type="text" name="reg_fname" placeholder="First name" value="<?php
                                                                                                         if (isset($_SESSION['reg_fname'])) {
                                                                                                             echo $_SESSION['reg_fname'];
@@ -135,13 +156,12 @@ require 'includes/form_handlers/login_handler.php';
                     <?php if (in_array("Your password do not match", $error_array)) echo "Your password do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
-                    <!-- captcha -->
-                    <div id="captcha">
-                    </div>
-                    <input type="text" placeholder="Captcha" id="captchaTextBox" />
-                        
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter code" required>
                     <br>
-
+                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
+                    <br>
+                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <br>
                     <input id="register_button" type="submit" name="register_button" value="Register">
                     <br>
                     <?php if (in_array("<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>", $error_array)) echo "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>"; ?>
@@ -153,3 +173,4 @@ require 'includes/form_handlers/login_handler.php';
 </body>
 
 </html>
+
