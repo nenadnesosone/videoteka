@@ -1,5 +1,4 @@
 <?php
-
 require_once 'data\userdata.php';
 
 //Deklarisanje varijabli
@@ -91,6 +90,12 @@ if (isset($_POST['register_button'])) {
         array_push($error_array, "Your password must be between 5 and 30 characters"); 
     }
 
+    if (isset($_SESSION['captcha_code']) && $_POST['captcha_code'] == $_SESSION['captcha_code']) {
+        unset($_SESSION['captcha_code']);
+
+    }else{
+        array_push($error_array, "Invalid code! Please, try again.<br>"); 
+    }
     if (empty($error_array)) {
         $password = md5($password); //enkripcija lozinke
 
@@ -126,11 +131,19 @@ if (isset($_POST['register_button'])) {
             $profile_picture = "images/profile_pictures/avatar (3)_128.png";
         }
 
+        if (isset($_SESSION['captcha_code']) && $_POST['captcha_code'] == $_SESSION['captcha_code']) {
+            unset($_SESSION['captcha_code']);
+    
+        }else{
+            array_push($error_array, "Invalid code!"); 
+        }
+        
+        
         //unos podataka u bazu
-        UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
+        // UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
      
          //unos podataka u bazu
-         //$query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");
+         $query = mysqli_query($con, "INSERT INTO users_data VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_picture')");
         array_push($error_array, "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>");
 
         //brisanje podataka iz sesija

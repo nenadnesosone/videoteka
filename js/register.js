@@ -12,7 +12,7 @@ $(document).ready(function(){
         })
     });
 
-    // zakomentarisano dok sve nebude gotovo
+    // zakomentarisano dok sve ne bude gotovo
   
 
     // Reakcija na klik dugmeta
