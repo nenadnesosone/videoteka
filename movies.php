@@ -43,6 +43,7 @@ require_once 'data/moviedata.php';
 
     echo var_dump($result);
     }
+    
     ?>
 
 

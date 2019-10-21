@@ -27,8 +27,8 @@ function displayMovie(){
     contentType:'json',
     method:'GET',
     success: function(resp){
-        // data = JSON.parse(resp);
-        console.log(resp);
+        data = JSON.parse(resp);
+        console.log(data);
     }
 })
 }

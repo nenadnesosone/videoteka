@@ -76,17 +76,10 @@ require 'includes/form_handlers/login_handler.php';
             </div>
             <div id="first">
                 <form action="register.php" method="POST">
-<<<<<<< HEAD
-                    <input id="log_email" type="email" name="log_email" placeholder="Email address" value="<?php
-                                                                                                            if (isset($_SESSION['log_email'])) {
-                                                                                                                echo $_SESSION['log_email'];
-                                                                                                            } ?>" required>
-=======
                     <input id="log_email" type="email" name="log_email" placeholder="Email" value="<?php
                     if (isset($_SESSION['log_email'])) {
                         echo $_SESSION['log_email'];
                      } ?>" required>
->>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <br>
                     <input id="log_password" type="password" name="log_password" placeholder="Password">
                     <br>
@@ -101,13 +94,8 @@ require 'includes/form_handlers/login_handler.php';
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
-<<<<<<< HEAD
-
-                    <a href="reset_password.php" id="reset_link">Forgot your password?</a>
-=======
                     
                     <a href="reset_password.php" id="reset_link" style="color:blue;">Forgot your password?</a> 
->>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
@@ -115,11 +103,7 @@ require 'includes/form_handlers/login_handler.php';
             </div>
             <div id="second">
 
-<<<<<<< HEAD
-                <form onsubmit="validateCaptcha()" action="register.php" method="POST">
-=======
                 <form action="register.php" method="POST" id="register">
->>>>>>> c6333d4ee6cf14a47bf3af0b369ad298e222c182
                     <input id="reg_fname" type="text" name="reg_fname" placeholder="First name" value="<?php
                                                                                                         if (isset($_SESSION['reg_fname'])) {
                                                                                                             echo $_SESSION['reg_fname'];
