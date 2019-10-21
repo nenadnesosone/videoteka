@@ -89,6 +89,7 @@ button:hover, .modal-content a:hover {
     display: none;
     flex-wrap: wrap;
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .modal-content{

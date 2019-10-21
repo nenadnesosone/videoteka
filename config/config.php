@@ -26,11 +26,9 @@ class Database {
 
     public static function getInstance()
     {
-
         if (! self::$instance)
         {
             // self oznacava TEKUCU KLASU -> Odnosno klasu Database.
-
 			self::$instance = new self();
         }
         
@@ -42,7 +40,7 @@ class Database {
 	private function __construct() {
         // Pri konstrukciji objekta ove klase, otvaramo konekciju ka bazi.
 		$this->con = new mysqli($this->host, $this->username, 
-			$this->password, $this->database);
+            $this->password, $this->database);
 	
         // Ukoliko dodje do greske
         if (mysqli_connect_error())

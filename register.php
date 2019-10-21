@@ -23,7 +23,7 @@ require 'includes/form_handlers/login_handler.php';
     <link rel="stylesheet" href="css/register_style.css">
 </head>
 
-<body>
+<body onload="createCaptcha()">
     <?php
 
     if (isset($_POST['register_button'])) {
@@ -77,9 +77,9 @@ require 'includes/form_handlers/login_handler.php';
             <div id="first">
                 <form action="register.php" method="POST">
                     <input id="log_email" type="email" name="log_email" placeholder="Email address" value="<?php
-                    if (isset($_SESSION['log_email'])) {
-                        echo $_SESSION['log_email'];
-                     } ?>" required>
+                                                                                                            if (isset($_SESSION['log_email'])) {
+                                                                                                                echo $_SESSION['log_email'];
+                                                                                                            } ?>" required>
                     <br>
                     <input id="log_password" type="password" name="log_password" placeholder="Password">
                     <br>
@@ -89,40 +89,40 @@ require 'includes/form_handlers/login_handler.php';
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
-                    
-                    <a href="reset_password.php" id="reset_link" style="color:blue;display: flex;justify-content: flex-start;padding-left: 77px;margin-top: -65px;">Forgot your password?</a> 
-                    <br><br>
+
+                    <a href="reset_password.php" id="reset_link">Forgot your password?</a>
+                    <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
                 </form>
             </div>
             <div id="second">
 
-                <form action="register.php" method="POST">
+                <form onsubmit="validateCaptcha()" action="register.php" method="POST">
                     <input id="reg_fname" type="text" name="reg_fname" placeholder="First name" value="<?php
-                    if (isset($_SESSION['reg_fname'])) {
-                        echo $_SESSION['reg_fname'];
-                    } ?>" required>
+                                                                                                        if (isset($_SESSION['reg_fname'])) {
+                                                                                                            echo $_SESSION['reg_fname'];
+                                                                                                        } ?>" required>
                     <br>
                     <?php if (in_array("Your first name must be between 2 and 25 characters", $error_array)) echo "Your first name must be between 2 and 25 characters<br>"; ?>
 
                     <input id="reg_lname" type="text" name="reg_lname" placeholder="Last name" value="<?php
-                        if (isset($_SESSION['reg_lname'])) {
-                            echo $_SESSION['reg_lname'];
-                     } ?>" required>
+                                                                                                        if (isset($_SESSION['reg_lname'])) {
+                                                                                                            echo $_SESSION['reg_lname'];
+                                                                                                        } ?>" required>
                     <br>
                     <?php if (in_array("Your last name must be between 2 and 25 characters", $error_array)) echo  "Your last name must be between 2 and 25 characters<br>"; ?>
 
                     <input id="reg_email" type="email" name="reg_email" placeholder="Email" value="<?php
-                        if (isset($_SESSION['reg_email'])) {
-                         echo $_SESSION['reg_email'];
-                         } ?>" required>
+                                                                                                    if (isset($_SESSION['reg_email'])) {
+                                                                                                        echo $_SESSION['reg_email'];
+                                                                                                    } ?>" required>
                     <br>
 
                     <input id="reg_email2" type="email" name="reg_email2" placeholder="Confirm email" value="<?php
-                    if (isset($_SESSION['reg_email2'])) {
-                    echo $_SESSION['reg_email2'];
-                   } ?>" required>
+                                                                                                                if (isset($_SESSION['reg_email2'])) {
+                                                                                                                    echo $_SESSION['reg_email2'];
+                                                                                                                } ?>" required>
                     <br>
                     <?php if (in_array("Email already in use", $error_array)) echo  "Email already in use<br>";
                     else if (in_array("Invalid email format", $error_array)) echo  "Invalid email format<br>";
@@ -135,6 +135,12 @@ require 'includes/form_handlers/login_handler.php';
                     <?php if (in_array("Your password do not match", $error_array)) echo "Your password do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
+                    <!-- captcha -->
+                    <div id="captcha">
+                    </div>
+                    <input type="text" placeholder="Captcha" id="captchaTextBox" />
+                        
+                    <br>
 
                     <input id="register_button" type="submit" name="register_button" value="Register">
                     <br>

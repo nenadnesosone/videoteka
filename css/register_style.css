@@ -86,4 +86,7 @@
    #second {
        display: none;
    }
+   canvas{
+       pointer-events: none;
+   }
  

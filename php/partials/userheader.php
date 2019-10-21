@@ -30,14 +30,12 @@
                      <a class="dropdown-item" href="signout.php">Sign Out</a>
                    </div>
                  </li>
-                 <li>
-                 <form action="search.php" method="POST">
-                 <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
-                 <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" >Search</button>
-                 </form>
-            </li>
                </ul>
            </div>
+           <form action="search.php" method="POST">
+           <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px;margin: 2px 5px 2px -3px">
+           <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" ><i class="fas fa-search"></i></button>
+           </form>
        </div>
    </nav>';
 ?>

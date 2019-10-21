@@ -2,8 +2,8 @@
    echo '    <!-- NAV -->
    <nav class="navbar navbar-dark bg-transparent navbar-expand-md py-2" id="main-nav">
        <div class="container">
-           <a href="main.php" class="navbar-brand mr-auto">
-               <img src="./images/Logo/logo1.png" width="250" height="100" alt="" class="img-fluid">
+           <a href="http://localhost/videoteka/main.php" class="navbar-brand mr-auto">
+               <img src="http://localhost/videoteka/images/Logo/logo1.png" width="250" height="100" alt="" class="img-fluid">
            </a>
 
            <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#idcollapse">
@@ -15,7 +15,7 @@
                        <a href="main.php" class="nav-link">Home</a>
                    </li>
                    <li class="nav-item">
-                       <a href="watchlist.php" class="nav-link">Your Watchlist</a>
+                       <a href="watchlist.php" class="nav-link">Watchlist</a>
                    </li>
                    <li class="nav-item">
                        <a href="register.php" class="nav-link">Login/SignUp</a>
@@ -30,15 +30,12 @@
                             <a class="dropdown-item" href="signout.php">Sign Out</a>
                     </div>
                     </li>
-                    <li>
-                        <form action="search.php" method="POST">
-                        <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:5px">
-                        <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-3px">Search</button>
-                        </form>
-                   </li>
-
                </ul>
            </div>
+           <form action="search.php" method="POST">
+           <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+           <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+           </form>
        </div>
    </nav>';
 ?>

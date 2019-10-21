@@ -1,6 +1,7 @@
 <?php
-require 'config/config.php';
 
+require_once 'config/config.php';
+require_once 'data/moviedata.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,16 +18,31 @@ require 'config/config.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/singleMovie.css">
-    <script src="js/singleMovie.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://localhost/videoteka/css/singleMovie.css">
+    <script src="http://localhost/videoteka/js/singleMovie.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 
 </head>
 
 <body>
 
-    <?php
+     <?php
     require 'php\partials\mainheader.php';
+    // //  koji url treba da ide?
+    if(isset($_GET['id']) && $_GET['id']!=""){
+        $id = $_GET['id'];   
+        $url = 'http://localhost/movies/'.$id;
 
+    $client = curl_init($url);
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($client);
+
+    $result = json_decode($response);
+    echo $result;
+
+    echo var_dump($result);
+    }
     ?>
 
 
@@ -36,12 +52,13 @@ require 'config/config.php';
         </div>
 
         <div class="row">
+
             <div class="d-none d-md-block col-md-3 offset-1">
-                <img src="images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="250px" height="450px">
+                <img src="http://localhost/videoteka/images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="250px" height="450px">
             </div>
             <div class="col-md-4">
                 <!-- ime filma iz baze -->
-                <h1>Once Upon A Time In Hollywod</h1>
+                <h1>Once Upon A Time In Hollywood</h1>
                 <!-- svi podaci iz baze -->
                 <h5><span>2019</span>, Directed by <span>Quentin Tarantino</span></h5>
                 <!--opis filma iz baze  -->
@@ -136,9 +153,8 @@ require 'config/config.php';
     </script>
 
 
+    <?php
+    require 'php\partials\footer.php';
 
+    ?>
 </body>
-<?php
-require 'php\partials\footer.php';
-
-?>

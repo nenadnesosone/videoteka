@@ -182,7 +182,7 @@ img.hover-shadow {
 }
 
 .page-footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -194,4 +194,11 @@ img.hover-shadow {
     color: #9ab;
 }
 
+
+
+@media only screen and (max-width: 767px){
+    #mainphoto {
+        background-position: center center;
+    }
+}
 

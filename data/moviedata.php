@@ -59,17 +59,19 @@ class MovieData
         $query = "SELECT * FROM movies";
         $result = mysqli_query($db, $query);
         if ($result) {
-            // $movies = [];
+            $data = [];
             while ($row = mysqli_fetch_assoc($result)) {
+                // $data []=json_encode($row);
                 $title = $row['Title'];
                 $leadingActor = $row['LeadingActor'];
                 $imageUrl = $row['ImageUrl'];
+                $movieId = $row['MovieId'];
                 echo   "<div class='col-md-6 col-lg-3'>
                 <div class='card border-0'>
                     <div class='modal'>
                         <div class='modal-content'>
-                            <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
-                            <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
+                            <button class='btn btn-small mb-2 watch' data-id='$movieId'>Add To Watchlist</button>
+                            <button role='button' class='btn btn-small moreInfo' data-id='$movieId'><a href='#'>More Info</a></button>
                         </div>
                     </div>
                     <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
@@ -79,30 +81,38 @@ class MovieData
                     </div>
                 </div>
             </div> ";
-            }
+            } 
+            // echo json_encode($data);
+            // echo json_last_error_msg(); // Print out the error if any
+// die();
         } else {
-            echo "No Movies To Display";
+            return [];
+            echo "No Movies To Display.";
         }
     }
 
     // funcija koja ce prikupljati podatke o filmovima iz baze koje je korisnik odabrao
-    public static function GetSomeMovies($movieId)
+    public static function GetMovie($id)
     {
-        //povezujemo se s bazom
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
+        
         $db = Database::getInstance()->getConnection();
 
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
-
         // odaberemo konkretan film
-        $query = "SELECT * FROM movies WHERE movieId=$movieId";
+        $query = "SELECT * FROM movies WHERE movieId=$id";
         $result = mysqli_query($db, $query);
+        mysqli_set_charset($db, 'utf8');
         if ($result) {
             $row = mysqli_fetch_assoc($result);
-            return $row;
+            $data = json_encode($row);
+            echo json_encode($data);
         } else {
             return [];
         }
     }
+
+
+
 
     // funkcija za ubacivanje filmova u bazu ako zelimo da je koristimo 
     public static function CreateMovie($newfilm)
@@ -173,23 +183,18 @@ class MovieData
             $sql = "SELECT * FROM movies WHERE Title LIKE '%$search%' OR ReleaseYear LIKE '%$search%' OR Genre  LIKE '%$search%' OR Country  LIKE '%$search%'";
             $result = mysqli_query($db, $sql);
             $queryResult = mysqli_num_rows($result);
-
-            if ($queryResult == 1) {
-                echo "<p class='lead text-white'>There is " . $queryResult . " result!</p>";
-            } elseif ($queryResult > 1) {
-                echo "<p class='lead text-white'>There are " . $queryResult . " results!</p>";
-            }
             if ($queryResult > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $title = $row['Title'];
                     $leadingActor = $row['LeadingActor'];
                     $imageUrl = $row['ImageUrl'];
+                    $movieId = $row['MovieId'];
                     echo   "<div class='col-md-6 col-lg-3'>
                         <div class='card border-0'>
                             <div class='modal'>
                                 <div class='modal-content'>
                                     <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
-                                    <button role='button' class='btn btn-small'> <a href='singleMovie.php' class='btn-link'>More Info</a></button>
+                                    <button role='button' class='btn btn-small moreInfo'> <a href='localhost/movies/$movieId' class='btn-link'>More Info</a></button>
                                 </div>
                             </div>
                             <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
@@ -201,7 +206,7 @@ class MovieData
                     </div> ";
                 }
             } else {
-                echo "There are no results matching your search!";
+                echo "<p class='lead text-white'>There are no results matching your search!</p>";
             }
         }
     }
