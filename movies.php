@@ -27,21 +27,21 @@ require_once 'data/moviedata.php';
 
 <body>
 
-     <?php
+    <?php
     require 'php\partials\mainheader.php';
     // //  koji url treba da ide?
-    if(isset($_GET['id']) && $_GET['id']!==""){
-        $id = $_GET['id'];   
-        $url = 'http://localhost/movies/'.$id;
+    if (isset($_GET['id']) && $_GET['id'] !== "") {
+        $id = $_GET['id'];
+        $url = 'http://localhost/movies/' . $id;
 
-    $client = curl_init($url);
-    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($client);
+        $client = curl_init($url);
+        curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($client);
 
-    $result = json_decode($response);
-    echo $result;
+        $result = json_decode($response);
+        echo $result;
 
-    echo var_dump($result);
+        echo var_dump($result);
     }
 
     ?>
@@ -49,25 +49,40 @@ require_once 'data/moviedata.php';
 
     <div class="container m-auto">
 
-        <div id="mainphoto">
-        </div>
-
         <div class="row">
 
-            <div class="d-none d-md-block col-md-3 offset-1">
-                <img src="http://localhost/videoteka/images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="250px" height="450px">
+            <div class="col-lg-5">
+                <img src="http://localhost/videoteka/images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="400px" height="600px">
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-7">
                 <!-- ime filma iz baze -->
                 <h1>Once Upon A Time In Hollywood</h1>
                 <!-- svi podaci iz baze -->
-                <h5><span>2019</span>, Directed by <span>Quentin Tarantino</span></h5>
+                <h5 id="dir">Directed by <span>Quentin Tarantino</span></h5>
                 <!--opis filma iz baze  -->
                 <p class="lead">A faded television actor and his stunt double strive to achieve fame and success in the
                     film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.
                 </p>
+                <h5>Stars:<span> Brad Pitt</span></h5>
+                <h5>Released:<span> 2019</span><span>(USA)</span></h5>
+                <h5>Genre:<span> Comedy/Drama</span></h5>
+                <h5 id="lastH">IMDB rating:<span> 8.5</span></h5>
+
+
+                <div class="btnDiv">
+                    <button class="stick1 btn btn-block hover-shadow mb-0" onclick="currentSlide(1)" id="open">Movie Cuts - View Gallery</button>
+
+                    <button class="stick btn btn-block hover-shadow" onclick="showLink()" id="shareOff">Share</button>
+
+                    <button class="stick btn btn-block hover-shadow" id="shareOn" style="display:none" onmouseout="hideLink()">
+                        <!-- link iz baze -->
+                        <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
+                </div>
+
+
+
             </div>
-            <div class="col-md-3" id="btn">
+            <!-- <div class="col-md-3" id="btn">
 
                 <button class="btn btn-block hover-shadow" onclick="currentSlide(1)" id="open">Movie Cuts - View Gallery</button>
 
@@ -75,8 +90,8 @@ require_once 'data/moviedata.php';
 
                 <button class="btn btn-block hover-shadow" id="shareOn" style="display:none" onmouseout="hideLink()">
                     <!-- link iz baze -->
-                    <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
-            </div>
+            <!-- <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button> -->
+            <!-- </div>  -->
         </div>
     </div>
 

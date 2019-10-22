@@ -40,7 +40,7 @@ require 'includes/form_handlers/login_handler.php';
     ?>
     <?php
 
-    include 'php/partials/regheader.php';
+    require 'php/partials/regheader.php';
 
     ?>
 
@@ -65,6 +65,8 @@ require 'includes/form_handlers/login_handler.php';
                     } ?>
                                         <br>
                     <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <br>
+
                     <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
@@ -119,6 +121,7 @@ require 'includes/form_handlers/login_handler.php';
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
                     <br>
                     <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <br>
                     <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
