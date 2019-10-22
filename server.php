@@ -191,7 +191,7 @@ if (!in_array($method, $supported_methods)) {
                         $response->data = NULL;
                     } else {
                         /* Ako su svi podaci tu, dodajemo novi film u bazu. */
-                        $id = $db->addMovie($data->title, $data->director);
+                        $id = MovieData::CreateMovie($newfilm);
 
                         /* Ako je dodavanje filma iz nekog razloga neuspesno, prijavljujemo gresku. */
                         if ($id == -1) {

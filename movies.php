@@ -30,7 +30,7 @@ require_once 'data/moviedata.php';
      <?php
     require 'php\partials\mainheader.php';
     // //  koji url treba da ide?
-    if(isset($_GET['id']) && $_GET['id']!=""){
+    if(isset($_GET['id']) && $_GET['id']!==""){
         $id = $_GET['id'];   
         $url = 'http://localhost/movies/'.$id;
 
@@ -43,7 +43,7 @@ require_once 'data/moviedata.php';
 
     echo var_dump($result);
     }
-    
+
     ?>
 
 

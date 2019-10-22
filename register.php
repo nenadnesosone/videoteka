@@ -21,9 +21,10 @@ require 'includes/form_handlers/login_handler.php';
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/register_style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
-<body onload="createCaptcha()">
+<body>
     <?php
 
     if (isset($_POST['register_button'])) {
@@ -37,35 +38,11 @@ require 'includes/form_handlers/login_handler.php';
         ';
     }
     ?>
+    <?php
 
+    include 'php/partials/regheader.php';
 
-    <!-- NAV -->
-    <nav class="navbar fixed-top navbar-dark bg-transparent navbar-expand-md py-2" id="main-nav">
-        <div class="container">
-            <a href="main.php" class="navbar-brand mr-auto">
-                <img src="images/Logo/logo1.png" width="250" height="100" alt="" class="img-fluid">
-            </a>
-
-            <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#idcollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="idcollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="main.php" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Your Watchlist</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="nav-link">Login/Sign Up</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    ?>
 
 
     <div class="wrapper">
@@ -77,25 +54,25 @@ require 'includes/form_handlers/login_handler.php';
             <div id="first">
                 <form action="register.php" method="POST">
                     <input id="log_email" type="email" name="log_email" placeholder="Email" value="<?php
-                    if (isset($_SESSION['log_email'])) {
-                        echo $_SESSION['log_email'];
-                     } ?>" required>
+                                                                                                    if (isset($_SESSION['log_email'])) {
+                                                                                                        echo $_SESSION['log_email'];
+                                                                                                    } ?>" required>
                     <br>
                     <input id="log_password" type="password" name="log_password" placeholder="Password">
                     <br>
                     <?php if (in_array("Email or password was incorrect!<br>", $error_array)) {
                         echo "Email or password was incorrect!<br>";
                     } ?>
-                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter code" required>
+                                        <br>
+                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
-                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
-                    <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
-                    
-                    <a href="reset_password.php" id="reset_link" style="color:blue;">Forgot your password?</a> 
+
+                    <a href="reset_password.php" id="reset_link" style="color:blue;">Forgot your password?</a>
                     <br>
                     <a href="#" id="signup" class="signup">Need an account? Register here!</a>
 
@@ -140,11 +117,11 @@ require 'includes/form_handlers/login_handler.php';
                     <?php if (in_array("Your password do not match", $error_array)) echo "Your password do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
-                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter code" required>
-                    <br>
-                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
                     <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
+                    <br>
+                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
                     <input id="register_button" type="submit" name="register_button" value="Register">
                     <br>
@@ -154,7 +131,11 @@ require 'includes/form_handlers/login_handler.php';
             </div>
         </div>
     </div>
+
+
+    <?php
+    include 'php/partials/footer.php';
+    ?>
 </body>
 
 </html>
-
