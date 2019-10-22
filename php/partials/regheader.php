@@ -2,8 +2,8 @@
    echo '    <!-- NAV -->
    <nav class="navbar navbar-dark bg-transparent navbar-expand-md py-2" id="main-nav">
        <div class="container">
-           <a href="http://localhost/videoteka/main.php" class="navbar-brand mr-auto">
-               <img src="http://localhost/videoteka/images/Logo/logo1.png" width="250" height="100" alt="" class="img-fluid">
+           <a href="main.php" class="navbar-brand mr-auto">
+               <img src="./images/Logo/logo1.png" width="250" height="100" alt="" class="img-fluid">
            </a>
 
            <button role="button" class="navbar-toggler" data-toggle="collapse" data-target="#idcollapse">
