@@ -130,14 +130,6 @@ if (isset($_POST['register_button'])) {
         }else if($rand == 7){
             $profile_picture = "images/profile_pictures/avatar (3)_128.png";
         }
-
-        if (isset($_SESSION['captcha_code']) && $_POST['captcha_code'] == $_SESSION['captcha_code']) {
-            unset($_SESSION['captcha_code']);
-    
-        }else{
-            array_push($error_array, "Invalid code!"); 
-        }
-        
         
         //unos podataka u bazu
          UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);

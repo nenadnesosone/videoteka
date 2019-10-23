@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(){
 
     // Reakcija na klik dugmeta
@@ -97,9 +98,5 @@ $(document).ready(function(){
         });
     });
 
-
-
-
-
-
 });
+*/

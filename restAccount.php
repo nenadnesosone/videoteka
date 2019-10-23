@@ -104,6 +104,9 @@ require 'includes/form_handlers/profile_handler.php';
 
         </div>
     </div>
+    <?php
+    include 'php/partials/footer.php';
+    ?>
 </body>
 
 </html>

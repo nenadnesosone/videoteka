@@ -16,16 +16,23 @@ if (isset($_POST['login_button'])) {
     $check_login_query = mysqli_num_rows($check_database_query);
 
     if ($check_login_query == 1) {
-        $row = mysqli_fetch_array($check_database_query);
-        $_SESSION['username'] = $row['UserName'];
-        $_SESSION['userid'] = $row['Userid'];
-        $_SESSION['userimage'] = $row['ProfilePicture'];
-
-        header("Location: watchlist.php");
+        if (isset($_SESSION['captcha_code']) && $_POST['captcha_code'] == $_SESSION['captcha_code']) {
+            unset($_SESSION['captcha_code']);
+            
+            $row = mysqli_fetch_array($check_database_query);
+            $_SESSION['username'] = $row['UserName'];
+            $_SESSION['userid'] = $row['Userid'];
+            $_SESSION['userimage'] = $row['ProfilePicture'];
+    
+            header("Location: watchlist.php");
+            
+            $_SESSION['log_email'] = "";
+    
+            exit();
+        }else{
+            array_push($error_array, "Invalid code! Please, try again.<br>"); 
+        }
         
-        $_SESSION['log_email'] = "";
-
-        exit();
     }else {
         array_push($error_array,"Email or password was incorrect!<br>");
 
