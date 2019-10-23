@@ -50,7 +50,7 @@ if($email_exists && password_verify($data->password, $user->password)){
             "Email" => $em, // $this-em
             "Password" =>  $password, //$this-password
             "ProfilePicture" => $userimage // $this->userimage
-       ));
+       )
     );
  
      // kod pozitivnog odgovora
