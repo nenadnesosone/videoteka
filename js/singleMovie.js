@@ -1,10 +1,10 @@
-
-function showLink () {
+// galerija
+function showLink() {
     document.getElementById('shareOff').style.display = "none";
     document.getElementById('shareOn').style.display = "block";
 }
 
-function hideLink(){
+function hideLink() {
     document.getElementById('shareOn').style.display = "none";
     document.getElementById('shareOff').style.display = "block";
 }

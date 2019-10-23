@@ -61,30 +61,9 @@ class MovieData
         if ($result) {
             $data = [];
             while ($row = mysqli_fetch_assoc($result)) {
-                // $data []=json_encode($row);
-                $title = $row['Title'];
-                $leadingActor = $row['LeadingActor'];
-                $imageUrl = $row['ImageUrl'];
-                $movieId = $row['MovieId'];
-                echo   "<div class='col-md-6 col-lg-3'>
-                <div class='card border-0'>
-                    <div class='modal'>
-                        <div class='modal-content'>
-                            <button class='btn btn-small mb-2 watch' data-id='$movieId'>Add To Watchlist</button>
-                            <button role='button' class='btn btn-small moreInfo' data-id='$movieId'><a href='#'>More Info</a></button>
-                        </div>
-                    </div>
-                    <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
-                    <div class='card-body'>
-                        <h6>" . $title . "</h6>
-                        <p class='text-muted card-text'> " . $leadingActor . "</p>
-                    </div>
-                </div>
-            </div> ";
+                $data []=$row;
             } 
-            // echo json_encode($data);
-            // echo json_last_error_msg(); // Print out the error if any
-// die();
+            return $data;
         } else {
             return [];
             echo "No Movies To Display.";
@@ -104,8 +83,8 @@ class MovieData
         mysqli_set_charset($db, 'utf8');
         if ($result) {
             $row = mysqli_fetch_assoc($result);
-            $data = json_encode($row);
-            echo json_encode($data);
+            // echo var_dump($row);
+            return $row;
         } else {
             return [];
         }

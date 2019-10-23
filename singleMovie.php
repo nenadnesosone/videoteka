@@ -14,7 +14,6 @@ require_once 'data/moviedata.php';
     <title>Movie Title</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet">
@@ -29,20 +28,6 @@ require_once 'data/moviedata.php';
 
     <?php
     require 'php\partials\mainheader.php';
-    // //  koji url treba da ide?
-    if (isset($_GET['id']) && $_GET['id'] !== "") {
-        $id = $_GET['id'];
-        $url = 'http://localhost/movies/' . $id;
-
-        $client = curl_init($url);
-        curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($client);
-
-        $result = json_decode($response);
-        echo $result;
-
-        echo var_dump($result);
-    }
 
     ?>
 
@@ -52,24 +37,25 @@ require_once 'data/moviedata.php';
         <div class="row">
 
             <div class="col-lg-5">
-                <img src="http://localhost/videoteka/images/pseudoposter.JPG" class="img-fluid rounded" alt="" width="400px" height="600px">
+                <img id="imageUrl" src="" class="img-fluid rounded" alt="" width="350px" height="550px">
             </div>
-            <div class="col-lg-7">
-                <!-- ime filma iz baze -->
-                <h1>Once Upon A Time In Hollywood</h1>
-                <!-- svi podaci iz baze -->
-                <h5 id="dir">Directed by <span>Quentin Tarantino</span></h5>
-                <!--opis filma iz baze  -->
-                <p class="lead">A faded television actor and his stunt double strive to achieve fame and success in the
-                    film industry during the final years of Hollywood's Golden Age in 1969 Los Angeles.
-                </p>
-                <h5>Stars:<span> Brad Pitt</span></h5>
-                <h5>Released:<span> 2019</span><span>(USA)</span></h5>
-                <h5>Genre:<span> Comedy/Drama</span></h5>
-                <h5 id="lastH">IMDB rating:<span> 8.5</span></h5>
+            <div class="col-lg-6">
+
+                <h1 id="title"></h1>
+                <h5 id="directorsH">Directed by <span id="director"></span></h5>
 
 
-                <div class="btnDiv">
+                <div class="bottomAlign">
+                    <p class="lead" id="summary"></p>
+
+                    <h5>Stars: <span id="leadingActor"></span></h5>
+
+                    <h5>Released: <span id="releaseYear"></span><span id="country"></span></h5>
+
+                    <h5>Genre: <span id="genre"></span></h5>
+
+                    <h5 id="lastH">IMDB rating: <span id="imdbRating"></span></h5>
+
                     <button class="stick1 btn btn-block hover-shadow mb-0" onclick="currentSlide(1)" id="open">Movie Cuts - View Gallery</button>
 
                     <button class="stick btn btn-block hover-shadow" onclick="showLink()" id="shareOff">Share</button>
@@ -78,20 +64,7 @@ require_once 'data/moviedata.php';
                         <!-- link iz baze -->
                         <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button>
                 </div>
-
-
-
             </div>
-            <!-- <div class="col-md-3" id="btn">
-
-                <button class="btn btn-block hover-shadow" onclick="currentSlide(1)" id="open">Movie Cuts - View Gallery</button>
-
-                <button class="btn btn-block hover-shadow" onclick="showLink()" id="shareOff">Share</button>
-
-                <button class="btn btn-block hover-shadow" id="shareOn" style="display:none" onmouseout="hideLink()">
-                    <!-- link iz baze -->
-            <!-- <input type="text" value="http://tiny.cc/uk52dz" readonly spellcheck="false"></button> -->
-            <!-- </div>  -->
         </div>
     </div>
 
@@ -160,13 +133,44 @@ require_once 'data/moviedata.php';
 
 
     <script>
+        // jquery
         $("#open").click(() => {
             $("#modal").fadeIn('slow');
         });
         $("#close").click(() => {
             $("#modal").fadeOut('slow');
         });
+
+
+
+
+
+        // dohvatanje podataka
+
+        let country = window.localStorage.getItem('country');
+        let director = window.localStorage.getItem('director');
+        let genre = window.localStorage.getItem('Genre');
+        let imageUrl = window.localStorage.getItem('imageUrl');
+        let imdbRating = window.localStorage.getItem('imdbRating');
+        let leadingActor = window.localStorage.getItem('leadingActor');
+        let title = window.localStorage.getItem('title');
+        let summary = window.localStorage.getItem('summary');
+        let releaseYear = window.localStorage.getItem('releaseYear');
+
+
+        console.log(title);
+
+        document.querySelector('#country').textContent = " (" + country + ")";
+        document.querySelector('#director').textContent = director;
+        document.querySelector('#genre').textContent = genre;
+        document.querySelector('#imdbRating').textContent = imdbRating;
+        document.querySelector('#leadingActor').textContent = leadingActor
+        document.querySelector('#title').textContent = title;
+        document.querySelector('#summary').textContent = summary;
+        document.querySelector('#releaseYear').textContent = releaseYear;
+        document.querySelector('#imageUrl')['src'] = imageUrl;
     </script>
+
 
 
     <?php

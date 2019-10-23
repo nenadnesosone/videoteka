@@ -62,7 +62,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
         $mail ->Host="localhost";
         $mail ->SMTPAuth = true;
         $mail ->Username = "ljubicazeravic@gmail.com";
-        $mail -> Password = "ljubica";
+        $mail -> Password = "ljubica"; 
         $mail -> Port = 465;
         $mail->addCC("cc@example.com"); //CC i BCC polja
         $mail->addBCC("bcc@example.com"); 
@@ -102,6 +102,13 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
 </head>
 <body>
     
+
+<?php
+
+include 'php/partials/regheader.php';
+
+?>
+
 <div class="wrapper">
     <div class="login_box">
         <div class="login_header">

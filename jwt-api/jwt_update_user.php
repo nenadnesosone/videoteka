@@ -141,7 +141,7 @@ if(!empty($user->em) && !empty($user->password)){
 
         if (isset($user->newuserimage)){
 
-            $newuserimage = $this->newuserimage //$user->newuserimage
+            $newuserimage = $this->newuserimage; //$user->newuserimage
             $file_name = $newuserimage['name'];
             $file_size = $newuserimage['size'];
             $file_tmp = $newuserimage['tmp_name'];

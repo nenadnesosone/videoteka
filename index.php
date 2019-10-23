@@ -20,7 +20,7 @@ require 'config/config.php';
 
   <div id="landing-header">
     <h1>Welcome to MovieCamp!</h1>
-    <a href="main.php" class="btn btn-lg">View All Movies</a>
+    <a href="#" class="btn btn-lg">View All Movies</a>
   </div>
 
   <ul class="slideshow">
@@ -37,6 +37,10 @@ require 'config/config.php';
       <div class="text">NOW LOADING...</div>
     </div>
   </div>
+
+
+  
+<script src="js/index.js" type="text/javascript"> </script>
 
 </body>
 

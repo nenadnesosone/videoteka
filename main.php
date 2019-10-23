@@ -36,15 +36,49 @@ require 'data/moviedata.php';
 
     <div class="container m-auto">
         <div class="row">
-            <?php
-                MovieData::GetAllMovies();
-            ?>
+
         </div>
     </div>
 
 
 
+
+    <script type="text/javascript">
+        function createCard(movieId, imageUrl, title, leadingActor) {
+            let theCard =
+                `<div class='col-md-6 col-lg-3'>
+                <div class='card border-0'>
+                    <div class='modal'>
+                        <div class='modal-content'>
+                            <button class='btn btn-small mb-2 watch' data-id='` + movieId + `'>Add To Watchlist</button>
+                            <button class='btn btn-small mb-2 remove' data-id='` + movieId + `' style='display:none;'>Remove From Watchlist</button>
+                            <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
+                        </div>
+                    </div>
+                    <img src='` + imageUrl + `' alt='Card Image' class='card-img-top' />
+                    <div class='card-body'>
+                        <h6>` + title + `</h6>
+                        <p class='text-muted card-text'>` + leadingActor + `</p>
+                    </div>
+                </div>
+            </div>`;
+            return theCard;
+        }
+
+
+
+        let movies = JSON.parse(window.localStorage.getItem('movies'));
+        let allMovies = document.querySelector('.row');
+
+        movies.forEach(movie => {
+            let cardContent = createCard(movie.MovieId, movie.ImageUrl, movie.Title, movie.LeadingActor);
+            allMovies.innerHTML += cardContent;
+        });
+    </script>
+
+
     <script src="js/main.js" type="text/javascript"> </script>
+
     <?php
     require 'php\partials\footer.php';
 

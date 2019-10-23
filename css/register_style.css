@@ -6,8 +6,6 @@
 
 body {
     font-family: Forum, cursive;
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/backgrounds/movie_background.jpg);
-    background-position: center center; */
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/backgrounds/bg2.jfif);
     background-position: center center;
     background-size: cover;
@@ -40,6 +38,7 @@ a {
     height: 77vh;
     min-width: 435px;
     background-size: cover;
+    margin: auto;
 }
 
 .login_box,
@@ -79,7 +78,7 @@ a {
 input[type="submit"] {
     background-color: #456;
     border-radius: 3px;
-    margin: 5px 0 5px 0;
+    margin: 5px 0 15px 0;
     padding: 5px 10px 5px 10px;
     color: #EDEDED;
     text-shadow: #5c5656 0.5px 0.5px 0;
@@ -129,7 +128,7 @@ button:hover {
 }
 
 .page-footer {
-    position: relative;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -139,6 +138,7 @@ button:hover {
 .footer-copyright,
 .dropdown-item {
     text-decoration: none !important;
+    padding: 10px;
     color: #9ab;
 }
 

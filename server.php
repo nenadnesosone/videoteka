@@ -33,6 +33,7 @@
 */
 require_once 'config/config.php';
 require_once 'data/moviedata.php';
+require_once 'data/watchlistdata.php';
 
 
 /* 
@@ -44,7 +45,6 @@ $response_messages = array(
     200 => "OK",
     400 => "Bad Request",
     404 => "File Not Found",
-    404 => "Method Not Allowed",
     500 => "Internal Server Error"
 );
 
@@ -137,7 +137,6 @@ if (!in_array($method, $supported_methods)) {
                     /* Postavlja se odgovarajuci statusni kod. */
                     $response->status = 200;
                 } else {
-
                     /* Proverava da li je putanja oblika /movies/movie_id */
                     if ($url_parts_counter == 2 and $url_parts[1] == "movies") {
 
@@ -147,7 +146,9 @@ if (!in_array($method, $supported_methods)) {
                         /* Ako je id filma korektan broj (pozitivan ceo broj) */
                         if ($id > 0) {
                             /* citamo informacije o filmu sa zadatim identifikatorom. */
-                                $movie = MovieData::GetMovie($id);
+                            $movie = MovieData::GetMovie($id);
+                            // echo 'ovo je film';
+                            // echo $movie;
                             /* Ako film sa ovim identifikatorom ne postoji u bazi */
                             if ($movie == NULL) {
                                 /* Prijavljujemo gresku. */
@@ -168,12 +169,17 @@ if (!in_array($method, $supported_methods)) {
                         $response->status = 400;
                         $response->data = NULL;
                     }
+                    if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
+
+                        $id = intval($url_parts[2]);
+                        $response->data = WatchlistData::GetUsersWatchlist($userid);
+                    } else { }
                 }
                 break;
 
             case "POST":
-                /* Proveravamo da li je putanja oblika /movies */
-                if ($url_parts_counter == 1 and $url_parts[1] == "movies") {
+                /* Proveravamo da li je putanja oblika /watchlistt */
+                if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
                     /* 
                         Ako jeste, citamo podatke o filmu koji do servera stizu u JSON formatu. 
                         Ove podatke citamo sa standardnog PHP ulaza (php://input) u jednu nisku 
@@ -191,7 +197,7 @@ if (!in_array($method, $supported_methods)) {
                         $response->data = NULL;
                     } else {
                         /* Ako su svi podaci tu, dodajemo novi film u bazu. */
-                        $id = MovieData::CreateMovie($newfilm);
+                        $id = WatchlistData::AddMovieToWatchlist($selected);
 
                         /* Ako je dodavanje filma iz nekog razloga neuspesno, prijavljujemo gresku. */
                         if ($id == -1) {
@@ -212,7 +218,28 @@ if (!in_array($method, $supported_methods)) {
                 break;
 
             case "DELETE":
-                // TODO: implementirati ovaj deo samostalno
+                if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") { }
+
+                $data = json_decode(file_get_contents("php://input"));
+
+                if (!isset($data->$userid) or !isset($data->$movieId)) {
+                    $response->status = 400;
+                    $response->data = NULL;
+                } else {
+                    /* Ako su svi podaci tu, brisermo film iz watchliste */
+                    $id = WatchlistData::DeleteMovieFromWatchlist($userid, $movieId);
+
+                    /* Ako je brisanje filma iz nekog razloga neuspesno, prijavljujemo gresku. */
+                    if ($id == -1) {
+                        $response->status = 400;
+                        $response->data = NULL;
+                    } else {
+                        /* Ako je brisanje filma uspesno, identifikator novododatog filma se postavlja kao deo odgovora. */
+                        $response->data = $id;
+                        $response->status = 201;
+                    }
+                }
+
                 break;
         }
     } catch (PDOException $e) {
@@ -240,13 +267,12 @@ if (!in_array($method, $supported_methods)) {
         Posto se podaci salju u JSON formatu, postavlja se zaglavlje kojim se to klijentu 
         stavlja do znanja. 
     */
-    header("Content-Type: application/json");
+    header("Content-Type: application/json; charset=utf-8");
 
     /* Proverava se da li postoje podaci koje treba poslati. */
     if ($response->data != NULL) {
 
         /* Ako postoje, "salju se" u JSON formatu. Slanje podrazumeva ispis sadrzaja koriscenjem funkcije echo. */
-            echo json_encode($response->data);
-            
+        echo json_encode($response->data);
     }
 }

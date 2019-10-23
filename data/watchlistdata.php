@@ -2,7 +2,7 @@
 require_once 'config\config.php';
 
 // klasa uz ciju pomoc cemo pristupati korisnickim podacima i njihovim filmovima
-class UserMovieData{
+class WatchlistData{
 
     //deklarisanje varijabli
     public $userId;
@@ -37,7 +37,7 @@ class UserMovieData{
     }
 
     // funcija koja ce prikupljati podatke pojedinacnom korisniku koji je odabrao neke filmove
-    public static function GetAllUsersMovies($userId)
+    public static function GetUsersWatchlist($userId)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -57,7 +57,7 @@ class UserMovieData{
 
 
     // funkcija za ubacivanje filma kojeg je korisnik odabrao
-    public static function CreateUserMovies($selected)
+    public static function AddMovieToWatchlist($selected)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -74,26 +74,26 @@ class UserMovieData{
         }
     }
 
-    // funkcija za brisanje svih korisnikovih filmova iz baze ako zelimo da je koristimo
-    public static function DeleteUserMovies($userId)
-    {
-        //povezujemo se s bazom
-        $db = Database::getInstance()->getConnection();
+    // // funkcija za brisanje svih korisnikovih filmova iz baze ako zelimo da je koristimo
+    // public static function DeleteAllMoviesFromWatchlist($userId)
+    // {
+    //     //povezujemo se s bazom
+    //     $db = Database::getInstance()->getConnection();
 
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
+    //     // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
-        // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
-        $query = "DELETE FROM users_movies WHERE UserId=$userId";
-        $result = mysqli_query($db, $query);
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
+    //     $query = "DELETE FROM users_movies WHERE UserId=$userId";
+    //     $result = mysqli_query($db, $query);
+    //     if ($result) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     // funkcija za brisanje jednog korisnikovog filma iz baze
-    public static function DeleteOneUserMovie($userId, $movieId)
+    public static function DeleteMovieFromWatchlist($userId, $movieId)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -101,7 +101,7 @@ class UserMovieData{
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId i movieid
 
         // brisanje odabranog filma iz baze 	 	 	 	 	 	 	 	 	 	 	
-        $query = "DELETE FROM users_movies WHERE UserId=$userId AND MovieId=$userId";
+        $query = "DELETE FROM users_movies WHERE UserId=$userId AND MovieId=$movieId";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;
