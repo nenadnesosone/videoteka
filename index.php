@@ -20,7 +20,7 @@ require 'config/config.php';
 
   <div id="landing-header">
     <h1>Welcome to MovieCamp!</h1>
-    <a href="#" class="btn btn-lg">View All Movies</a>
+    <a href="main.php" class="btn btn-lg">View All Movies</a>
   </div>
 
   <ul class="slideshow">

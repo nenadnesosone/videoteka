@@ -21,7 +21,7 @@ if (isset($_POST['login_button'])) {
             
             $row = mysqli_fetch_array($check_database_query);
             $_SESSION['username'] = $row['UserName'];
-            $_SESSION['userid'] = $row['Userid'];
+            $_SESSION['userid'] = $row['UserId'];
             $_SESSION['userimage'] = $row['ProfilePicture'];
     
             header("Location: watchlist.php");
