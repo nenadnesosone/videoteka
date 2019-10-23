@@ -1,4 +1,5 @@
 <?php
+/*
 // headers da bi ovaj fajl prihvatao samo JSON data
 header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
@@ -61,7 +62,7 @@ else{
     array_push($error_array,"Email or password was incorrect!<br>");
     echo json_encode(array("message" => "Delete failed."));
 }
-
+*/
 
 
 /// ako kod gore neradi ovaj bi trebalo da radi

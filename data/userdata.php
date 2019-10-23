@@ -5,8 +5,8 @@ require_once 'config\config.php';
 class UserData{
 
     // za jwt
-    //private $con;
-    //private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
+    private $con;
+    private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
 
     // svojstva objekta
     public $userId;
@@ -20,23 +20,23 @@ class UserData{
 
 
     // funkcija konstruktor
-    public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
-    {
-        $this->userId = $userId; 
-        $this->fname = $fname;
-        $this->$lname = $$lname;
-        $this->userName = $userName;
-        $this->em = $em;
-        $this->password = $password;
-        $this->$date = $date;
-        $this->profile_picture = $profile_picture;
+    // public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
+    // {
+    //     $this->userId = $userId; 
+    //     $this->fname = $fname;
+    //     $this->$lname = $$lname;
+    //     $this->userName = $userName;
+    //     $this->em = $em;
+    //     $this->password = $password;
+    //     $this->$date = $date;
+    //     $this->profile_picture = $profile_picture;
 
-    }
-
-    // za jwt
-    // public function __construct($db){
-    //     $this->con = $db;
     // }
+
+    //za jwt
+    public function __construct($db){
+        $this->con = $db;
+    }
 
 
     // funcija koja ce prikupljati podatke o svim korisnicima iz baze
@@ -233,8 +233,61 @@ class UserData{
 	
 }
 
-    // ako nerade funkcije gore kod JWT probajte sledece
+  
+    // da li postoji email u bazi
+    function JWTCheckEmail(){
+    
+    
+        // query da proveri da li email postoji u bazi
+        $query = "SELECT *
+                FROM " . $this->table_name . "
+                WHERE Email = ? 
+                LIMIT 0,1";// koliko prvih redova treba da se odbaci, broj redova za ispisivanje
+        //? iznad cemo promeniti
+        // pripremamo query
+        $stmt = $this->con->prepare($query);
+    
+        // cistimo email
+        $em = $user->email;
+        $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
+        $em = str_replace(' ', '', $em); //uklanja razmake
+        $em = filter_var($em, FILTER_SANITIZE_EMAIL);
+    
+        // vezemo vrednost
+        $stmt->bindParam(1, $em);// umesto ? pisemo 1
+    
+        // izvrsavamo query
+        $stmt->execute();
+    
+        // dobijamo broj redova iz zadnje mysqli query
+        $num = $stmt->rowCount();
+    
+        // ako postoji dodeli vrednosti objektu za upotrebu
+        if($num>0){
+    
+            // povlacimo podatke
+            $row = $stmt->fetch(mysqli::FETCH_ASSOC);
+    
+            // dodeljivanje vrednosti objektu
+            $userId = $row['UserId'];
+            $fname = $row['FirstName'];
+            $lname = $row['LastName'];
+            $username = $row['UserName'];
+            $em = $row['Email'];
+            $password = $row['Password'];
+            $userimage = $row['ProfilePicture'];
 
+
+            // vratiti tacno jer postoji u bazi
+            return true;
+        }
+    
+        // vratiti netacno ako nepostoji
+        return false;
+    }
+
+  // ako nerade funkcije gore kod JWT probajte sledece
+/*
     function JWTCreateUser(){
     
         // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
@@ -379,58 +432,6 @@ class UserData{
             return true;
         }
     
-        return false;
-    }
-
-    // da li postoji email u bazi
-    function JWTCheckEmail(){
-    
-    
-        // query da proveri da li email postoji u bazi
-        $query = "SELECT *
-                FROM " . $this->table_name . "
-                WHERE Email = ? 
-                LIMIT 0,1";// koliko prvih redova treba da se odbaci, broj reova za ispisivanje
-        //? iznad cemo promeniti
-        // pripremamo query
-        $stmt = $this->con->prepare($query);
-    
-        // cistimo email
-        $em = $this->em;
-        $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
-        $em = str_replace(' ', '', $em); //uklanja razmake
-        $em = filter_var($em, FILTER_SANITIZE_EMAIL);
-    
-        // vezemo vrednost
-        $stmt->bindParam(1, $em);// umesto ? pisemo 1
-    
-        // izvrsavamo query
-        $stmt->execute();
-    
-        // dobijamo broj redova iz zadnje mysqli query
-        $num = $stmt->rowCount();
-    
-        // ako postoji dodeli vrednosti objektu za upotrebu u sesijama
-        if($num>0){
-    
-            // povlacimo podatke
-            $row = $stmt->fetch(mysqli::FETCH_ASSOC);
-    
-            // dodeljivanje vrednosti obejktu
-            $this->userId = $row['UserId'];
-            $this->fname = $row['FirstName'];
-            $this->lname = $row['LastName'];
-            $this->username = $row['UserName'];
-            $this->em = $row['Email'];
-            $this->password = $row['Password'];
-            $this->userimage = $row['ProfilePicture'];
-
-
-            // vratiti tacno jer postoji u bazi
-            return true;
-        }
-    
-        // vratiti netacno ako nepostoji
         return false;
     }
 
@@ -709,6 +710,5 @@ class UserData{
 }
 
 
-
+*/
 ?>
-

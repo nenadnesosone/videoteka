@@ -1,5 +1,5 @@
 <?php
-
+/*
 // headers da bi ovaj fajl prihvatao samo JSON data
 header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
@@ -173,7 +173,7 @@ else{
     // displej poruka da nije napravljen korisnik
     echo json_encode(array("message" => "Unable to create user."));
 }
-
+*/
 /// ako kod gore neradi ovaj bi trebalo da radi
 
 /*
@@ -200,8 +200,8 @@ $user = new UserData($db);
 // prikupljamo podake preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
-// postavljamo vrenosti
-$user->ftname = $data->firstname;
+// postavljamo vrednosti
+$user->fname = $data->firstname;
 $user->lname = $data->lastname;
 $user->em = $data->email;
 $user->em2 = $data->email2;
