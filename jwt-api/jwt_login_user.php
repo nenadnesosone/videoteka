@@ -77,7 +77,8 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
     echo json_encode(
             array(
                 "message" => "Successful login.",
-                "jwt" => $jwt
+                "jwt" => $jwt,
+                "userId" => $userid
             )
         );
 

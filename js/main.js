@@ -22,6 +22,34 @@ function addToWatchlist() {
 
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
+    let token = window.localStorage.getItem('token');
+    let userId = window.localStorage.getItem('userId');
+
+    let data = {
+        'movieId': movieId,
+        'userId': userId
+    }
+
+    $.ajax({
+        url: "http://localhost/videoteka/watchlist",
+        method: 'POST',
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        data: JSON.stringify(data),
+        dataType: "json",
+        success: function(serverResponse) {
+            console.log("Odgovor servera");
+            console.log(serverResponse);
+            if (serverResponse['success']) {
+                alert("Uspesno dodat film!");
+            } else {
+                alert("Neuspesno dodat film!");
+            }
+        },
+
+    })
 
 }
 
@@ -35,9 +63,37 @@ function removeFromWatchlist() {
     });
 
     // zahtev
-
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
+    let token = window.localStorage.getItem('token');
+    let userId = window.localStorage.getItem('userId');
+
+    let data = {
+        'movieId': movieId,
+        'userId': userId
+    }
+
+    $.ajax({
+        url: "http://localhost/videoteka/watchlist",
+        type: 'DELETE',
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        data: JSON.stringify(data),
+        dataType: "json",
+        success: function(serverResponse) {
+            console.log("Odgovor servera");
+            console.log(serverResponse);
+            if (serverResponse['success']) {
+                alert("Uspesno dodat film!");
+            } else {
+                alert("Neuspesno dodat film!");
+            }
+        },
+
+
+    })
 
 
 }

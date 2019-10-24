@@ -62,8 +62,8 @@ class WatchlistData{
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
         // podatke stavljamo u promenljive
-        $userId = $selected['Userid'];
-        $movieId = $selected['MovieId'];
+        $userId = $selected->userId;
+        $movieId = $selected->movieId;
         
         $query = "INSERT INTO users_movies (`UserId`,`MovieId`) VALUES ('$userId', '$movieId')";
         $result = mysqli_query($db, $query);
@@ -73,7 +73,6 @@ class WatchlistData{
             return false;
         }
     }
-
     // // funkcija za brisanje svih korisnikovih filmova iz baze ako zelimo da je koristimo
     // public static function DeleteAllMoviesFromWatchlist($userId)
     // {
@@ -93,13 +92,14 @@ class WatchlistData{
     // }
 
     // funkcija za brisanje jednog korisnikovog filma iz baze
-    public static function DeleteMovieFromWatchlist($userId, $movieId)
+    public static function DeleteMovieFromWatchlist($selected)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
 
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId i movieid
-
+        $userId = $selected->userId;
+        $movieId = $selected->movieId;
         // brisanje odabranog filma iz baze 	 	 	 	 	 	 	 	 	 	 	
         $query = "DELETE FROM users_movies WHERE UserId=$userId AND MovieId=$movieId";
         $result = mysqli_query($db, $query);

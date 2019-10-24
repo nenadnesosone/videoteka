@@ -13,7 +13,6 @@ require 'includes/form_handlers/login_handler.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to MOVIECAMP</title>
-    </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/register.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
@@ -64,12 +63,15 @@ require 'includes/form_handlers/login_handler.php';
                         echo "Email or password was incorrect!<br>";
                     } ?>
                                         <br>
-                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <!-- <span><img src="includes/captcha_code.php" id="captcha_image"></span> -->
                     <br>
 
-                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
+                    <!-- <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required> -->
                     <br>
-                    <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
+                    <?php
+                    //  if (in_array("Invalid code! Please, try again.<br>", $error_array)) 
+                    //  echo "Invalid code! Please, try again.<br>";
+                      ?>
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
@@ -120,16 +122,16 @@ require 'includes/form_handlers/login_handler.php';
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
                     <br>
-                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
+                    <!-- <span><img src="includes/captcha_code.php" id="captcha_image"></span> -->
                     <br>
-                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
+                    <!-- <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required> -->
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
                     <input id="register_button" type="submit" name="register_button" value="Register">
                     <br>
                     <?php if (in_array("<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>", $error_array)) echo "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>"; ?>
-                    <a href="#" id="signin" class="signin">Already have an account? Sign in here!</a>
+                    <a href="#" id="signin" class="signin">Already have an account? Log in here!</a>
                 </form>
             </div>
         </div>
@@ -137,7 +139,7 @@ require 'includes/form_handlers/login_handler.php';
 
 
     <?php
-    include 'php/partials/footer.php';
+    // include 'php/partials/footer.php';
     ?>
 </body>
 
