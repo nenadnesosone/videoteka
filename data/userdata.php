@@ -1,12 +1,13 @@
 <?php
-require_once 'config\config.php';
+// require_once '../config/config.php';
+// require_once '../jwt-api/jwt_login_user.php';
 
 // klasa uz ciju pomoc cemo pristupati korisnickim podacima
 class UserData{
 
     // za jwt
-    private $con;
-    private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
+    // private $con;
+    // private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
 
     // svojstva objekta
     public $userId;
@@ -20,23 +21,23 @@ class UserData{
 
 
     // funkcija konstruktor
-    // public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
-    // {
-    //     $this->userId = $userId; 
-    //     $this->fname = $fname;
-    //     $this->$lname = $$lname;
-    //     $this->userName = $userName;
-    //     $this->em = $em;
-    //     $this->password = $password;
-    //     $this->$date = $date;
-    //     $this->profile_picture = $profile_picture;
+    public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
+    {
+        $this->userId = $userId; 
+        $this->fname = $fname;
+        $this->$lname = $$lname;
+        $this->userName = $userName;
+        $this->em = $em;
+        $this->password = $password;
+        $this->$date = $date;
+        $this->profile_picture = $profile_picture;
 
-    // }
+    }
 
     //za jwt
-    public function __construct($db){
-        $this->con = $db;
-    }
+    // public function __construct($db){
+    //     $this->con = $db;
+    // }
 
 
     // funcija koja ce prikupljati podatke o svim korisnicima iz baze
@@ -233,28 +234,38 @@ class UserData{
 	
 }
 
-  
+/*  
     // da li postoji email u bazi
-    function JWTCheckEmail(){
+    function JWTCheckEmail($em){
     
+
+            //bilo ovako
+        // $query = "SELECT *
+        // FROM " . $this->table_name . "
+        // WHERE Email = ? 
+        // LIMIT 0,1";
+
     
         // query da proveri da li email postoji u bazi
         $query = "SELECT *
-                FROM " . $this->table_name . "
+                FROM  users_data
                 WHERE Email = ? 
                 LIMIT 0,1";// koliko prvih redova treba da se odbaci, broj redova za ispisivanje
         //? iznad cemo promeniti
         // pripremamo query
-        $stmt = $this->con->prepare($query);
+        $db = Database::getInstance()->getConnection();
+        $stmt = $db->prepare($query);
     
         // cistimo email
-        $em = $user->email;
+        //$em = $user->email;
         $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
         $em = str_replace(' ', '', $em); //uklanja razmake
         $em = filter_var($em, FILTER_SANITIZE_EMAIL);
     
         // vezemo vrednost
-        $stmt->bindParam(1, $em);// umesto ? pisemo 1
+
+
+        $stmt->bind_param(1, $em);// umesto ? pisemo 1
     
         // izvrsavamo query
         $stmt->execute();
@@ -287,7 +298,7 @@ class UserData{
     }
 
   // ako nerade funkcije gore kod JWT probajte sledece
-/*
+
     function JWTCreateUser(){
     
         // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
