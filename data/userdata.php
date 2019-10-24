@@ -1,5 +1,6 @@
 <?php
-require_once 'config\config.php';
+require_once '../config/config.php';
+require_once '../jwt-api/jwt_login_user.php';
 
 // klasa uz ciju pomoc cemo pristupati korisnickim podacima
 class UserData{
@@ -235,26 +236,36 @@ class UserData{
 
   
     // da li postoji email u bazi
-    function JWTCheckEmail(){
+    function JWTCheckEmail($em){
     
+
+            //bilo ovako
+        // $query = "SELECT *
+        // FROM " . $this->table_name . "
+        // WHERE Email = ? 
+        // LIMIT 0,1";
+
     
         // query da proveri da li email postoji u bazi
         $query = "SELECT *
-                FROM " . $this->table_name . "
+                FROM  users_data
                 WHERE Email = ? 
                 LIMIT 0,1";// koliko prvih redova treba da se odbaci, broj redova za ispisivanje
         //? iznad cemo promeniti
         // pripremamo query
-        $stmt = $this->con->prepare($query);
+        $db = Database::getInstance()->getConnection();
+        $stmt = $db->prepare($query);
     
         // cistimo email
-        $em = $user->email;
+        //$em = $user->email;
         $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
         $em = str_replace(' ', '', $em); //uklanja razmake
         $em = filter_var($em, FILTER_SANITIZE_EMAIL);
     
         // vezemo vrednost
-        $stmt->bindParam(1, $em);// umesto ? pisemo 1
+
+
+        $stmt->bind_param(1, $em);// umesto ? pisemo 1
     
         // izvrsavamo query
         $stmt->execute();

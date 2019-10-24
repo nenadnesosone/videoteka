@@ -8,13 +8,13 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // fajlovi potrebni da bi se konektovali na bazu
-require_once './config/config.php';
-require_once './data/userdata.php';
+//require_once '../config/config.php';
+require_once '../data/userdata.php';
  
 // konektujemo se s bazom
-$database = new Database();
+//$database = new Database();
 
-$db = $database->getInstance()->getConnection();
+$db = Database::getInstance()->getConnection();
  
 // pravimo nov objekat korisnika
 $user = new UserData($db);
@@ -22,9 +22,9 @@ $user = new UserData($db);
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
-$user->email = $data->email; // prikupljamo email iz podataka
+$em = $data->email; // prikupljamo email iz podataka
 
-$email_exists = $user->JWTCheckEmail();/// da li vec postoji email u bazi
+$email_exists = JWTCheckEmail($em);/// da li vec postoji email u bazi
  
 // generisemo json web token
 require_once './config/core.php';
@@ -79,8 +79,8 @@ else{
 
 
 
-/*
 
+/*
 // headers da bi ovaj fajl prihvatao samo JSON data
 header("Access-Control-Allow-Origin: http://localhost/videoteka-master"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
@@ -89,22 +89,22 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // fajlovi potrebni da bi se konektovali na bazu
-require_once './config/config.php';
-require_once './data/userdata.php';
+//require_once './config/config.php';
+require_once '../data/userdata.php';
  
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
 
-$user->email = $data->email; // prikupljamo email iz podataka
-$em = $user->email; // stavljamo ga u promenljivu na nekucamo nonstop $user-email
+// $user->email = $data->email; // prikupljamo email iz podataka
+$em = $data->email; // stavljamo ga u promenljivu na nekucamo nonstop $user-email
 $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
 $em = str_replace(' ', '', $em); //uklanja razmake
 $em = filter_var($em, FILTER_SANITIZE_EMAIL);
 $_SESSION['log_email'] = $em; //cuva u sesiji email
 
-$user->password = $data->password;// prikupljamo lozinku iz podataka
-$password = $user->password;// stavljamo ga u promenljivu na nekucamo nonstop $user-password
+//$user->password = $data->password;// prikupljamo lozinku iz podataka
+$password = $data->password;// stavljamo ga u promenljivu na nekucamo nonstop $user-password
 $password = htmlspecialchars(strip_tags($password)); //uklanja HTML elemente
 $password = str_replace(' ', '', $password); //uklanja razmake
 $password = md5($password);  //enkripcija lozinke
@@ -123,11 +123,11 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
  
     // uzimamo podatke iz baze
     $row = UserData::GetUserRow($em, $password);
-    $user->id = $row['UserId'];
-    $user->firstname = $row['FirstName'];
-    $user->lastname = $row['LastName'];
-    $user->username = $row['UserName'];
-    $user->userimage = $row['ProfilePicture'];
+    $userid = $row['UserId'];
+    $firstname = $row['FirstName'];
+    $lastname = $row['LastName'];
+    $username = $row['UserName'];
+    $userimage = $row['ProfilePicture'];
 
     // dajemo podatke sesiji ili cemo sve podatke citati to preko jwt
     // $_SESSION['userid'] = $this->id;
@@ -141,13 +141,13 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
        "iat" => $iat,
        "nbf" => $nbf,
        "data" => array(
-           "UserId" => $user->id,// $this->id
-           "FirstName" => $user->firstname,// $this->firstname
-           "LastName" => $user->lastname,// $this->lastname
-           "UserName" => $user->username,// $this->username
-           "Email" => $user->email,// $this-email
-           "ProfilePicture" => $user->userimage// $this->userimage
-       ));
+           "UserId" => $userid,// $this->id
+           "FirstName" => $firstname,// $this->firstname
+           "LastName" => $lastname,// $this->lastname
+           "UserName" => $username,// $this->username
+           "Email" => $email,// $this-email
+           "ProfilePicture" => $userimage// $this->userimage
+       )
     );
  
 
@@ -176,8 +176,7 @@ else{
     echo json_encode(array("message" => "Login failed."));
 }
 
+
 */
-
-
 
 ?>
