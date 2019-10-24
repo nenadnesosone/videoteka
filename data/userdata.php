@@ -1,6 +1,6 @@
 <?php
-require_once '../config/config.php';
-require_once '../jwt-api/jwt_login_user.php';
+// require_once '../config/config.php';
+// require_once '../jwt-api/jwt_login_user.php';
 
 // klasa uz ciju pomoc cemo pristupati korisnickim podacima
 class UserData{

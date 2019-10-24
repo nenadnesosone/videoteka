@@ -8,7 +8,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // fajlovi potrebni da bi se konektovali na bazu
-//require_once './config/config.php';
+require_once '../config/config.php';
 require_once '../data/userdata.php';
  
 // dobijamo podatke preko JSON
