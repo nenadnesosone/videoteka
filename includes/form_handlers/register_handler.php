@@ -1,5 +1,5 @@
 <?php
-require_once './data/userdata.php';
+require_once '.\data\userdata.php';
 
 //Deklarisanje varijabli
 $fname = "";

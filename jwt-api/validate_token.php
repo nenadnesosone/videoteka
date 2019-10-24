@@ -1,18 +1,18 @@
 <?php
 // headers da bi ovaj fajl prihvatao samo JSON data
-header("Access-Control-Allow-Origin: http://localhost/videoteka"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
+header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // da bi dekodirali jwt
-require_once '../config/core.php';
-require_once '../php-jwt-master/src/BeforeValidException.php';
-require_once '../php-jwt-master/src/ExpiredException.php';
-require_once '../php-jwt-master/src/SignatureInvalidException.php';
-require_once '../php-jwt-master/src/JWT.php';
-use \Firebase\JWT\JWT;/// jwt tako zovemo bazu
+require_once './config/core.php';
+require_once './php-jwt-master/src/BeforeValidException.php';
+require_once './php-jwt-master/src/ExpiredException.php';
+require_once './php-jwt-master/src/SignatureInvalidException.php';
+require_once './php-jwt-master/src/JWT.php';
+use \Firebase\JWT\JWT;
  
 // dobijamo podatke iz php
 $data = json_decode(file_get_contents("php://input"));
