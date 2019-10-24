@@ -6,8 +6,8 @@ require_once '../jwt-api/jwt_login_user.php';
 class UserData{
 
     // za jwt
-    private $con;
-    private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
+    // private $con;
+    // private $table_name = "users_data"; // u cinema.sql je ovako u videoteka.sql je users
 
     // svojstva objekta
     public $userId;
@@ -21,23 +21,23 @@ class UserData{
 
 
     // funkcija konstruktor
-    // public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
-    // {
-    //     $this->userId = $userId; 
-    //     $this->fname = $fname;
-    //     $this->$lname = $$lname;
-    //     $this->userName = $userName;
-    //     $this->em = $em;
-    //     $this->password = $password;
-    //     $this->$date = $date;
-    //     $this->profile_picture = $profile_picture;
+    public function __construct($userId, $fname, $lname, $userName, $em, $password, $date, $profile_picture)
+    {
+        $this->userId = $userId; 
+        $this->fname = $fname;
+        $this->$lname = $$lname;
+        $this->userName = $userName;
+        $this->em = $em;
+        $this->password = $password;
+        $this->$date = $date;
+        $this->profile_picture = $profile_picture;
 
-    // }
+    }
 
     //za jwt
-    public function __construct($db){
-        $this->con = $db;
-    }
+    // public function __construct($db){
+    //     $this->con = $db;
+    // }
 
 
     // funcija koja ce prikupljati podatke o svim korisnicima iz baze
@@ -234,7 +234,7 @@ class UserData{
 	
 }
 
-  
+/*  
     // da li postoji email u bazi
     function JWTCheckEmail($em){
     
@@ -298,7 +298,7 @@ class UserData{
     }
 
   // ako nerade funkcije gore kod JWT probajte sledece
-/*
+
     function JWTCreateUser(){
     
         // insert query /// levo nazivi kolona a desno parametar ima dvodatcku ispred (moramo prvo da ga pripremimo)
