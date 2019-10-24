@@ -1,15 +1,19 @@
 <?php
 
 // headers da bi ovaj fajl prihvatao samo JSON data
+<<<<<<< HEAD
 header("Access-Control-Allow-Origin: http://localhost/videoteka"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
+=======
+header("Access-Control-Allow-Origin: http://localhost/videoteka-master"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
+>>>>>>> 303647a97f7fbef811ac5fd9502ea63615592556
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // fajlovi potrebni da bi se konektovali na bazu
-include_once 'config/config.php';
-include_once 'data/userdata.php';
+require_once './config/config.php';
+require_once './data/userdata.php';
  
 // konektujemo se s bazom
 $database = new Database();
@@ -27,11 +31,11 @@ $user->email = $data->email; // prikupljamo email iz podataka
 $email_exists = $user->JWTCheckEmail();/// da li vec postoji email u bazi
  
 // generisemo json web token
-include_once 'config/core.php';
-include_once 'php-jwt-master/src/BeforeValidException.php';
-include_once 'php-jwt-master/src/ExpiredException.php';
-include_once 'php-jwt-master/src/SignatureInvalidException.php';
-include_once 'php-jwt-master/src/JWT.php';
+require_once './config/core.php';
+require_once './php-jwt-master/src/BeforeValidException.php';
+require_once './php-jwt-master/src/ExpiredException.php';
+require_once './php-jwt-master/src/SignatureInvalidException.php';
+require_once './php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;/// jwt tako zovemo bazu
  
 // check if email exists and if password is correct
@@ -63,7 +67,13 @@ if($email_exists && password_verify($data->password, $user->password)){
                  "message" => "Successful login.",
                  "jwt" => $jwt
              ));
+<<<<<<< HEAD
             }
+=======
+
+}
+ 
+>>>>>>> 303647a97f7fbef811ac5fd9502ea63615592556
 // ulogovanje nije uspelo
 else{
  
@@ -80,15 +90,15 @@ else{
 /*
 
 // headers da bi ovaj fajl prihvatao samo JSON data
-header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
+header("Access-Control-Allow-Origin: http://localhost/videoteka-master"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
 // fajlovi potrebni da bi se konektovali na bazu
-include_once 'config/config.php';
-include_once 'data/userdata.php';
+require_once './config/config.php';
+require_once './data/userdata.php';
  
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
@@ -109,11 +119,11 @@ $password = md5($password);  //enkripcija lozinke
 
  
 // generisemo json web token
-include_once 'config/core.php';
-include_once 'php-jwt-master/src/BeforeValidException.php';
-include_once 'php-jwt-master/src/ExpiredException.php';
-include_once 'php-jwt-master/src/SignatureInvalidException.php';
-include_once 'php-jwt-master/src/JWT.php';
+require_once './config/core.php';
+require_once './php-jwt-master/src/BeforeValidException.php';
+require_once './php-jwt-master/src/ExpiredException.php';
+require_once './php-jwt-master/src/SignatureInvalidException.php';
+require_once './php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;/// jwt tako zovemo bazu
  
 // da li postoji email i da li lozinka odgovarajuca
@@ -145,7 +155,7 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
            "UserName" => $user->username,// $this->username
            "Email" => $user->email,// $this-email
            "ProfilePicture" => $user->userimage// $this->userimage
-       )
+       ));
     );
  
 
