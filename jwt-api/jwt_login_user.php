@@ -1,7 +1,7 @@
 <?php
 
 // headers da bi ovaj fajl prihvatao samo JSON data
-header("Access-Control-Allow-Origin: http://localhost/videoteka-master/"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
+header("Access-Control-Allow-Origin: http://localhost/videoteka"); /// promenite kod sebe ako vam je folder videoteka-master na drugom mestu
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
@@ -62,10 +62,8 @@ if($email_exists && password_verify($data->password, $user->password)){
              array(
                  "message" => "Successful login.",
                  "jwt" => $jwt
-             )
-
-}
- 
+             ));
+            }
 // ulogovanje nije uspelo
 else{
  
