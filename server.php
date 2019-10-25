@@ -147,8 +147,6 @@ if (!in_array($method, $supported_methods)) {
                         if ($id > 0) {
                             /* citamo informacije o filmu sa zadatim identifikatorom. */
                             $movie = MovieData::GetMovie($id);
-                            // echo 'ovo je film';
-                            // echo $movie;
                             /* Ako film sa ovim identifikatorom ne postoji u bazi */
                             if ($movie == NULL) {
                                 /* Prijavljujemo gresku. */
@@ -164,23 +162,45 @@ if (!in_array($method, $supported_methods)) {
                             $response->status = 400;
                             $response->data = NULL;
                         }
-                    } else {
-                        /* Ovaj deo se odnosi na nepoznati GET zahtev i nepodrzanu putanju. */
-                        $response->status = 400;
-                        $response->data = NULL;
-                    }
-                    if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
+                    } else{
 
-                        $id = intval($url_parts[2]);
-                        $response->data = WatchlistData::GetUsersWatchlist($userid);
+                    if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
+
+                        $response->data = WatchlistData::GetAllSelected();
+                        /* Postavlja se odgovarajuci statusni kod. */
+                        $response->status = 200;
                     } else {
-                        if($url_parts_counter == 1 and $url_parts[1] == "watchlist"){
-                            $response->data = WatchlistData::GetAllSelected();
-                            /* Postavlja se odgovarajuci statusni kod. */
-                            $response->status = 200;
+                        if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
+
+                            $id = intval($url_parts[2]);
+                            if ($id > 0) {
+                                /* citamo informacije o filmu sa zadatim identifikatorom. */
+                                $userWatchlist = WatchlistData::GetUsersWatchlist($id);
+
+                                /* Ako korisnik sa ovim identifikatorom ne postoji u bazi */
+                                if ($userWatchlist == NULL) {
+                                    /* Prijavljujemo gresku. */
+                                    $response->status = 404;
+                                    $response->data = NULL;
+                                } else {
+                                    /* U suprotnom postavljamo podatke i odgovarajuci statusni kod.  */
+                                    $response->data = $userWatchlist;
+                                    $response->status = 200;
+                                }
+                            } else {
+                                /* Ako movie_id nije korektan broj, prijavljujemo gresku. */
+                                $response->status = 400;
+                                $response->data = NULL;
+                            }
+                        } else {
+                            /* Ovaj deo se odnosi na nepoznati GET zahtev i nepodrzanu putanju. */
+                            $response->status = 400;
+                            $response->data = NULL;
                         }
-                     }
+                    }
                 }
+            }
+
                 break;
 
             case "POST":
@@ -224,30 +244,29 @@ if (!in_array($method, $supported_methods)) {
                 break;
 
             case "DELETE":
-                if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") { 
+                if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
 
-                $data = json_decode(file_get_contents("php://input"));
+                    $data = json_decode(file_get_contents("php://input"));
 
-                if (!isset($data->userid) or !isset($data->movieId)) {
-                    $response->status = 400;
-                    $response->data = NULL;
-                } else {
-                    /* Ako su svi podaci tu, brisermo film iz watchliste */
-                    $id = WatchlistData::DeleteMovieFromWatchlist($selected);
-
-                    /* Ako je brisanje filma iz nekog razloga neuspesno, prijavljujemo gresku. */
-                    if ($id == -1) {
+                    if (!isset($data->userid) or !isset($data->movieId)) {
                         $response->status = 400;
                         $response->data = NULL;
                     } else {
-                    //     /* Ako je brisanje filma uspesno, identifikator obrisanog filma se postavlja kao deo odgovora. */
-                        $response->data = $id;
-                        $response->status = 201;
-                    
+                        /* Ako su svi podaci tu, brisermo film iz watchliste */
+                        $id = WatchlistData::DeleteMovieFromWatchlist($selected);
+
+                        /* Ako je brisanje filma iz nekog razloga neuspesno, prijavljujemo gresku. */
+                        if ($id == -1) {
+                            $response->status = 400;
+                            $response->data = NULL;
+                        } else {
+                            //     /* Ako je brisanje filma uspesno, identifikator obrisanog filma se postavlja kao deo odgovora. */
+                            $response->data = $id;
+                            $response->status = 201;
+                        }
+                    }
                 }
-            }
-        }
-            break;
+                break;
         }
     } catch (PDOException $e) {
         /* Ovim delom koda se obradjuju sve gore neprepoznate greske koje se jave. */

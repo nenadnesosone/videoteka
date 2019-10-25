@@ -37,7 +37,7 @@ require_once 'data/moviedata.php';
         <div class="row">
 
             <div class="col-lg-5">
-                <img id="imageUrl" src="" class="img-fluid rounded" alt="" width="350px" height="550px">
+                <img id="posterUrl" src="" class="img-fluid rounded" alt="" width="350px" height="550px">
             </div>
             <div class="col-lg-6">
 
@@ -158,7 +158,7 @@ require_once 'data/moviedata.php';
         let releaseYear = window.localStorage.getItem('releaseYear');
 
 
-        console.log(title);
+        console.log(posterUrl);
 
         document.querySelector('#country').textContent = " (" + country + ")";
         document.querySelector('#director').textContent = director;
@@ -168,7 +168,7 @@ require_once 'data/moviedata.php';
         document.querySelector('#title').textContent = title;
         document.querySelector('#summary').textContent = summary;
         document.querySelector('#releaseYear').textContent = releaseYear;
-        document.querySelector('#imageUrl')['src'] = imageUrl;
+        document.querySelector('#posterUrl')['src'] = posterUrl;
     </script>
 
 

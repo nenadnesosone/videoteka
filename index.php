@@ -18,29 +18,29 @@ require 'config/config.php';
 
 <body>
 
-  <div id="landing-header">
-    <h1>Welcome to MovieCamp!</h1>
-    <a href="main.php" class="btn btn-lg">View All Movies</a>
-  </div>
 
-  <ul class="slideshow">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
+    <div id="landingHeader" style="display:none">
+      <h1>Welcome to MovieCamp!</h1>
+      <a href="main.php" class="btn btn-lg">View All Movies</a>
+    </div>
 
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  
   <div class="wrap">
     <div class="loading">
       <div class="bounceball"></div>
-      <div class="text">NOW LOADING...</div>
+      <div class="text lead warning"> NOW LOADING...</div>
     </div>
-  </div>
 
 
-  
-<script src="js/index.js" type="text/javascript"> </script>
+
+  <script src="js/index.js" type="text/javascript"> </script>
 
 </body>
 

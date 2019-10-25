@@ -62,16 +62,6 @@ require 'includes/form_handlers/login_handler.php';
                     <?php if (in_array("Email or password was incorrect!<br>", $error_array)) {
                         echo "Email or password was incorrect!<br>";
                     } ?>
-                                        <br>
-                    <!-- <span><img src="includes/captcha_code.php" id="captcha_image"></span> -->
-                    <br>
-
-                    <!-- <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required> -->
-                    <br>
-                    <?php
-                    //  if (in_array("Invalid code! Please, try again.<br>", $error_array)) 
-                    //  echo "Invalid code! Please, try again.<br>";
-                      ?>
                     <br>
                     <input id="login_button" type="submit" name="login_button" value="Login">
                     <br>
@@ -122,9 +112,9 @@ require 'includes/form_handlers/login_handler.php';
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
                     <br>
-                    <!-- <span><img src="includes/captcha_code.php" id="captcha_image"></span> -->
+                    <span><img src="includes/captcha_code.php" id="captcha_image"></span>
                     <br>
-                    <!-- <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required> -->
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
@@ -139,7 +129,7 @@ require 'includes/form_handlers/login_handler.php';
 
 
     <?php
-    // include 'php/partials/footer.php';
+    include 'php/partials/footer.php';
     ?>
 </body>
 

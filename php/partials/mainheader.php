@@ -15,7 +15,7 @@
                        <a href="main.php" class="nav-link">Home</a>
                    </li>
                    <li class="nav-item">
-                       <a href="watchlist.php" class="nav-link">Watchlist</a>
+                       <a href="#" class="nav-link watchlist">Watchlist</a>
                    </li>
                    <li class="nav-item">
                        <a href="register.php" class="nav-link">Login/SignUp</a>

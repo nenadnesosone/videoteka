@@ -5,6 +5,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 
 const btn = document.querySelector('.btn');
+const landingHeader = document.querySelector('#landingHeader');
 
 
 function viewAllMovies() {
@@ -19,6 +20,10 @@ function viewAllMovies() {
         }
     })
 }
+
+setTimeout(function() {
+    landingHeader.style.display = "block";
+}, 5300);
 
 
 btn.addEventListener('click', viewAllMovies)

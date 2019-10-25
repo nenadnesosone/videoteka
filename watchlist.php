@@ -1,11 +1,11 @@
 <?php
 require 'config/config.php';
-if(isset($_SESSION['username'])){
+if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
     $user_details_query = mysqli_query($con, "SELECT * FROM users_data WHERE username= '$userLoggedIn'");
     $user = mysqli_fetch_array($user_details_query);
-}else{
-    header("location: register.php"); 
+} else {
+    header("location: register.php");
 }
 ?>
 
@@ -35,107 +35,50 @@ if(isset($_SESSION['username'])){
     <?php
     require 'php\partials\userheader.php';
     ?>
-    <!-- GALERIJA -->
-    <!--- Ovde bi trebalo staviti funkcionalnosti pravljenja liste kad se klikne na add to watchlist--->
+
+
     <div class="container m-auto">
         <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button role="button" class="btn btn-small"> <a href="singleMovie.php" class="btn-link">More Info</a></button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Amelie.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Amelie</h6>
-                        <p class="text-muted card-text">Glavni glumci
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/TheAbyss.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>The Abyss</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/YTuMamaTambien.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Y Tu Mama Tambien</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Cube.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Cube</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/Dune.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Dune</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card border-0">
-                    <div class="modal">
-                        <div class="modal-content">
-                            <button class="btn btn-small mb-2 watch">Add To Watchlist</button>
-                            <button href="singleMovie.php" role="button" class="btn btn-small">More Info</button>
-                        </div>
-                    </div>
-                    <img src="./images/Posters/RunLolaRun.jpg" alt="Card Image" class="card-img-top">
-                    <div class="card-body">
-                        <h6>Run Lola Run</h6>
-                        <p class="text-muted card-text">Glavni glumci</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 
 
 
-    <script src="js/main.js" type="text/javascript"> </script>
+
+    <script type="text/javascript">
+
+    
+        function createCard(movieId, imageUrl, title, leadingActor) {
+            let theCard =
+                `<div class='col-md-6 col-lg-3'>
+                <div class='card border-0'>
+                    <div class='modal'>
+                        <div class='modal-content'>
+                            <button class='btn btn-small mb-2 watch' data-id='` + movieId + `'>Add To Watchlist</button>
+                            <button class='btn btn-small mb-2 remove' data-id='` + movieId + `' style='display:none;'>Remove From Watchlist</button>
+                            <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
+                        </div>
+                    </div>
+                    <img src='` + imageUrl + `' alt='Card Image' class='card-img-top' />
+                    <div class='card-body'>
+                        <h6>` + title + `</h6>
+                        <p class='text-muted card-text'>` + leadingActor + `</p>
+                    </div>
+                </div>
+            </div>`;
+            return theCard;
+        }
+
+
+    </script>
+
+
+
+
+
+
+
     <?php
     require 'php\partials\footer.php';
 

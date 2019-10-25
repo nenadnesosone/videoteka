@@ -2,7 +2,7 @@ body {
     background-color: #0000;
 }
 
-#landing-header {
+#landingHeader {
     z-index: 1;
     position: relative;
     text-align: center;
@@ -10,7 +10,7 @@ body {
     font-family: Kelly Slab, cursive;
 }
 
-#landing-header h1 {
+#landingHeader h1 {
     color: #fff;
 }
 
@@ -46,7 +46,7 @@ body {
     background-repeat: no-repeat;
     opacity: 0;
     z-index: 0;
-    animation: imageAnimation 40s linear infinite;
+    animation: imageAnimation 45s linear infinite;
 }
 
 .slideshow li:nth-child(1) {
@@ -55,27 +55,27 @@ body {
 
 .slideshow li:nth-child(2) {
     background-image: url(../IMAGES/Landing/pic2.jpg);
-    animation-delay: 10s;
+    animation-delay: 15s;
 }
 
 .slideshow li:nth-child(3) {
     background-image: url(../IMAGES/Landing/pic3.jpg);
-    animation-delay: 20s;
+    animation-delay: 25s;
 }
 
 .slideshow li:nth-child(4) {
     background-image: url(../IMAGES/Landing/pic4.jpg);
-    animation-delay: 30s;
+    animation-delay: 35s;
 }
 
 .slideshow li:nth-child(5) {
     background-image: url(../IMAGES/Landing/pic5.jpg);
-    animation-delay: 40s;
+    animation-delay: 45s;
 }
 
 @keyframes imageAnimation {
     0% {
-        opacity: 0;
+        opacity: 0.2;
         animation-timing-function: ease-in;
     }
     10% {
@@ -92,7 +92,7 @@ body {
 
 .wrap {
     position: absolute;
-    top: 59.2%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -116,8 +116,8 @@ body {
     content: '';
     display: block;
     top: 0;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background-color: #fb1717;
     transform-origin: 50%;

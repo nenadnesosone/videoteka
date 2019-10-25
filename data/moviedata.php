@@ -83,7 +83,6 @@ class MovieData
         mysqli_set_charset($db, 'utf8');
         if ($result) {
             $row = mysqli_fetch_assoc($result);
-            // echo var_dump($row);
             return $row;
         } else {
             return [];

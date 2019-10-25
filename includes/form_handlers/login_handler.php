@@ -16,8 +16,6 @@ if (isset($_POST['login_button'])) {
     $check_login_query = mysqli_num_rows($check_database_query);
 
     if ($check_login_query == 1) {
-        // if (isset($_SESSION['captcha_code']) && $_POST['captcha_code'] == $_SESSION['captcha_code']) {
-        //     unset($_SESSION['captcha_code']);
             
             $row = mysqli_fetch_array($check_database_query);
             $_SESSION['username'] = $row['UserName'];
@@ -29,9 +27,7 @@ if (isset($_POST['login_button'])) {
             $_SESSION['log_email'] = "";
     
             exit();
-        // }else{
-        //     array_push($error_array, "Invalid code! Please, try again.<br>"); 
-        // }
+
         
     }else {
         array_push($error_array,"Email or password was incorrect!<br>");

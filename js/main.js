@@ -7,6 +7,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 const addButtons = document.querySelectorAll('.watch');
 const removeButtons = document.querySelectorAll('.remove');
 const moreInfo = document.querySelectorAll('.moreInfo');
+const watchlist = document.querySelector('.watchlist');
+
 
 
 function addToWatchlist() {
@@ -18,7 +20,7 @@ function addToWatchlist() {
         }
     });
 
-    //zahtev
+    //dodavanje filma u watchlistu
 
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
@@ -53,6 +55,8 @@ function addToWatchlist() {
 
 }
 
+
+
 function removeFromWatchlist() {
     // css
     this.style.display = 'none';
@@ -62,7 +66,7 @@ function removeFromWatchlist() {
         }
     });
 
-    // zahtev
+    // brisanje filma iz watchliste (ne radi :( )
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
     let token = window.localStorage.getItem('token');
@@ -98,6 +102,9 @@ function removeFromWatchlist() {
 
 }
 
+
+
+
 function displayMovie() {
 
     window.localStorage.setItem('movieId', this.dataset.id);
@@ -105,14 +112,13 @@ function displayMovie() {
 
     $.ajax({
         url: 'http://localhost/videoteka/movies/' + movieId,
-        contentType: 'json',
         method: 'GET',
         success: function(resp) {
             // ovde se hvataju podaci i smestaju u LS
             window.localStorage.setItem('country', resp.Country);
             window.localStorage.setItem('director', resp.Director);
             window.localStorage.setItem('Genre', resp.Genre);
-            window.localStorage.setItem('imageUrl', resp.ImageUrl);
+            window.localStorage.setItem('posterUrl', resp.posterUrl);
             window.localStorage.setItem('imdbRating', resp.ImdbRating);
             window.localStorage.setItem('leadingActor', resp.LeadingActor);
             window.localStorage.setItem('title', resp.Title);
@@ -125,6 +131,28 @@ function displayMovie() {
     })
 }
 
+
+
+// ne radi
+function displayWatchlist() {
+    let userId = window.localStorage.getItem('userId');
+
+    $.ajax({
+        url: 'http://localhost/videoteka/watchlist/' + userId,
+        contentType: 'json',
+        method: 'GET',
+        success: function(resp) {
+            console.log(resp);
+            // nisam sigurna kako ovo treba da ide jer mi imamo samo ID-jeve smestene u ovoj tabeli
+
+            window.localStorage.setItem('watchlistMoviesId', JSON.stringify(resp));
+        }
+    })
+}
+
+
+
 addButtons.forEach(btn => btn.addEventListener('click', addToWatchlist));
 removeButtons.forEach(btn => btn.addEventListener('click', removeFromWatchlist));
 moreInfo.forEach(btn => btn.addEventListener('click', displayMovie));
+watchlist.addEventListener('click', displayWatchlist);

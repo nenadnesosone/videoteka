@@ -128,10 +128,11 @@ button:hover {
 }
 
 .page-footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
+    margin-top: 10px;
 }
 
 .page-footer a,
@@ -144,7 +145,7 @@ button:hover {
 
 @media only screen and (max-width: 767px) {
     .login_box,
-    .update_box  {
+    .update_box {
         width: 280px;
     }
 }

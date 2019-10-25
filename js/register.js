@@ -38,7 +38,7 @@ $(document).ready(function() {
             success: function(data) {
                 localStorage.setItem('token', data.jwt);
                 localStorage.setItem('userId', data.userId);
-                alert('Sucessfully retrieved token from the server');
+                // alert('Sucessfully retrieved token from the server');
             },
             error: function(e) {
                 console.log("Login Failed");
