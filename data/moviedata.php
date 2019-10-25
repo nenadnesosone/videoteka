@@ -112,7 +112,7 @@ class MovieData
 
 
         // ubacivanje filmova u bazu 	 	 	
-        $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image`) 
+        $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`PosterUrl`,`ImageUrl_1`,`ImageUrl_2`,`ImageUrl_3`,`ImageUrl_4`,`ImageUrl_5` ) 
         VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$posterUrl','$imageUrl_1', '$imageUrl_2', '$imageUrl_3', '$imageUrl_4', '$imageUrl_5')";
 
         $result = mysqli_query($db, $query);
@@ -141,28 +141,6 @@ class MovieData
         }
     }
 
-    // funkcija za trazenje filmova iz baze
-    public static function WatchlistMovie($movieId)
-    {
-        //povezujemo se s bazom
-        $db = Database::getInstance()->getConnection();
-
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
-
-        // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
-        $query = "SELECT * FROM movies WHERE movieId=$movieId";
-        $result = mysqli_query($db, $query);
-        mysqli_set_charset($db, 'utf8');
-        if ($result) {
-            $data = mysqli_fetch_assoc($result);
-            return $data;
-        } else {
-            return [];
-        }
-    }
-
-
-
     // pretraga filmova
     public static function FindMovie()
     {
@@ -177,7 +155,7 @@ class MovieData
                 while ($row = mysqli_fetch_assoc($result)) {
                     $title = $row['Title'];
                     $leadingActor = $row['LeadingActor'];
-                    $imageUrl = $row['ImageUrl'];
+                    $imageUrl = $row['PosterUrl'];
                     $movieId = $row['MovieId'];
                     echo   "<div class='col-md-6 col-lg-3'>
                         <div class='card border-0'>

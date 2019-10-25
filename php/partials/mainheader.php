@@ -54,9 +54,9 @@
          </li>
          <li>
          <form action="search.php" method="POST">
-         <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
-         <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" ><i class="fas fa-search"></button>
-         </form>
+            <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+            <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+        </form>
      </li>
          </ul>
      </div>
@@ -71,10 +71,10 @@
              </div>
          </li>
          <li>
-         <form action="search.php" method="POST">
-         <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline; width:70%;height:35px;margin-top:7px">
-         <button type="submit" name="submit_search" class="btn btn-primary"style="margin-top:-3px" >Search</button>
-         </form>
+        <form action="search.php" method="POST">
+            <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+            <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+        </form>
      </li>
          </ul>
      </div>

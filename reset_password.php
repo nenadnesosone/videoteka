@@ -33,7 +33,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
         $token = str_shuffle($token);
         $token = substr($token, 0, 10);
 
-        mysqli_query($con, "INSERT INTO `password_reset`  VALUES ('$email', '$token', '$expDate') ");
+        mysqli_query($con, "INSERT INTO `password_reset` (`email`,`token`,`expDate`) VALUES ('$email', '$token', '$expDate') ");
   
         $output='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';

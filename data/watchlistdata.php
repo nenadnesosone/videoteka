@@ -57,6 +57,7 @@ class WatchlistData
         }
     }
 
+    // funcija koja ce prikupljati podatke pojedinacnom korisniku koji je odabrao neke filmove i prikazivati ih
     public static function CreateWatchlist($userId){
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
@@ -70,32 +71,29 @@ class WatchlistData
         if ($num_rows > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                     $movieId = $row["MovieId"];
-                    $data = MovieData::WatchlistMovie($movieId);
-                    while ($film = mysqli_fetch_assoc($data)){
 
-                   
-                    $title = $film['Title'];
-                    $leadingActor = $film['LeadingActor'];
-                    $posterUrl = $film['PosterUrl'];
-
-                    echo
-                    `<div class='col-md-6 col-lg-3'>
-                    <div class='card border-0'>
-                        <div class='modal'>
-                            <div class='modal-content'>
-                                <button class='btn btn-small mb-2 watch' data-id='` . $movieId .`'>Add To Watchlist</button>
-                                <button class='btn btn-small mb-2 remove' data-id='` . $movieId . `' style='display:none;'>Remove From Watchlist</button>
-                                <button role='button' class='btn btn-small moreInfo' data-id='` . $movieId . `'><a href='#'>More Info</a></button>
+                    $data = MovieData::GetMovie($movieId);
+                    $filmid = $data['MovieId'];
+                    $title = $data['Title'];
+                    $leadingActor = $data['LeadingActor'];
+                    $posterUrl = $data['PosterUrl'];
+                    
+                echo
+                        "<div class='col-md-6 col-lg-3'>
+                        <div class='card border-0'>
+                            <div class='modal'>
+                                <div class='modal-content'>
+                                    <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
+                                    <button role='button' class='btn btn-small moreInfo'> <a href='localhost/movies/$filmid' class='btn-link'>More Info</a></button>
+                                </div>
+                            </div>
+                            <img src='$posterUrl' alt='Card Image' class='card-img-top'/>
+                            <div class='card-body'>
+                                <h6>" . $title . "</h6>
+                                <p class='text-muted card-text'> " . $leadingActor . "</p>
                             </div>
                         </div>
-                        <img id='poster' src='`. $posterUrl .`' alt='Card Image' class='card-img-top' />
-                        <div class='card-body'>
-                            <h6>` . $title . `</h6>
-                            <p class='text-muted card-text'>` . $leadingActor . `</p>
-                        </div>
-                    </div>
-                </div>`;
-                }
+                    </div> ";
             }
             
         } else {
@@ -158,4 +156,3 @@ class WatchlistData
         }
     }
 }
-?>

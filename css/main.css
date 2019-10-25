@@ -10,7 +10,7 @@ body {
     display: block;
     position: relative;
     font-family: Forum, cursive;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/backgrounds/bg4.jfif);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../images/backgrounds/bg2.jfif);
     background-size: cover;
 }
 
