@@ -16,18 +16,15 @@ class MovieData
     public $language;
     public $summary;
     public $imdbRating;
-    public $imageUrl;
-    public $image;
-    /*
-    public $image2;
-    public $image3;
-    public $image4;
-    public $image5;
-*/ // za videoteka.sql
+    public $posterUrl;
+    public $imageUrl_1;
+    public $imageUrl_2;
+    public $imageUrl_3;
+    public $imageUrl_4;
+    public $imageUrl_5;
 
     // funkcija konstruktor
-    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image) // za cinema sql
-    //public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $imageUrl, $image, $image_2, $image_3, $image_4, $image_5)// za videoteka.sql
+    public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $posterUrl, $imageUrl_1, $imageUrl_2, $imageUrl_3, $imageUrl_4, $imageUrl_5) // za cinema sql
     {
         $this->movieId = $movieId;
         $this->title = $title;
@@ -39,18 +36,16 @@ class MovieData
         $this->language = $language;
         $this->summary = $summary;
         $this->imdbRating = $imdbRating;
-        $this->imageUrl = $imageUrl;
-        $this->image = $image;
-        /*
-        $this->image2 = $image2;
-        $this->image3 = $image3;
-        $this->image4 = $image4;
-        $this->image5 = $image5;
-        
-*/ // za videoteka.sql
+        $this->posterUrl = $posterUrl;
+        $this->imageUrl_1 = $imageUrl_1;
+        $this->imageUrl_2 = $imageUrl_2;
+        $this->imageUrl_3 = $imageUrl_3;
+        $this->imageUrl_4 = $imageUrl_4;
+        $this->imageUrl_5 = $imageUrl_5;
 
     }
     // funcija koja ce prikupljati podatke o svim filmovima iz baze
+
     public static function GetAllMovies()
     {
         //povezujemo se s bazom
@@ -58,15 +53,16 @@ class MovieData
         ///odaberemo sve
         $query = "SELECT * FROM movies";
         $result = mysqli_query($db, $query);
+        mysqli_set_charset($db, 'utf8');
         if ($result) {
             $data = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $data []=$row;
-            } 
+            while ($row = mysqli_fetch_assoc($result))
+            {
+                $data[] = $row;
+            }
             return $data;
         } else {
             return [];
-            echo "No Movies To Display.";
         }
     }
 
@@ -107,22 +103,17 @@ class MovieData
         $language = $newfilm['Language'];
         $summary = $newfilm['Summary'];
         $imdbRating = $newfilm['ImdbRating'];
-        $imageUrl = $newfilm['ImageUrl'];
-        $image = $newfilm['Image'];
-        /*
-        $image2 = $newfilm['Image2'];
-        $image3 = $newfilm['Image3'];
-        $image4 = $newfilm['Image4'];
-        $image5 = $newfilm['Image5'];
-*/ // za videoteka.sql
+        $posterUrl = $newfilm['PosterUrl'];
+        $imageUrl_1 = $newfilm['ImageUrl_1'];
+        $imageUrl_2 = $newfilm['ImageUrl_2'];
+        $imageUrl_3 = $newfilm['ImageUrl_3'];
+        $imageUrl_4 = $newfilm['ImageUrl_4'];
+        $imageUrl_5 = $newfilm['ImageUrl_5'];
+
 
         // ubacivanje filmova u bazu 	 	 	
         $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image`) 
-        VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image')";
-        /*
-        $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`ImageUrl`,`Image_1`, `Image_2`, `Image_3`, `Image_4`, `Image_5`) 
-        VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$imageUrl','$image', '$image2','$image3','$image4','$image5')";
-*/ // za videoteka.sql
+        VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$posterUrl','$imageUrl_1', '$imageUrl_2', '$imageUrl_3', '$imageUrl_4', '$imageUrl_5')";
 
         $result = mysqli_query($db, $query);
         if ($result) {

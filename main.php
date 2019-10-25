@@ -43,7 +43,7 @@ require 'data/moviedata.php';
 
 
     <script type="text/javascript">
-        function createCard(movieId, imageUrl, title, leadingActor) {
+        function createCard(movieId, posterUrl, title, leadingActor) {
             let theCard =
                 `<div class='col-md-6 col-lg-3'>
                 <div class='card border-0'>
@@ -54,7 +54,7 @@ require 'data/moviedata.php';
                             <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
                         </div>
                     </div>
-                    <img src='` + imageUrl + `' alt='Card Image' class='card-img-top' />
+                    <img id='poster' src='`+posterUrl+`' alt='Card Image' class='card-img-top' />
                     <div class='card-body'>
                         <h6>` + title + `</h6>
                         <p class='text-muted card-text'>` + leadingActor + `</p>
@@ -70,8 +70,9 @@ require 'data/moviedata.php';
         let allMovies = document.querySelector('.row');
 
         movies.forEach(movie => {
-            let cardContent = createCard(movie.MovieId, movie.ImageUrl, movie.Title, movie.LeadingActor);
+            let cardContent = createCard(movie.MovieId , movie.posterUrl,movie.Title, movie.LeadingActor);
             allMovies.innerHTML += cardContent;
+            
         });
     </script>
 

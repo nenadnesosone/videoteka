@@ -26,7 +26,7 @@
                             <a class="dropdown-item" href="#">Donate!</a>
                             <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="signout.php">Sign Out</a>
+                            <a class="dropdown-item signout" href="signout.php">Sign Out</a>
                     </div>
                     </li>
                </ul>

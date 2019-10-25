@@ -14,7 +14,6 @@ function viewAllMovies() {
         contentType: 'json',
         method: 'GET',
         success: function(resp) {
-
             window.localStorage.setItem('movies', JSON.stringify(resp));
             window.location.href = 'http://localhost/videoteka/main.php';
         }

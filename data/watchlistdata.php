@@ -2,7 +2,8 @@
 require_once 'config\config.php';
 
 // klasa uz ciju pomoc cemo pristupati korisnickim podacima i njihovim filmovima
-class WatchlistData{
+class WatchlistData
+{
 
     //deklarisanje varijabli
     public $userId;
@@ -11,9 +12,8 @@ class WatchlistData{
     // funkcija konstruktor
     public function __construct($userId, $movieId)
     {
-        $this->userId = $userId; 
+        $this->userId = $userId;
         $this->movieId = $movieId;
-      
     }
 
     // funcija koja ce prikupljati podatke o svim korisnicima i svim selektovanim filmovima
@@ -26,9 +26,8 @@ class WatchlistData{
         $result = mysqli_query($db, $query);
         if ($result) {
             $usersMoviesData = [];
-            while ($row = mysqli_fetch_assoc($result))
-            {
-                $usersMoviesData [] = $row;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $usersMoviesData[] = $row;
             }
             return $usersMoviesData;
         } else {
@@ -48,8 +47,11 @@ class WatchlistData{
         $query = "SELECT * FROM users_movies WHERE userId=$userId";
         $result = mysqli_query($db, $query);
         if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            return $row;
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+            return $data;
         } else {
             return [];
         }
@@ -64,7 +66,7 @@ class WatchlistData{
         // podatke stavljamo u promenljive
         $userId = $selected->userId;
         $movieId = $selected->movieId;
-        
+
         $query = "INSERT INTO users_movies (`UserId`,`MovieId`) VALUES ('$userId', '$movieId')";
         $result = mysqli_query($db, $query);
         if ($result) {
@@ -109,9 +111,4 @@ class WatchlistData{
             return false;
         }
     }
-
-    
 }
-	 		 	 	 	 	 	 	 	 	
-
-?>

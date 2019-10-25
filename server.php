@@ -132,11 +132,21 @@ if (!in_array($method, $supported_methods)) {
 
                 if ($url_parts_counter == 1 and $url_parts[1] == "movies") {
                     /* Ako jeste, dohvataju se podaci o svim filmovima. */
+
                     $response->data = MovieData::getAllMovies();
 
                     /* Postavlja se odgovarajuci statusni kod. */
                     $response->status = 200;
+
                 } else {
+                    if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
+
+                        $response->data = WatchlistData::GetAllSelected();
+                        /* Postavlja se odgovarajuci statusni kod. */
+                        $response->status = 200;
+
+                    }else{
+
                     /* Proverava da li je putanja oblika /movies/movie_id */
                     if ($url_parts_counter == 2 and $url_parts[1] == "movies") {
 
@@ -162,45 +172,37 @@ if (!in_array($method, $supported_methods)) {
                             $response->status = 400;
                             $response->data = NULL;
                         }
-                    } else{
+                    }else {
+                            if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
 
-                    if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
+                                $id = intval($url_parts[2]);
+                                if ($id > 0) {
+                                    /* citamo informacije o filmu sa zadatim identifikatorom. */
+                                    $userWatchlist = WatchlistData::GetUsersWatchlist($id);
 
-                        $response->data = WatchlistData::GetAllSelected();
-                        /* Postavlja se odgovarajuci statusni kod. */
-                        $response->status = 200;
-                    } else {
-                        if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
-
-                            $id = intval($url_parts[2]);
-                            if ($id > 0) {
-                                /* citamo informacije o filmu sa zadatim identifikatorom. */
-                                $userWatchlist = WatchlistData::GetUsersWatchlist($id);
-
-                                /* Ako korisnik sa ovim identifikatorom ne postoji u bazi */
-                                if ($userWatchlist == NULL) {
-                                    /* Prijavljujemo gresku. */
-                                    $response->status = 404;
-                                    $response->data = NULL;
+                                    /* Ako korisnik sa ovim identifikatorom ne postoji u bazi */
+                                    if ($userWatchlist == NULL) {
+                                        /* Prijavljujemo gresku. */
+                                        $response->status = 404;
+                                        $response->data = NULL;
+                                    } else {
+                                        /* U suprotnom postavljamo podatke i odgovarajuci statusni kod.  */
+                                        $response->data = $userWatchlist;
+                                        $response->status = 200;
+                                    }
                                 } else {
-                                    /* U suprotnom postavljamo podatke i odgovarajuci statusni kod.  */
-                                    $response->data = $userWatchlist;
-                                    $response->status = 200;
+                                    /* Ako movie_id nije korektan broj, prijavljujemo gresku. */
+                                    $response->status = 400;
+                                    $response->data = NULL;
                                 }
                             } else {
-                                /* Ako movie_id nije korektan broj, prijavljujemo gresku. */
+                                /* Ovaj deo se odnosi na nepoznati GET zahtev i nepodrzanu putanju. */
                                 $response->status = 400;
                                 $response->data = NULL;
                             }
-                        } else {
-                            /* Ovaj deo se odnosi na nepoznati GET zahtev i nepodrzanu putanju. */
-                            $response->status = 400;
-                            $response->data = NULL;
                         }
                     }
                 }
-            }
-
                 break;
 
             case "POST":
@@ -293,7 +295,7 @@ if (!in_array($method, $supported_methods)) {
         Posto se podaci salju u JSON formatu, postavlja se zaglavlje kojim se to klijentu 
         stavlja do znanja. 
     */
-    header("Content-Type: application/json; charset=utf-8");
+    header("Content-Type: application/json");
 
     /* Proverava se da li postoje podaci koje treba poslati. */
     if ($response->data != NULL) {

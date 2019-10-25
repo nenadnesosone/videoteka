@@ -8,6 +8,7 @@ const addButtons = document.querySelectorAll('.watch');
 const removeButtons = document.querySelectorAll('.remove');
 const moreInfo = document.querySelectorAll('.moreInfo');
 const watchlist = document.querySelector('.watchlist');
+const signout = document.querySelector('.signout');
 
 
 
@@ -156,3 +157,4 @@ addButtons.forEach(btn => btn.addEventListener('click', addToWatchlist));
 removeButtons.forEach(btn => btn.addEventListener('click', removeFromWatchlist));
 moreInfo.forEach(btn => btn.addEventListener('click', displayMovie));
 watchlist.addEventListener('click', displayWatchlist);
+// signout.addEventListener('click', localStorage.clear());
