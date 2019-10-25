@@ -1,3 +1,3 @@
 setTimeout(function(){ 
     $(".wrap").fadeOut("slow");
-}, 5000);
+}, 2000);

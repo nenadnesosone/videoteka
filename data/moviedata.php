@@ -141,6 +141,27 @@ class MovieData
         }
     }
 
+    // funkcija za trazenje filmova iz baze
+    public static function WatchlistMovie($movieId)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
+
+        // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
+        $query = "SELECT * FROM movies WHERE movieId=$movieId";
+        $result = mysqli_query($db, $query);
+        mysqli_set_charset($db, 'utf8');
+        if ($result) {
+            $data = mysqli_fetch_assoc($result);
+            return $data;
+        } else {
+            return [];
+        }
+    }
+
+
 
     // pretraga filmova
     public static function FindMovie()

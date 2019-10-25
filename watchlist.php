@@ -44,7 +44,15 @@ if (isset($_SESSION['username'])) {
     </div>
 
 
+    <div class="container m-auto">
+        <div class="row">
+            <?php
 
+            $userId = $_SESSION['userid'];
+            WatchlistData::CreateWatchlist($userId);
+            ?>
+        </div>
+    </div>
 
     <script type="text/javascript">
 

@@ -22,7 +22,7 @@ function viewAllMovies() {
 
 setTimeout(function() {
     landingHeader.style.display = "block";
-}, 5300);
+}, 2500);
 
 
 btn.addEventListener('click', viewAllMovies)

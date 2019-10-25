@@ -14,15 +14,14 @@ require_once '../data/userdata.php';
 // dobijamo podatke preko JSON
 $data = json_decode(file_get_contents("php://input"));
  
-// $user->email = $data->email; // prikupljamo email iz podataka
-$em = $data->email; // stavljamo ga u promenljivu na nekucamo nonstop $user-email
+/// prikupljamo email iz podataka
+$em = $data->email; // stavljamo ga u promenljivu na nekucamo nonstop $data-email
 $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
 $em = str_replace(' ', '', $em); //uklanja razmake
 $em = filter_var($em, FILTER_SANITIZE_EMAIL);
-$_SESSION['log_email'] = $em; //cuva u sesiji email
 
-//$user->password = $data->password;// prikupljamo lozinku iz podataka
-$password = $data->password;// stavljamo ga u promenljivu na nekucamo nonstop $user-password
+// prikupljamo lozinku iz podataka
+$password = $data->password;// stavljamo ga u promenljivu na nekucamo nonstop $data-password
 $password = htmlspecialchars(strip_tags($password)); //uklanja HTML elemente
 $password = str_replace(' ', '', $password); //uklanja razmake
 $password = md5($password);  //enkripcija lozinke
@@ -47,24 +46,18 @@ if(UserData::CheckEmail($em) && UserData::CheckUser($em, $password)){
     $username = $row['UserName'];
     $userimage = $row['ProfilePicture'];
 
-    // dajemo podatke sesiji ili cemo sve podatke citati to preko jwt
-    // $_SESSION['userid'] = $this->id;
-    // $_SESSION['username'] = $this->username;
-    // $_SESSION['userimage'] = $this->userimage;
-    // $_SESSION['log_email'] = "";
-
     $token = array(
        "iss" => $iss,
        "aud" => $aud,
        "iat" => $iat,
        "nbf" => $nbf,
        "data" => array(
-           "UserId" => $userid,// $this->id
-           "FirstName" => $firstname,// $this->firstname
-           "LastName" => $lastname,// $this->lastname
-           "UserName" => $username,// $this->username
-           "Email" => $em,// $this-email
-           "ProfilePicture" => $userimage// $this->userimage
+           "UserId" => $userid,
+           "FirstName" => $firstname,
+           "LastName" => $lastname,
+           "UserName" => $username,
+           "Email" => $em,
+           "ProfilePicture" => $userimage
        )
     );
  
@@ -91,7 +84,7 @@ else{
     http_response_code(401);
  
     // reci korisniku da nije uspeo
-    array_push($error_array,"Email or password was incorrect!<br>");
+    //array_push($error_array,"Email or password was incorrect!<br>");
     echo json_encode(array("message" => "Login failed."));
 }
 

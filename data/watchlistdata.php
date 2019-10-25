@@ -57,6 +57,50 @@ class WatchlistData
         }
     }
 
+    public static function CreateWatchlist($userId){
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+
+        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId medjutim, on se ulogovao i znamo ko je
+
+        // odaberemo konkretnog korisnika
+        $query = "SELECT * FROM users_movies WHERE userId=$userId";
+        $result = mysqli_query($db, $query);
+        $num_rows = mysqli_num_rows($result);
+        if ($num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                    $movieId = $row["MovieId"];
+
+                    $data = MovieData::WatchlistMovie($movieId)
+
+                    $title = $data['Title'];
+                    $leadingActor = $data['LeadingActor'];
+                    $posterUrl = $data['PosterUrl'];
+
+                    echo
+                    `<div class='col-md-6 col-lg-3'>
+                    <div class='card border-0'>
+                        <div class='modal'>
+                            <div class='modal-content'>
+                                <button class='btn btn-small mb-2 watch' data-id='` . $movieId .`'>Add To Watchlist</button>
+                                <button class='btn btn-small mb-2 remove' data-id='` . $movieId . `' style='display:none;'>Remove From Watchlist</button>
+                                <button role='button' class='btn btn-small moreInfo' data-id='` . $movieId . `'><a href='#'>More Info</a></button>
+                            </div>
+                        </div>
+                        <img id='poster' src='`. $posterUrl .`' alt='Card Image' class='card-img-top' />
+                        <div class='card-body'>
+                            <h6>` . $title . `</h6>
+                            <p class='text-muted card-text'>` . $leadingActor . `</p>
+                        </div>
+                    </div>
+                </div>`;
+            }
+            
+        } else {
+            return [];
+        }
+
+
 
     // funkcija za ubacivanje filma kojeg je korisnik odabrao
     public static function AddMovieToWatchlist($selected)
@@ -112,3 +156,4 @@ class WatchlistData
         }
     }
 }
+?>
