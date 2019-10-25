@@ -46,7 +46,7 @@ require_once 'data/moviedata.php';
 
 
                 <div class="bottomAlign">
-                    <p class="lead more" id="summary"></p>
+                    <p class="lead" id="summary"></p>
 
                     <h5>Stars: <span id="leadingActor"></span></h5>
 
@@ -142,9 +142,6 @@ require_once 'data/moviedata.php';
         });
 
 
-
-
-
         // dohvatanje podataka
 
         let country = window.localStorage.getItem('country');
@@ -192,4 +189,39 @@ require_once 'data/moviedata.php';
     require 'php\partials\footer.php';
 
     ?>
+
+    <script type="text/javascript">
+        let showChar = 140;
+        let ellipsestext = "...";
+        let moretext = "Show more";
+        let lesstext = "Show less";
+        $('.lead').each(function() {
+            let content = $(this).html();
+
+            if (content.length > showChar) {
+
+                let c = content.substr(0, showChar);
+                let h = content.substr(showChar - 1, content.length - showChar);
+
+                let html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>'+ h +'</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                $(this).html(html);
+            }
+
+        });
+
+        $(".morelink").click(function() {
+            if ($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
+    </script>
+
 </body>
