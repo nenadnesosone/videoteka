@@ -30,7 +30,7 @@ require 'includes/form_handlers/profile_handler.php';
         header('Location: main.php');
     }
 
-    include 'php/partials/regheader.php';
+    require 'php\partials\mainheader.php';
     ?>
 
 

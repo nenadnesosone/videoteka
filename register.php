@@ -39,7 +39,7 @@ require 'includes/form_handlers/login_handler.php';
     ?>
     <?php
 
-    require 'php/partials/regheader.php';
+    require 'php\partials\mainheader.php';
 
     ?>
 

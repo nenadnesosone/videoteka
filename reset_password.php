@@ -105,7 +105,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
 
 <?php
 
-include 'php/partials/regheader.php';
+require 'php\partials\mainheader.php';
 
 ?>
 

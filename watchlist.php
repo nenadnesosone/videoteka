@@ -33,7 +33,7 @@ if (isset($_SESSION['username'])) {
 
 
     <?php
-    require 'php\partials\userheader.php';
+    require 'php\partials\mainheader.php';
     ?>
 
 
