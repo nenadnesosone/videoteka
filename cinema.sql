@@ -110,14 +110,14 @@ CREATE TABLE `users_data` (
   `Email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Password` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `RegistrationDate` date DEFAULT NULL,
-  `ProfileImage` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL
+  `ProfilePicture` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users_data`
 --
 
-INSERT INTO `users_data` (`UserId`, `FirstName`, `LastName`, `UserName`, `Email`, `Password`, `RegistrationDate`, `ProfileImage`) VALUES
+INSERT INTO `users_data` (`UserId`, `FirstName`, `LastName`, `UserName`, `Email`, `Password`, `RegistrationDate`, `ProfilePicture`) VALUES
 (1, 'Danica2', 'R', 'Rasha', 'IT.obuka.danica@gmail.com', 'a43d9e4fb22287ba625f4671e9dc89e807a4b07f18e858bacbe6d70e8dba5ec5', '2019-09-12', 'https://github.com/nenadnesosone/videoteka/blob/master/images/profile_pictures/woman_128.png?raw=true'),
 (2, 'Natalija', 'B', 'Natalie', 'IT.obuka.natalija@gmail.com', '0f0049e60f68337025ac710e879a6cc6173391f3dcea958ecf7a1feb003efa00', '2019-10-07', 'https://github.com/nenadnesosone/videoteka/blob/master/images/profile_pictures/avatar%20(1)_128.png?raw=true'),
 (3, 'Ljubica', 'Z', 'Ljubica', 'IT.obuka.ljubica@gmail.com', '955212af962c31b3eaacda801e8fd247e29a67e14f0e1f44d462de16d8d9da73', '2019-10-07', 'https://github.com/nenadnesosone/videoteka/blob/master/images/profile_pictures/avatar%20(2)_128.png?raw=true'),

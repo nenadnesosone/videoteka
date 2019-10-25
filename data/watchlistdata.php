@@ -71,8 +71,7 @@ class WatchlistData
             while ($row = mysqli_fetch_assoc($result)) {
                     $movieId = $row["MovieId"];
 
-                    $data = MovieData::WatchlistMovie($movieId)
-
+                    while ($data = MovieData::WatchlistMovie($movieId))
                     $title = $data['Title'];
                     $leadingActor = $data['LeadingActor'];
                     $posterUrl = $data['PosterUrl'];
