@@ -70,11 +70,13 @@ class WatchlistData
         if ($num_rows > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                     $movieId = $row["MovieId"];
+                    $data = MovieData::WatchlistMovie($movieId);
+                    while ($film = mysqli_fetch_assoc($data)){
 
-                    while ($data = MovieData::WatchlistMovie($movieId))
-                    $title = $data['Title'];
-                    $leadingActor = $data['LeadingActor'];
-                    $posterUrl = $data['PosterUrl'];
+                   
+                    $title = $film['Title'];
+                    $leadingActor = $film['LeadingActor'];
+                    $posterUrl = $film['PosterUrl'];
 
                     echo
                     `<div class='col-md-6 col-lg-3'>
@@ -93,13 +95,14 @@ class WatchlistData
                         </div>
                     </div>
                 </div>`;
+                }
             }
             
         } else {
             return [];
         }
 
-
+    }
 
     // funkcija za ubacivanje filma kojeg je korisnik odabrao
     public static function AddMovieToWatchlist($selected)

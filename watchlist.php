@@ -1,5 +1,7 @@
 <?php
 require 'config/config.php';
+require 'data/watchlistdata.php';
+require 'data/moviedata.php';
 if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
     $user_details_query = mysqli_query($con, "SELECT * FROM users_data WHERE username= '$userLoggedIn'");
