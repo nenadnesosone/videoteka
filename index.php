@@ -35,7 +35,7 @@ require 'config/config.php';
   <div class="wrap">
     <div class="loading">
       <div class="bounceball"></div>
-      <div class="text lead warning"> NOW LOADING...</div>
+      <div class="text lead"> NOW LOADING...</div>
     </div>
 
 

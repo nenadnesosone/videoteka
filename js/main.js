@@ -125,6 +125,11 @@ function displayMovie() {
             window.localStorage.setItem('title', resp.Title);
             window.localStorage.setItem('summary', resp.Summary);
             window.localStorage.setItem('releaseYear', resp.ReleaseYear);
+            window.localStorage.setItem('imageUrl_1', resp.ImageUrl_1);
+            window.localStorage.setItem('imageUrl_2', resp.ImageUrl_2);
+            window.localStorage.setItem('imageUrl_3', resp.ImageUrl_3);
+            window.localStorage.setItem('imageUrl_4', resp.ImageUrl_4);
+            window.localStorage.setItem('imageUrl_5', resp.ImageUrl_5);
             console.log(resp.PosterUrl);
 
             window.location.href = "http://localhost/videoteka/singleMovie.php";

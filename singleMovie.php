@@ -46,7 +46,7 @@ require_once 'data/moviedata.php';
 
 
                 <div class="bottomAlign">
-                    <p class="lead" id="summary"></p>
+                    <p class="lead more" id="summary"></p>
 
                     <h5>Stars: <span id="leadingActor"></span></h5>
 
@@ -77,27 +77,27 @@ require_once 'data/moviedata.php';
             <!-- slike ce biti iz baze -->
             <div class="slides">
                 <div class="numbertext">1 / 5</div>
-                <img src="images/demo1.jpg" style="width:100%" class="rounded">
+                <img src="" id="imgG1" style="width:100%" class="rounded">
             </div>
 
             <div class="slides">
                 <div class="numbertext">2 / 5</div>
-                <img src="images/demo2.jpg" style="width:100%" class="rounded">
+                <img src="" id="imgG2" style="width:100%" class="rounded">
             </div>
 
             <div class="slides">
                 <div class="numbertext">3 / 5</div>
-                <img src="images/demo3.jpg" style="width:100%" class="rounded">
+                <img src="" id="imgG3" style="width:100%" class="rounded">
             </div>
 
             <div class="slides">
                 <div class="numbertext">4 / 5</div>
-                <img src="images/demo4.jpg" style="width:100%" class="rounded">
+                <img src="" id="imgG4" style="width:100%" class="rounded">
             </div>
 
             <div class="slides">
                 <div class="numbertext">5 / 5</div>
-                <img src="images/demo5.jpg" style="width:100%" class="rounded">
+                <img src="" id="imgG5" style="width:100%" class="rounded">
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -105,27 +105,27 @@ require_once 'data/moviedata.php';
 
             <!-- Ime filma iz baze -->
             <div class="caption-container">
-                <p>Once Upon A Time In Hollywood</p>
+                <p id="titleGallery"></p>
             </div>
 
             <div class="column">
-                <img class="demo" src="images/demo1.jpg" onclick="currentSlide(1)" alt="blabla">
+                <img class="demo" id="img1" src="" onclick="currentSlide(1)" alt="blabla">
             </div>
 
             <div class="column">
-                <img class="demo" src="images/demo2.jpg" onclick="currentSlide(2)" alt="img2">
+                <img class="demo" id="img2" src="" onclick="currentSlide(2)" alt="img2">
             </div>
 
             <div class="column">
-                <img class="demo" src="images/demo3.jpg" onclick="currentSlide(3)" alt="img3">
+                <img class="demo" id="img3" src="" onclick="currentSlide(3)" alt="img3">
             </div>
 
             <div class="column">
-                <img class="demo" src="images/demo4.jpg" onclick="currentSlide(4)" alt="img4">
+                <img class="demo" id="img4" src="" onclick="currentSlide(4)" alt="img4">
             </div>
 
             <div class="column">
-                <img class="demo" src="images/demo5.jpg" onclick="currentSlide(5)" alt="img5">
+                <img class="demo" id="img5" src="" onclick="currentSlide(5)" alt="img5">
             </div>
         </div>
     </div>
@@ -156,6 +156,11 @@ require_once 'data/moviedata.php';
         let title = window.localStorage.getItem('title');
         let summary = window.localStorage.getItem('summary');
         let releaseYear = window.localStorage.getItem('releaseYear');
+        let imageUrl_1 = window.localStorage.getItem('imageUrl_1');
+        let imageUrl_2 = window.localStorage.getItem('imageUrl_2');
+        let imageUrl_3 = window.localStorage.getItem('imageUrl_3');
+        let imageUrl_4 = window.localStorage.getItem('imageUrl_4');
+        let imageUrl_5 = window.localStorage.getItem('imageUrl_5');
 
         // smestanje podataka u html
 
@@ -165,9 +170,20 @@ require_once 'data/moviedata.php';
         document.querySelector('#imdbRating').textContent = imdbRating;
         document.querySelector('#leadingActor').textContent = leadingActor
         document.querySelector('#title').textContent = title;
+        document.querySelector('#titleGallery').textContent = title;
         document.querySelector('#summary').textContent = summary;
         document.querySelector('#releaseYear').textContent = releaseYear;
         document.querySelector('#posterUrl')['src'] = posterUrl;
+        document.querySelector('#img1')['src'] = imageUrl_1;
+        document.querySelector('#img2')['src'] = imageUrl_2;
+        document.querySelector('#img3')['src'] = imageUrl_3;
+        document.querySelector('#img4')['src'] = imageUrl_4;
+        document.querySelector('#img5')['src'] = imageUrl_5;
+        document.querySelector('#imgG1')['src'] = imageUrl_1;
+        document.querySelector('#imgG2')['src'] = imageUrl_2;
+        document.querySelector('#imgG3')['src'] = imageUrl_3;
+        document.querySelector('#imgG4')['src'] = imageUrl_4;
+        document.querySelector('#imgG5')['src'] = imageUrl_5;
     </script>
 
 

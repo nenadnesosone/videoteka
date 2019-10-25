@@ -1,5 +1,6 @@
 body {
     background-color: #0000;
+    font-family: Kelly Slab, cursive;
 }
 
 #landingHeader {
@@ -7,7 +8,6 @@ body {
     position: relative;
     text-align: center;
     padding-top: 40vh;
-    font-family: Kelly Slab, cursive;
 }
 
 #landingHeader h1 {
@@ -98,9 +98,10 @@ body {
 }
 
 .text {
-    color: #fb1717;
+    color: #b83c33;
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 7px;
+    font-size: 2.3rem;
 }
 
 .bounceball {
@@ -119,7 +120,7 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #fb1717;
+    background-color: #b83c33;
     transform-origin: 50%;
     animation: bounce 400ms alternate infinite ease;
 }
