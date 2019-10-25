@@ -119,13 +119,13 @@ function displayMovie() {
             window.localStorage.setItem('country', resp.Country);
             window.localStorage.setItem('director', resp.Director);
             window.localStorage.setItem('Genre', resp.Genre);
-            window.localStorage.setItem('posterUrl', resp.posterUrl);
+            window.localStorage.setItem('posterUrl', resp.PosterUrl);
             window.localStorage.setItem('imdbRating', resp.ImdbRating);
             window.localStorage.setItem('leadingActor', resp.LeadingActor);
             window.localStorage.setItem('title', resp.Title);
             window.localStorage.setItem('summary', resp.Summary);
             window.localStorage.setItem('releaseYear', resp.ReleaseYear);
-            console.log(resp);
+            console.log(resp.PosterUrl);
 
             window.location.href = "http://localhost/videoteka/singleMovie.php";
         }

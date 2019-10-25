@@ -42,7 +42,7 @@ require_once 'data/moviedata.php';
             <div class="col-lg-6">
 
                 <h1 id="title"></h1>
-                <h5 id="directorsH">Directed by <span id="director"></span></h5>
+                <h5 id="directorsH">Directed by: <span id="director"></span></h5>
 
 
                 <div class="bottomAlign">
@@ -150,15 +150,14 @@ require_once 'data/moviedata.php';
         let country = window.localStorage.getItem('country');
         let director = window.localStorage.getItem('director');
         let genre = window.localStorage.getItem('Genre');
-        let imageUrl = window.localStorage.getItem('imageUrl');
+        let posterUrl = window.localStorage.getItem('posterUrl');
         let imdbRating = window.localStorage.getItem('imdbRating');
         let leadingActor = window.localStorage.getItem('leadingActor');
         let title = window.localStorage.getItem('title');
         let summary = window.localStorage.getItem('summary');
         let releaseYear = window.localStorage.getItem('releaseYear');
 
-
-        console.log(posterUrl);
+        // smestanje podataka u html
 
         document.querySelector('#country').textContent = " (" + country + ")";
         document.querySelector('#director').textContent = director;

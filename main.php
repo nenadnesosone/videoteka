@@ -68,11 +68,12 @@ require 'data/moviedata.php';
 
         let movies = JSON.parse(window.localStorage.getItem('movies'));
         let allMovies = document.querySelector('.row');
+        let imgPoster = document.querySelector('#poster');
+        let d = document.querySelector('.d');
 
         movies.forEach(movie => {
-            let cardContent = createCard(movie.MovieId , movie.posterUrl,movie.Title, movie.LeadingActor);
+            let cardContent = createCard(movie.MovieId, movie.PosterUrl,movie.Title, movie.LeadingActor);
             allMovies.innerHTML += cardContent;
-            
         });
     </script>
 
