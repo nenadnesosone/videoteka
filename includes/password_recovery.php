@@ -1,6 +1,6 @@
 <?php
 
-require "../config/config.php";
+require_once "../config/config.php";
 
 if (isset($_GET["token"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($_GET["action"]=="reset") && !isset($_POST["action"])) {
     $token = $_GET["token"];

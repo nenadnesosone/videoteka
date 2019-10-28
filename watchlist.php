@@ -1,7 +1,7 @@
 <?php
-require 'config/config.php';
-require 'data/watchlistdata.php';
-require 'data/moviedata.php';
+require_once 'config/config.php';
+require_once 'data/watchlistdata.php';
+require_once 'data/moviedata.php';
 if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
     $user_details_query = mysqli_query($con, "SELECT * FROM users_data WHERE username= '$userLoggedIn'");
@@ -35,7 +35,7 @@ if (isset($_SESSION['username'])) {
 
 
     <?php
-    require 'php\partials\mainheader.php';
+    require_once 'php\partials\mainheader.php';
     ?>
 
 
@@ -90,6 +90,6 @@ if (isset($_SESSION['username'])) {
 
 
     <?php
-    require 'php\partials\footer.php';
+    require_once 'php\partials\footer.php';
 
     ?>

@@ -22,12 +22,15 @@
                     <li class="nav-item">
                     <a href="register.php" class="nav-link">Login/SignUp</a>
                 </li>
+                <li>
+                <form action="search.php" method="POST">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+                </form>
+                </li>
             </ul>
         </div>
-        <form action="search.php" method="POST">
-        <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
-        <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
-        </form>
+
     </div>
 </nav>';
         } else {
@@ -43,39 +46,39 @@
               <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>'; 
               if(($_SESSION['username'] == 'Rasha') || ($_SESSION['username'] == 'Natalie') || ($_SESSION['username'] == 'Ljubica') || ($_SESSION['username'] == 'Andjelka') || ($_SESSION['username'] == 'Nesa')){
                  echo      
-             '<a class="dropdown-item" href="#">Add movie in database</a>
-             <a class="dropdown-item" href="#">View all users</a>
-             <a class="dropdown-item" href="#">View users movie statistics</a>
-             <a class="dropdown-item" href="#">Donate!</a>
-             <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="signout.php">Sign Out</a>
-             </div>
-         </li>
-         <li>
-         <form action="search.php" method="POST">
-            <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
-            <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
-        </form>
-     </li>
+                '<a class="dropdown-item" href="#">Add movie in database</a>
+                <a class="dropdown-item" href="#">Delete movie from database</a>
+                <a class="dropdown-item" href="#">View all users</a>
+                <a class="dropdown-item" href="#">View users movie statistics</a>
+                <a class="dropdown-item" href="https://www.imdb.com">Potential new movies for database</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="signout.php">Sign Out</a>
+                </div>
+            </li>
+            <li>
+                <form action="search.php" method="POST">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+                </form>
+            </li>
          </ul>
      </div>
  </div>
 </nav>';
               } else {
                  echo
-             '<a class="dropdown-item" href="#">Donate!</a>
-             <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="signout.php">Sign Out</a>
-             </div>
-         </li>
-         <li>
-        <form action="search.php" method="POST">
-            <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
-            <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
-        </form>
-     </li>
+                '<a class="dropdown-item" href="#">Donate!</a>
+                <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="signout.php">Sign Out</a>
+                </div>
+            </li>
+            <li>
+                <form action="search.php" method="POST">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
+                </form>
+            </li>
          </ul>
      </div>
  </div>

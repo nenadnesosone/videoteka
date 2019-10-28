@@ -1,6 +1,6 @@
 <?php
-require 'config/config.php';
-require 'includes/form_handlers/profile_handler.php';
+require_once 'config/config.php';
+require_once 'includes/form_handlers/profile_handler.php';
 
 ?>
 
@@ -20,7 +20,7 @@ require 'includes/form_handlers/profile_handler.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/register_style.css">
     <script src="js/profile.js"></script>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body>
@@ -30,7 +30,7 @@ require 'includes/form_handlers/profile_handler.php';
         header('Location: main.php');
     }
 
-    require 'php\partials\mainheader.php';
+    require_once 'php\partials\mainheader.php';
     ?>
 
 
@@ -105,7 +105,7 @@ require 'includes/form_handlers/profile_handler.php';
         </div>
     </div>
     <?php
-    include 'php/partials/footer.php';
+    require_once 'php/partials/footer.php';
     ?>
 </body>
 

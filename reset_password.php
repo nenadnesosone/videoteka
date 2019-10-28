@@ -1,8 +1,7 @@
 <?php
-
-require 'config/config.php';
-require 'includes/form_handlers/register_handler.php';
-require 'includes/form_handlers/login_handler.php';
+require_once 'config/config.php';
+require_once 'includes/form_handlers/register_handler.php';
+require_once 'includes/form_handlers/login_handler.php';
 
 if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
     $email = $_POST['reset_email'];
@@ -105,7 +104,7 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
 
 <?php
 
-require 'php\partials\mainheader.php';
+require_once 'php\partials\mainheader.php';
 
 ?>
 
