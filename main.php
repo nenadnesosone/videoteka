@@ -1,6 +1,6 @@
 <?php
-require 'config/config.php';
-require 'data/moviedata.php';
+require_once 'config/config.php';
+require_once 'data/moviedata.php';
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ require 'data/moviedata.php';
 <body>
     <!-- NAV -->
     <?php
-    require 'php\partials\mainheader.php';
+    require_once 'php\partials\mainheader.php';
 
     ?>
 
@@ -81,6 +81,6 @@ require 'data/moviedata.php';
     <script src="js/main.js" type="text/javascript"> </script>
 
     <?php
-    require 'php\partials\footer.php';
+    require_once 'php\partials\footer.php';
 
     ?>

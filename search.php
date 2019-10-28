@@ -25,7 +25,7 @@ require_once 'data/moviedata.php';
 <body>
     <!-- NAV -->
     <?php
-    require 'php\partials\mainheader.php';
+    require_once 'php\partials\mainheader.php';
 
     ?>
 

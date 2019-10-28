@@ -27,7 +27,7 @@ require_once 'data/moviedata.php';
 <body>
 
     <?php
-    require 'php\partials\mainheader.php';
+    require_once 'php\partials\mainheader.php';
 
     ?>
 
@@ -186,7 +186,7 @@ require_once 'data/moviedata.php';
 
 
     <?php
-    require 'php\partials\footer.php';
+    require_once 'php\partials\footer.php';
 
     ?>
 
