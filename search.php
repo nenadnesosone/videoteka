@@ -29,8 +29,6 @@ require_once 'data/moviedata.php';
 
     ?>
 
-    <!-- <h1>Search page</h1> -->
-
 
     <div class="container m-auto">
         <div class="row">

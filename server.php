@@ -1,36 +1,5 @@
 <?php
-/*
-    Ovaj fajl demonstrira razvoj jednog rudimentarnog REST API-ja.
 
-    Funkcionalnosti koje su podrzane API-jem su: 
-
-    GET /movies
-        Smisao ovog zahteva je dohvatanje svih informacija o filmovima
-        (ime filma i ime reditelja). Informacije o filmovima se vracaju kroz
-        telo odgovora u JSON formatu.
-
-    POST /movies
-        Smisao ovog zahteva je kreiranje novog filma.
-        Podaci o novom filmu se ocekuju kroz telo zahteva u JSON formatu.
-        Odgovor sadrzi identifikator novokreiranog filma.
-        
-    GET /movies/movie_id
-        Smisao ovog zahteva je dohvatanje informacija o filmu sa identifikatorom
-        movie_id. Informacije o filmu se vracaju kroz telo odgovora u JSON formatu.
-
-    DELTE /movies/movie_id
-        Smisao ovog zahteva je brisanje informacija o filmu sa identifikatorom 
-        movie_id.
-
-    Zbog konfiguracije u .htaccess datoteci, ovi zahtevi imaju svoje fizicke putanje
-    server.php/movies i server.php/movies_id.
-    
-*/
-
-/*
-    U database.php fajlu se nalaze funkcije za rad sa bazom podataka koje
-    se koriste za dohvatanje podataka i odgovarajuci upis i brisanje.
-*/
 require_once 'config/config.php';
 require_once 'data/moviedata.php';
 require_once 'data/watchlistdata.php';
