@@ -11,6 +11,78 @@ $(document).ready(function() {
             $("#first").slideDown("slow");
         })
     });
+    
+    //frontend validacija
+    $(document).ready(function () {    
+        let errorMessage = document.querySelector('#errorMessage');
+        // Attach the event handler for the keyboard keyup
+        $('#reg_fname').keyup(function() {
+            let $th = $(this);
+            // run the expression and replace with nothing
+            $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
+            if ($th.val().length > 25) {
+                errorMessage.textContent = "Your first name can't be larger than 25 characters!";
+                return false;
+            }else{
+                errorMessage.textContent ="";
+            }
+
+        });
+        $('#reg_lname').keyup(function() {
+            let $th = $(this);
+            // run the expression and replace with nothing
+            $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
+            if ($th.val().length > 30) {
+                errorMessage.textContent = "Your last name can't be larger than 25 characters!";
+                return false;
+            }else{
+                errorMessage.textContent ="";
+            }
+
+        });
+        $('#reg_email').keyup(function() {
+            let $th = $(this);
+            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") ===-1 || $th.val().lastIndexOf(".") ===-1 ) {
+               errorMessage.textContent = "Invalid email adress!"
+               return false; 
+            }else{
+                errorMessage.textContent = "";
+            }
+
+        });
+        $('#reg_email2').keyup(function() {
+            let $th = $(this);
+            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") ===-1 || $th.val().lastIndexOf(".") ===-1 ) {
+               errorMessage.textContent = "Invalid email adress!"
+               return false; 
+            }else{
+                errorMessage.textContent = "";
+            }
+            if ($th.val() !== $('#reg_email').val()) {
+                errorMessage.textContent = "Emails don't match!"
+            }else{
+                errorMessage.textContent = "";
+            }
+        });
+        $('#reg_password').keyup(function() {
+            let $th = $(this);
+            if ($th.val().length <5 || $th.val().length >30 ) {
+               errorMessage.textContent = "Your password must be between 5 and 30 characters!";
+               return false; 
+            }else{
+                errorMessage.textContent = "";
+            }
+        });
+        $('#reg_password2').keyup(function() {
+            let $th = $(this);
+            if ($th.val() !== $('#reg_password').val()) {
+               errorMessage.textContent = "Passwords don't match!";
+               return false; 
+            }else{
+                errorMessage.textContent = "";
+            }
+        });
+    });
 
     // Reakcija na klik dugmeta
     $('#login_button').click(() => {

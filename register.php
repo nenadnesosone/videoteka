@@ -1,7 +1,7 @@
 <?php
-require_once 'config/config.php';
-require_once 'includes/form_handlers/register_handler.php';
-require_once 'includes/form_handlers/login_handler.php';
+require 'config/config.php';
+require 'includes/form_handlers/register_handler.php';
+require 'includes/form_handlers/login_handler.php';
 
 ?>
 
@@ -39,7 +39,7 @@ require_once 'includes/form_handlers/login_handler.php';
     ?>
     <?php
 
-    require_once 'php\partials\mainheader.php';
+    require 'php\partials\mainheader.php';
 
     ?>
 
@@ -106,7 +106,7 @@ require_once 'includes/form_handlers/login_handler.php';
 
                     <input id="reg_password" type="password" name="reg_password" placeholder="Password" required>
                     <br>
-                    <input is="reg_password2" type="password" name="reg_password2" placeholder="Confirm password" required>
+                    <input id="reg_password2" type="password" name="reg_password2" placeholder="Confirm password" required>
                     <br>
                     <?php if (in_array("Your password do not match", $error_array)) echo "Your password do not match<br>";
                     else if (in_array("Your password can only contain english characters and numbers", $error_array)) echo  "Your password can only contain english characters and numbers<br>";
@@ -114,24 +114,27 @@ require_once 'includes/form_handlers/login_handler.php';
                     <br>
                     <span><img src="includes/captcha_code.php" id="captcha_image"></span>
                     <br>
-                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Captcha" required>
+                    <input type="text" name="captcha_code" id="captcha_code" placeholder="Enter Code" required>
                     <br>
                     <?php if (in_array("Invalid code! Please, try again.<br>", $error_array)) echo "Invalid code! Please, try again.<br>"; ?>
                     <br>
+                    <div style="color:red" class="errorMessage" id="errorMessage"> </div>
+                    <br>                      
                     <input id="register_button" type="submit" name="register_button" value="Register">
                     <br>
                     <?php if (in_array("<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>", $error_array)) echo "<span style='color:#14C800;'>You're all set! Go ahead and login!</span><br>"; ?>
                     <a href="#" id="signin" class="signin">Already have an account? Log in here!</a>
+                                                                                <br>                     
+
                 </form>
             </div>
         </div>
     </div>
 
 
-    <?php
-    
-    require_once 'php/partials/footer.php';
-    ?>
+    <!-- <?php
+    include 'php/partials/footer.php';
+    ?> -->
 </body>
 
 </html>
