@@ -140,7 +140,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                 $file_ext = strtolower(end($splitParts));
                 $exts = array("jpg", "jpeg", "png");
                 $userphoto = $username. '.'.$file_ext;
-                $image_location = "images/profile_pictures/" .$userphoto;// gde cemo staviti sliku kad je ucitamo
+                $image_location = "images/profile_pictures/" .$userphoto;
+                // gde cemo staviti sliku kad je ucitamo
         
                 //proveravamo da li je fajl prazan
                 if($file_size == 0) {

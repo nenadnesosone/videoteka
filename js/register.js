@@ -15,28 +15,26 @@ $(document).ready(function() {
     //frontend validacija
     $(document).ready(function () {    
         let errorMessage = document.querySelector('#errorMessage');
-        // Attach the event handler for the keyboard keyup
+        // reakcija na keyup
         $('#reg_fname').keyup(function() {
             let $th = $(this);
-            // run the expression and replace with nothing
             $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
-            if ($th.val().length > 25) {
-                errorMessage.textContent = "Your first name can't be larger than 25 characters!";
+            if ($th.val().length > 25 || $th.val().length < 2) {
+                errorMessage.textContent = "Your first name must be between 2 and 25 characters!";
                 return false;
             }else{
                 errorMessage.textContent ="";
             }
-
         });
+
         $('#reg_lname').keyup(function() {
             let $th = $(this);
-            // run the expression and replace with nothing
             $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
-            if ($th.val().length > 30) {
-                errorMessage.textContent = "Your last name can't be larger than 25 characters!";
+            if ($th.val().length > 25 || $th.val().length < 2) {
+                errorMessage.textContent = "Your last name must be between 2 and 25 characters!";
                 return false;
             }else{
-                errorMessage.textContent ="";
+                errorMessage.textContent = "";
             }
 
         });
