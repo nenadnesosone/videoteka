@@ -42,7 +42,6 @@ class MovieData
         $this->imageUrl_3 = $imageUrl_3;
         $this->imageUrl_4 = $imageUrl_4;
         $this->imageUrl_5 = $imageUrl_5;
-
     }
     // funcija koja ce prikupljati podatke o svim filmovima iz baze
 
@@ -56,8 +55,28 @@ class MovieData
         mysqli_set_charset($db, 'utf8');
         if ($result) {
             $data = [];
-            while ($row = mysqli_fetch_assoc($result))
-            {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return [];
+        }
+    }
+
+    // izvlacenje filmova za watchlistu
+    
+    public static function GetAllMoviesForWatchlist($data)
+    {
+        //povezujemo se s bazom
+        $db = Database::getInstance()->getConnection();
+        ///odaberemo sve
+        $query = "SELECT * FROM movies WHERE movieId IN (".implode(',', $data).")";
+        $result = mysqli_query($db, $query);
+        mysqli_set_charset($db, 'utf8');
+        if ($result) {
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
                 $data[] = $row;
             }
             return $data;
@@ -70,7 +89,7 @@ class MovieData
     public static function GetMovie($id)
     {
         // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
-        
+
         $db = Database::getInstance()->getConnection();
 
         // odaberemo konkretan film
@@ -84,9 +103,6 @@ class MovieData
             return [];
         }
     }
-
-
-
 
     // funkcija za ubacivanje filmova u bazu ako zelimo da je koristimo 
     public static function CreateMovie($newfilm)
@@ -179,4 +195,3 @@ class MovieData
         }
     }
 }
-?>

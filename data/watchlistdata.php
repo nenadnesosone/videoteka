@@ -58,48 +58,24 @@ class WatchlistData
     }
 
     // funcija koja ce prikupljati podatke pojedinacnom korisniku koji je odabrao neke filmove i prikazivati ih
-    public static function CreateWatchlist($userId){
+    public static function CreateWatchlist($userId)
+    {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
 
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId medjutim, on se ulogovao i znamo ko je
-
-        // odaberemo konkretnog korisnika
         $query = "SELECT * FROM users_movies WHERE userId=$userId";
         $result = mysqli_query($db, $query);
         $num_rows = mysqli_num_rows($result);
         if ($num_rows > 0) {
+            $data = [];
             while ($row = mysqli_fetch_assoc($result)) {
-                    $movieId = $row["MovieId"];
-
-                    $data = MovieData::GetMovie($movieId);
-                    $filmid = $data['MovieId'];
-                    $title = $data['Title'];
-                    $leadingActor = $data['LeadingActor'];
-                    $posterUrl = $data['PosterUrl'];
-                    
-                echo
-                        "<div class='col-md-6 col-lg-3'>
-                        <div class='card border-0'>
-                            <div class='modal'>
-                                <div class='modal-content'>
-                                    <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
-                                    <button role='button' class='btn btn-small moreInfo'> <a href='localhost/movies/$filmid' class='btn-link'>More Info</a></button>
-                                </div>
-                            </div>
-                            <img src='$posterUrl' alt='Card Image' class='card-img-top'/>
-                            <div class='card-body'>
-                                <h6>" . $title . "</h6>
-                                <p class='text-muted card-text'> " . $leadingActor . "</p>
-                            </div>
-                        </div>
-                    </div> ";
+                $movieId = $row["MovieId"];
+                $data [] = $movieId;
             }
-            
+            return MovieData::GetAllMoviesForWatchlist($data);
         } else {
             return [];
         }
-
     }
 
     // funkcija za ubacivanje filma kojeg je korisnik odabrao

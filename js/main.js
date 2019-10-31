@@ -149,9 +149,7 @@ function displayWatchlist() {
         method: 'GET',
         success: function(resp) {
             console.log(resp);
-            // nisam sigurna kako ovo treba da ide jer mi imamo samo ID-jeve smestene u ovoj tabeli
-
-            window.localStorage.setItem('watchlistMoviesId', JSON.stringify(resp));
+            window.localStorage.setItem('watchlist', JSON.stringify(resp));
         }
     })
 }

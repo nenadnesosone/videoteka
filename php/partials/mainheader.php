@@ -17,7 +17,7 @@
                    if(!isset($_SESSION['username'])){
                        echo
                    '<li class="nav-item">
-                       <a href="watchlist.php" class="nav-link">Watchlist</a>
+                       <a href="#" class="nav-link watchlist">Watchlist</a>
                    </li>
                     <li class="nav-item">
                     <a href="register.php" class="nav-link">Login/SignUp</a>

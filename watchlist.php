@@ -48,18 +48,14 @@ if (isset($_SESSION['username'])) {
 
     <div class="container m-auto">
         <div class="row">
-            <?php
 
-            $userId = $_SESSION['userid'];
-            WatchlistData::CreateWatchlist($userId);
-            ?>
         </div>
     </div>
 
     <script type="text/javascript">
 
     
-        function createCard(movieId, imageUrl, title, leadingActor) {
+        function createCard(movieId, posterUrl, title, leadingActor) {
             let theCard =
                 `<div class='col-md-6 col-lg-3'>
                 <div class='card border-0'>
@@ -70,7 +66,7 @@ if (isset($_SESSION['username'])) {
                             <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
                         </div>
                     </div>
-                    <img src='` + imageUrl + `' alt='Card Image' class='card-img-top' />
+                    <img src='` + posterUrl + `' alt='Card Image' class='card-img-top' />
                     <div class='card-body'>
                         <h6>` + title + `</h6>
                         <p class='text-muted card-text'>` + leadingActor + `</p>
@@ -79,6 +75,15 @@ if (isset($_SESSION['username'])) {
             </div>`;
             return theCard;
         }
+
+        let watchlist = JSON.parse(window.localStorage.getItem('watchlist'));
+        let allMovies = document.querySelector('.row');
+        let imgPoster = document.querySelector('#poster');
+
+        watchlist.forEach(movie => {
+            let cardContent = createCard(movie.MovieId, movie.PosterUrl,movie.Title, movie.LeadingActor);
+            allMovies.innerHTML += cardContent;
+        });
 
 
     </script>
