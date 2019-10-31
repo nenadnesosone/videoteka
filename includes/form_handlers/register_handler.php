@@ -14,37 +14,25 @@ $error_array = array();
 if (isset($_POST['register_button'])) {
     
     //Ime
-    $fname = htmlspecialchars(strip_tags($_POST['reg_fname'])); //uklanja HTML elemente
-    $fname = str_replace(' ', '', $fname); //uklanja razmake
-    $fname = ucfirst(strtolower($fname)); //ostavlja samo prvo slovo veliko
+    $fname = ucfirst(strtolower(UserData::sanit($_POST['reg_fname'])));// uklanjamo html elemente i razmake, ostavlja samo prvo slovo veliko
     $_SESSION['reg_fname'] = $fname; //cuva se u sesiji ime
 
     //Prezime
-    $lname = htmlspecialchars(strip_tags($_POST['reg_lname'])); //uklanja HTML elemente
-    $lname = str_replace(' ', '', $lname); //uklanja razmake
-    $lname = ucfirst(strtolower($lname)); //ostavlja samo prvo slovo veliko
+    $lname = ucfirst(strtolower(UserData::sanit($_POST['reg_fname'])));// uklanjamo html elemente i razmake, ostavlja samo prvo slovo veliko
     $_SESSION['reg_lname'] = $lname; //cuva se u sesiji prezime
     
     //Email
-    $em = htmlspecialchars(strip_tags($_POST['reg_email'])); //uklanja HTML elemente
-    $em = str_replace(' ', '', $em); //uklanja razmake
-    // $em = ucfirst(strtolower($em));
+    $em = UserData::sanit($_POST['reg_email']);// uklanjamo html elemente i razmake
     $_SESSION['reg_email'] = $em; //cuva se u sesiji email
 
 
     //email 2
-    $em2 = htmlspecialchars(strip_tags($_POST['reg_email2'])); //uklanja HTML elemente
-    $em2 = str_replace(' ', '', $em2); //uklanja razmake
-    // $em2= ucfirst(strtolower($em2));
+    $em2 = UserData::sanit($_POST['reg_email2']);// uklanjamo html elemente i razmake
     $_SESSION['reg_email2'] = $em2; //cuva se u sesiji email2
 
     //Lozinka
-    $password = htmlspecialchars(strip_tags($_POST['reg_password'])); //uklanja HTML elemente
-    $password2 = htmlspecialchars(strip_tags($_POST['reg_password2'])); //uklanja HTML elemente
-
-    $password = str_replace(' ', '', $password); //uklanja razmake
-    $password2 = str_replace(' ', '', $password2); //uklanja razmake
-
+    $password = UserData::sanit($_POST['reg_password']); // uklanjamo html elemente i razmake
+    $password2 = UserData::sanit($_POST['reg_password2']); // uklanjamo html elemente i razmake
 
     $date = date("Y-m-d"); //uzima trenutni datum
 

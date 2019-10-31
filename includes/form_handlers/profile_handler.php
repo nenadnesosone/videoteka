@@ -17,13 +17,9 @@ $uploadOK = 1;
 
 if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
     
-    $em = filter_var($_POST['profile_email'], FILTER_SANITIZE_EMAIL);
-    $em = htmlspecialchars(strip_tags($em)); //uklanja HTML elemente
-    $em = str_replace(' ', '', $em); //uklanja razmake
-
-    $password = htmlspecialchars(strip_tags($_POST['profile_password'])); //uklanja HTML elemente
-    $password = str_replace(' ', '', $password); //uklanja razmake
-    $password = md5($password);    //enkripcija lozinke
+    $em =  filter_var(UserData::sanit($_POST['profile_email'], FILTER_SANITIZE_EMAIL)); //uklanja HTML elemente,  razmake, sanitizuje mail
+       
+    $password = md5(UserData::sanit($_POST['profile_password']));   //uklanja HTML elemente,  razmake  i enkripcija lozinke
 
     //provera da li postoji korisnik
     if (!Userdata::CheckUser($em, $password)) {
@@ -45,9 +41,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
         } else {
             if(!empty($_POST['update_fname'])){
 
-                $newfname = htmlspecialchars(strip_tags($_POST['update_fname'])); //uklanja HTML elemente
-                $newfname = str_replace(' ', '', $newfname); //uklanja razmake
-                $newfname = ucfirst(strtolower($newfname)); //ostavlja samo prvo slovo veliko
+                $newfname = ucfirst(strtolower(UserData::sanit($_POST['update_fname']))); //ostavlja samo prvo slovo veliko
+                
                     //provera duzine imena
                 if (strlen($newfname)>25 || strlen($newfname)<2) {
                     array_push($error_array,  "Your first name must be between 2 and 25 characters");
@@ -75,9 +70,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
             }
             if(!empty($_POST['update_lname'])){
 
-                $newlname = htmlspecialchars(strip_tags($_POST['update_lname'])); //uklanja HTML elemente
-                $newlname = str_replace(' ', '', $newlname); //uklanja razmake
-                $newlname = ucfirst(strtolower($newlname)); //ostavlja samo prvo slovo veliko
+               
+                $newlname = ucfirst(strtolower(UserData::sanit($_POST['update_lname']))); ///uklanja HTML elemente, razmake i ostavlja samo prvo slovo veliko
 
                 //provera duzine prezimena
                 if (strlen($newlname)>25 || strlen($newlname)<2) {
@@ -109,8 +103,8 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
             if((!empty($_POST['new_password'])) and (!empty($_POST['new_password2']))){
 
                 //Lozinka
-                $newpassword = htmlspecialchars(strip_tags($_POST['new_password'])); //uklanja HTML elemente
-                $newpassword2 = htmlspecialchars(strip_tags($_POST['new_password2'])); //uklanja HTML elemente
+                $newpassword = UserData::sanit($_POST['new_password']); //uklanja HTML elemente
+                $newpassword2 = UserData::sanit($_POST['new_password2']); //uklanja HTML elemente
 
                 if ($newpassword != $newpassword2) {
                     array_push($error_array, "Your passwords do not match");
