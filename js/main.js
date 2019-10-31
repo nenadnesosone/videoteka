@@ -74,8 +74,8 @@ function removeFromWatchlist() {
     let userId = window.localStorage.getItem('userId');
 
     let data = {
-        'movieId': movieId,
-        'userId': userId
+        movieId: movieId,
+        userId: userId
     }
 
     $.ajax({
@@ -145,7 +145,7 @@ function displayWatchlist() {
 
     $.ajax({
         url: 'http://localhost/videoteka/watchlist/' + userId,
-        contentType: 'json',
+        contentType: "application/json; charset=utf-8",
         method: 'GET',
         success: function(resp) {
             console.log(resp);
