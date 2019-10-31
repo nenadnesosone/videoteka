@@ -49,7 +49,7 @@ require_once 'includes/form_handlers/profile_handler.php';
                             echo $_SESSION['profile_email'];
                         } ?>" required>
                     <br>
-                    <input id="profile_password" type="password" name="profile_password" placeholder="Password">
+                    <input id="profile_password" type="password" name="profile_password" placeholder="Password" required>
                     <br>
                     <?php if (in_array("Email or password was incorrect!<br>", $error_array)) {
                         echo "Email or password was incorrect!<br>";
@@ -81,8 +81,10 @@ require_once 'includes/form_handlers/profile_handler.php';
                     else if (in_array("Your password must be between 5 and 30 characters", $error_array)) echo "Your password must be between 5 and 30 characters<br>"; ?>
 
                     <?php if (in_array("Your image is too large!", $error_array)) echo  "Your image is to large!<br>";
-                        else if (in_array("Extention must be JPEG, PNG or JPG!", $error_array)) echo "Extention must be JPEG, PNG or JPG!<br>"; 
+                        else if (in_array("Extention must be JPEG, PNG or JPG!", $error_array)) echo "Extention must be JPEG, PNG or JPG!<br>";
                         ?>
+                    <div style="color:red" class="errorMessageUpdate" id="errorMessageUpdate"> </div>
+
                     <input id="update_button" type="submit" name="update_button" value="Update">
                     <input id="delete_button" type="submit" name="delete_button" value="Delete"><br>
                     <?php if (in_array("You have updated your First Name!", $error_array)) echo "<span style='color:#14C800;'>You have updated your First Name!</span><br>"; ?>
@@ -92,18 +94,20 @@ require_once 'includes/form_handlers/profile_handler.php';
                     
                     <?php
 
-                    if (isset($_POST["newpwd"])) {
-                        if ($_POST["newpwd"] == "passwordupdated") {
-                            echo '<p class="signupsuccess">Your password has been reset!</p>';
-                        }
-                    }
-                    ?>
+                    // if (isset($_POST["newpwd"])) {
+                    //     if ($_POST["newpwd"] == "passwordupdated") {
+                    //         echo '<p class="signupsuccess">Your password has been reset!</p>';
+                    //     }
+                    // }
+                    ?> 
                     <a href="reset_password.php" style="color:blue;">Forgot your password?</a>
                 </form>
             </div>
 
         </div>
     </div>
+    <script src="js/restAccount.js"></script>
+
     <?php
     require_once 'php/partials/footer.php';
     ?>
