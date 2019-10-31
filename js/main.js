@@ -150,6 +150,7 @@ function displayWatchlist() {
         success: function(resp) {
             console.log(resp);
             window.localStorage.setItem('watchlist', JSON.stringify(resp));
+            window.location.href = "http://localhost/videoteka/watchlist.php"
         }
     })
 }

@@ -17,9 +17,6 @@
                    if(!isset($_SESSION['username'])){
                        echo
                    '<li class="nav-item">
-                       <a href="#" class="nav-link watchlist">Watchlist</a>
-                   </li>
-                    <li class="nav-item">
                     <a href="register.php" class="nav-link">Login/SignUp</a>
                 </li>
                 <li>
