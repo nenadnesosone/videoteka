@@ -21,7 +21,7 @@
                 </li>
                 <li>
                 <form action="search.php" method="POST">
-                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px;">
                     <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
                 </form>
                 </li>
@@ -54,7 +54,7 @@
             </li>
             <li>
                 <form action="search.php" method="POST">
-                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px;">
                     <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
                 </form>
             </li>
@@ -72,7 +72,7 @@
             </li>
             <li>
                 <form action="search.php" method="POST">
-                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px">
+                    <input type ="text" name ="search" placeholder="Search" required class="form-control" style="display:inline-block; width:70%;height:35px;margin: 2px -3px 2px 2px;">
                     <button type="submit" name="submit_search" class="btn btn-primary" style="margin-top:-2px;"><i class="fas fa-search"></i></button>
                 </form>
             </li>

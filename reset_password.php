@@ -53,21 +53,23 @@ if (isset($_POST['reset_request_submit']) && (!empty($_POST['reset_email']))) {
         $subject = "Password Recovery - Videoclub";
 
         $email_to =$email;
-        $fromserver = 'from@example.com';
+        // $fromserver = "noreply@yourwebsite.com";
         require("PHPMailer-master/PHPMailerAutoload.php");
+        require('includes/credentials.php');
         $mail = new PHPMailer();
         $mail -> IsSMTP();
-        $mail ->SMTPDebug = 2; //no debug
-        $mail ->Host="localhost";
+        $mail ->SMTPDebug = 4; //no debug
+        $mail ->Host="smtp.gmail.com";
         $mail ->SMTPAuth = true;
-        $mail ->Username = "ljubicazeravic@gmail.com";
-        $mail -> Password = "ljubica"; 
+        $mail ->Username = EMAIL;
+        $mail -> Password = PASS;
+        $mail ->SMTPSecure = 'ssl'; 
         $mail -> Port = 465;
         $mail->addCC("cc@example.com"); //CC i BCC polja
         $mail->addBCC("bcc@example.com"); 
-        $mail->From = 'from@example.com';
+        $mail->From = EMAIL;
         $mail->FromName = "Videoteka";
-        $mail->Sender = $fromserver; 
+        // $mail->Sender = EMAIL; 
         $mail->Subject = $subject;
         $mail->Body = $body;
         $mail->AddAddress($email_to);
