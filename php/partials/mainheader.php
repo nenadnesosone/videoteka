@@ -33,11 +33,11 @@
         } else {
             echo
             '<li class="nav-item">
-            <a href="watchlist.php" class="nav-link">'. $_SESSION['username'] . ' Watchlist</a>
+            <a href="watchlist.php" class="nav-link" onclick="displayWatchlist()" >'. $_SESSION['username'] . ' Watchlist</a>
             </li>
             <li class="nav-item dropdown">
                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                     <img src="'. $_SESSION['userimage'] .'" width="75" height="75" alt="" class="img-fluid">
+                     <img src="'. $_SESSION['userimage'] .'" width="35" height="35" alt="" class="img-fluid rounded">
                  </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="restAccount.php">Update/Delete Account</a>'; 
@@ -67,7 +67,7 @@
                 '<a class="dropdown-item" href="#">Donate!</a>
                 <a class="dropdown-item" href="#">Buy MovieCamp T-Shirt!</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="signout.php">Sign Out</a>
+                <a class="dropdown-item" href="signout.php" onclick="localStorage.clear()">Sign Out</a>
                 </div>
             </li>
             <li>

@@ -79,13 +79,13 @@ class WatchlistData
     }
 
     // funkcija za ubacivanje filma kojeg je korisnik odabrao
-    public static function AddMovieToWatchlist($selected)
+    public static function AddMovieToWatchlist($data)
     {
         //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
         // podatke stavljamo u promenljive
-        $userId = $selected->userId;
-        $movieId = $selected->movieId;
+        $userId = $data->userId;
+        $movieId = $data->movieId;
 
         $query = "INSERT INTO users_movies (`UserId`,`MovieId`) VALUES ('$userId', '$movieId')";
         $result = mysqli_query($db, $query);
@@ -95,34 +95,11 @@ class WatchlistData
             return false;
         }
     }
-    // // funkcija za brisanje svih korisnikovih filmova iz baze ako zelimo da je koristimo
-    // public static function DeleteAllMoviesFromWatchlist($userId)
-    // {
-    //     //povezujemo se s bazom
-    //     $db = Database::getInstance()->getConnection();
 
-    //     // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId
 
-    //     // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
-    //     $query = "DELETE FROM users_movies WHERE UserId=$userId";
-    //     $result = mysqli_query($db, $query);
-    //     if ($result) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // funkcija za brisanje jednog korisnikovog filma iz baze
-    public static function DeleteMovieFromWatchlist($selected)
+    public static function DeleteMovieFromWatchlist($userId, $movieId)
     {
-        //povezujemo se s bazom
-        $db = Database::getInstance()->getConnection();
-
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca userId i movieid
-        $userId = $selected->userId;
-        $movieId = $selected->movieId;
-        // brisanje odabranog filma iz baze 	 	 	 	 	 	 	 	 	 	 	
+        $db = Database::getInstance()->getConnection(); 	 	 	 	 	 	 	 	 	
         $query = "DELETE FROM users_movies WHERE UserId=$userId AND MovieId=$movieId";
         $result = mysqli_query($db, $query);
         if ($result) {

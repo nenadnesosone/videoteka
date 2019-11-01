@@ -53,33 +53,31 @@ if (!in_array($method, $supported_methods)) {
                     $response->data = MovieData::getAllMovies();
 
                     $response->status = 200;
-
                 } else {
                     if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
 
                         $response->data = WatchlistData::GetAllSelected();
                         $response->status = 200;
+                    } else {
 
-                    }else{
+                        if ($url_parts_counter == 2 and $url_parts[1] == "movies") {
 
-                    if ($url_parts_counter == 2 and $url_parts[1] == "movies") {
+                            $id = intval($url_parts[2]);
 
-                        $id = intval($url_parts[2]);
-
-                        if ($id > 0) {
-                            $movie = MovieData::GetMovie($id);
-                            if ($movie == NULL) {
-                                $response->status = 404;
-                                $response->data = NULL;
+                            if ($id > 0) {
+                                $movie = MovieData::GetMovie($id);
+                                if ($movie == NULL) {
+                                    $response->status = 404;
+                                    $response->data = NULL;
+                                } else {
+                                    $response->data = $movie;
+                                    $response->status = 200;
+                                }
                             } else {
-                                $response->data = $movie;
-                                $response->status = 200;
+                                $response->status = 400;
+                                $response->data = NULL;
                             }
                         } else {
-                            $response->status = 400;
-                            $response->data = NULL;
-                        }
-                    }else {
                             if ($url_parts_counter == 2 and $url_parts[1] == "watchlist") {
 
                                 $id = intval($url_parts[2]);
@@ -108,6 +106,7 @@ if (!in_array($method, $supported_methods)) {
 
             case "POST":
                 if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
+
                     $data = json_decode(file_get_contents("php://input"));
 
                     if (!isset($data->userId) or !isset($data->movieId)) {
@@ -132,23 +131,20 @@ if (!in_array($method, $supported_methods)) {
                 break;
 
             case "DELETE":
-                if ($url_parts_counter == 1 and $url_parts[1] == "watchlist") {
+                if ($url_parts_counter == 3 and $url_parts[1] == "watchlist") {
 
-                    $data = json_decode(file_get_contents("php://input"));
+                    
+                    $userId = intval($url_parts[2]);
+                    $movieId = intval($url_parts[3]);
 
-                    if (!isset($data->userid) or !isset($data->movieId)) {
+                    $isDeleted = WatchlistData::DeleteMovieFromWatchlist($userId, $movieId);
+
+                    if ($id == -1) {
                         $response->status = 400;
                         $response->data = NULL;
                     } else {
-                        $id = WatchlistData::DeleteMovieFromWatchlist($selected);
-
-                        if ($id == -1) {
-                            $response->status = 400;
-                            $response->data = NULL;
-                        } else {
-                            $response->data = $id;
-                            $response->status = 201;
-                        }
+                        $response->data = $isDeleted;
+                        $response->status = 201;
                     }
                 }
                 break;

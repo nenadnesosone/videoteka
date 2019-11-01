@@ -171,17 +171,18 @@ class MovieData
                 while ($row = mysqli_fetch_assoc($result)) {
                     $title = $row['Title'];
                     $leadingActor = $row['LeadingActor'];
-                    $imageUrl = $row['PosterUrl'];
+                    $posterUrl = $row['PosterUrl'];
                     $movieId = $row['MovieId'];
-                    echo   "<div class='col-md-6 col-lg-3'>
+                    echo   "<div class='col-md-6 col-xl-3'>
                         <div class='card border-0'>
                             <div class='modal'>
-                                <div class='modal-content'>
-                                    <button class='btn btn-small mb-2 watch'>Add To Watchlist</button>
-                                    <button role='button' class='btn btn-small moreInfo'> <a href='localhost/movies/$movieId' class='btn-link'>More Info</a></button>
-                                </div>
+                            <div class='modal-content'>
+                            <button class='btn btn-small mb-2 watch' data-id='` + $movieId + `'>Add To Watchlist</button>
+                            <button class='btn btn-small mb-2 remove' data-id='` + $movieId + `' style='display:none;'>Remove From Watchlist</button>
+                            <button role='button' class='btn btn-small moreInfo' data-id='` + $movieId + `'><a href='#'>More Info</a></button>
+                        </div>
                             </div>
-                            <img src='$imageUrl' alt='Card Image' class='card-img-top'/>
+                            <img src='$posterUrl' alt='Card Image' class='card-img-top'/>
                             <div class='card-body'>
                                 <h6>" . $title . "</h6>
                                 <p class='text-muted card-text'> " . $leadingActor . "</p>

@@ -7,26 +7,27 @@ document.getElementsByTagName('head')[0].appendChild(script);
 const addButtons = document.querySelectorAll('.watch');
 const removeButtons = document.querySelectorAll('.remove');
 const moreInfo = document.querySelectorAll('.moreInfo');
-const watchlist = document.querySelector('.watchlist');
 const signout = document.querySelector('.signout');
 
+
+let token = window.localStorage.getItem('token');
+let userId = window.localStorage.getItem('userId');
 
 
 function addToWatchlist() {
     //css
-    this.style.display = 'none';
-    removeButtons.forEach(btn => {
-        if (btn.dataset.id === this.dataset.id) {
-            btn.style.display = 'block';
-        }
-    });
+    // this.style.display = 'none';
+    // removeButtons.forEach(btn => {
+    //     if (btn.dataset.id === this.dataset.id) {
+    //         btn.style.display = 'block';
+    //     }
+    // });
 
     //dodavanje filma u watchlistu
 
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
-    let token = window.localStorage.getItem('token');
-    let userId = window.localStorage.getItem('userId');
+
 
     let data = {
         'movieId': movieId,
@@ -52,7 +53,7 @@ function addToWatchlist() {
             }
         },
 
-    })
+    });
 
 }
 
@@ -60,18 +61,15 @@ function addToWatchlist() {
 
 function removeFromWatchlist() {
     // css
-    this.style.display = 'none';
-    addButtons.forEach(btn => {
-        if (btn.dataset.id === this.dataset.id) {
-            btn.style.display = 'block';
-        }
-    });
+    // this.style.display = 'none';
+    // addButtons.forEach(btn => {
+    //     if (btn.dataset.id === this.dataset.id) {
+    //         btn.style.display = 'block';
+    //     }
+    // });
 
-    // brisanje filma iz watchliste (ne radi :( )
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
-    let token = window.localStorage.getItem('token');
-    let userId = window.localStorage.getItem('userId');
 
     let data = {
         'movieId': movieId,
@@ -79,28 +77,21 @@ function removeFromWatchlist() {
     }
 
     $.ajax({
-        url: "http://localhost/videoteka/watchlist",
+        url: "http://localhost/videoteka/watchlist/" + data['userId'] + '/' + data['movieId'],
         type: 'DELETE',
-        contentType: "application/json; charset=utf-8",
         beforeSend: function(xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        data: JSON.stringify(data),
-        dataType: "json",
         success: function(serverResponse) {
             console.log("Odgovor servera");
             console.log(serverResponse);
             if (serverResponse['success']) {
-                alert("Uspesno dodat film!");
+                alert("Uspesno obrisan film!");
             } else {
-                alert("Neuspesno dodat film!");
+                alert("Neuspesno obrisan film!");
             }
         },
-
-
     })
-
-
 }
 
 
@@ -130,7 +121,6 @@ function displayMovie() {
             window.localStorage.setItem('imageUrl_3', resp.ImageUrl_3);
             window.localStorage.setItem('imageUrl_4', resp.ImageUrl_4);
             window.localStorage.setItem('imageUrl_5', resp.ImageUrl_5);
-            console.log(resp.PosterUrl);
 
             window.location.href = "http://localhost/videoteka/singleMovie.php";
         }
@@ -139,9 +129,9 @@ function displayMovie() {
 
 
 
-// ne radi
 function displayWatchlist() {
     let userId = window.localStorage.getItem('userId');
+    console.log(userId)
 
     $.ajax({
         url: 'http://localhost/videoteka/watchlist/' + userId,
@@ -160,5 +150,3 @@ function displayWatchlist() {
 addButtons.forEach(btn => btn.addEventListener('click', addToWatchlist));
 removeButtons.forEach(btn => btn.addEventListener('click', removeFromWatchlist));
 moreInfo.forEach(btn => btn.addEventListener('click', displayMovie));
-watchlist.addEventListener('click', displayWatchlist);
-// signout.addEventListener('click', localStorage.clear());

@@ -35,7 +35,6 @@ require_once 'data/moviedata.php';
 
     <div class="container m-auto">
         <div class="row">
-
         </div>
     </div>
 
@@ -45,12 +44,12 @@ require_once 'data/moviedata.php';
     <script type="text/javascript">
         function createCard(movieId, posterUrl, title, leadingActor) {
             let theCard =
-                `<div class='col-md-6 col-lg-3'>
+                `<div class='col-md-6 col-xl-3'>
                 <div class='card border-0'>
                     <div class='modal'>
                         <div class='modal-content'>
-                            <button class='btn btn-small mb-2 watch' data-id='` + movieId + `'>Add To Watchlist</button>
-                            <button class='btn btn-small mb-2 remove' data-id='` + movieId + `' style='display:none;'>Remove From Watchlist</button>
+                            <button role='button' class='btn btn-small mb-2 watch' data-id='` + movieId + `'">Add To Watchlist</button>
+                            <button class='btn btn-small mb-2 remove' data-id='` + movieId + `'>Remove From Watchlist</button>
                             <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
                         </div>
                     </div>
@@ -77,9 +76,11 @@ require_once 'data/moviedata.php';
     </script>
 
 
-    <script src="js/main.js" type="text/javascript"> </script>
+    <script src="js/main.js" type="text/javascript"></script>
 
     <?php
     require_once 'php\partials\footer.php';
 
     ?>
+</body>
+</html>

@@ -131,10 +131,10 @@ require 'includes/form_handlers/login_handler.php';
     </div>
     <script src="js/register.js"></script>
 
-
-    <!-- <?php
+<!-- 
+     <?php
     include 'php/partials/footer.php';
-    ?> -->
+    ?>  -->
 </body>
 
 </html>
