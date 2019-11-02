@@ -41,10 +41,6 @@ if (isset($_POST['register_button'])) {
             $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
             //provera da li je vec koriscen taj email
-
-            /*$e_check = mysqli_query($con, "SELECT Email FROM users_data WHERE Email ='$em'");
-            $num_rows = mysqli_num_rows($e_check);*/
-
             if (UserData::CheckEmail($em)) {
                 array_push($error_array, "Email already in use");
             }
@@ -92,7 +88,6 @@ if (isset($_POST['register_button'])) {
         // Ako postoji u bazi username, dodati mu broj
         UserData::CheckUsername($username);
         
-        //$check_username_query = mysqli_query($con, "SELECT UserName FROM users_data WHERE UserName = '$username'");
         $i = 0;
         
         while (mysqli_num_rows(UserData::CheckUsername($username)) !=0) {
@@ -103,22 +98,8 @@ if (isset($_POST['register_button'])) {
 
         //dodeljujemo korisniku random profilnu sliku 
         $rand = rand(1, 7);
-        if ($rand == 1) {
-            $profile_picture = "images/profile_pictures/head_alizarin.png";   
-        }else if($rand == 2){
-            $profile_picture = "images/profile_pictures/head_belize_hole.png";
-        }else if($rand == 3){
-            $profile_picture = "images/profile_pictures/woman_128.png";
-        }else if($rand == 4){
-            $profile_picture = "images/profile_pictures/avatar_128.png";
-        }else if($rand == 5){
-            $profile_picture = "images/profile_pictures/avatar (1)_128.png";
-        }else if($rand == 6){
-            $profile_picture = "images/profile_pictures/avatar (2)_128.png";
-        }else if($rand == 7){
-            $profile_picture = "images/profile_pictures/avatar (3)_128.png";
-        }
-        
+        $profile_picture = "images/profile_pictures/avatar_" .$rand .".png";
+
         //unos podataka u bazu
          UserData::CreateUser($fname, $lname, $username, $em, $password, $date, $profile_picture);
      
@@ -136,4 +117,3 @@ if (isset($_POST['register_button'])) {
 
 
 ?>
-

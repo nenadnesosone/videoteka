@@ -30,8 +30,8 @@ function addToWatchlist() {
 
 
     let data = {
-        'movieId': movieId,
-        'userId': userId
+        movieId: movieId,
+        userId: userId
     }
 
     $.ajax({
@@ -42,7 +42,7 @@ function addToWatchlist() {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         data: JSON.stringify(data),
-        dataType: "json",
+        dataType: "application/json",
         success: function(serverResponse) {
             console.log("Odgovor servera");
             console.log(serverResponse);
