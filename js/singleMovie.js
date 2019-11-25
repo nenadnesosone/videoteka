@@ -1,4 +1,5 @@
-// galerija
+//
+
 function showLink() {
     document.getElementById('shareOff').style.display = "none";
     document.getElementById('shareOn').style.display = "block";
@@ -9,6 +10,7 @@ function hideLink() {
     document.getElementById('shareOff').style.display = "block";
 }
 
+// galerija
 let slideIndex = 1;
 showSlides(slideIndex);
 

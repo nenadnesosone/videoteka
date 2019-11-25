@@ -117,10 +117,8 @@ button:hover,
 }
 
 .page-footer {
-    position: relative;
-    left: 0;
-    bottom: 0;
     width: 100%;
+    flex: 0 0 30px;
 }
 
 .page-footer a,
@@ -128,6 +126,7 @@ button:hover,
 .dropdown-item {
     text-decoration: none !important;
     color: #9ab;
+    margin: 10px;
 }
 
 @media only screen and (max-width: 767px) {

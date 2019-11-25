@@ -134,7 +134,7 @@ require 'includes/form_handlers/login_handler.php';
 <!-- 
      <?php
     include 'php/partials/footer.php';
-    ?>  -->
+    ?>   -->
 </body>
 
 </html>
