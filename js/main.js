@@ -6,11 +6,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 const signout = document.querySelector('.signout');
 
-let token = window.localStorage.getItem('token');
-let userId = window.localStorage.getItem('userId');
 
-
-$(document).on('click', '.watch', ()=> {
+$(document).on('click', '.watch', function () {
     //css
     // this.style.display = 'none';
     // removeButtons.forEach(btn => {
@@ -23,7 +20,7 @@ $(document).on('click', '.watch', ()=> {
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
 
-    console.log(token)
+    console.log(userId)
 
     let data = {
         movieId: movieId,
@@ -34,9 +31,6 @@ $(document).on('click', '.watch', ()=> {
         url: "http://localhost/videoteka/watchlist",
         method: 'POST',
         contentType: "application/json; charset=utf-8",
-        beforeSend: (xhr) =>{
-            xhr.setRequestHeader(`Authorization: Bearer ${token}`);
-        },
         data: JSON.stringify(data),
         dataType: "application/json",
         success: (serverResponse) =>{
@@ -55,7 +49,7 @@ $(document).on('click', '.watch', ()=> {
 
 
 
-$(document).on('click', 'remove', () => {
+$(document).on('click', '.remove', function () {
     // css
     // this.style.display = 'none';
     // addButtons.forEach(btn => {
@@ -75,9 +69,6 @@ $(document).on('click', 'remove', () => {
     $.ajax({
         url: `http://localhost/videoteka/watchlist/${data.userId}/${data.movieId}`,
         type: 'DELETE',
-        beforeSend: (xhr) =>{
-            xhr.setRequestHeader(`Authorization: Bearer ${token}`);
-        },
         success: (serverResponse)=> {
             console.log("Odgovor servera");
             console.log(serverResponse);
@@ -92,7 +83,7 @@ $(document).on('click', 'remove', () => {
 
 
 
-$(document).on('click', '.moreInfo', ()=> {
+$(document).on('click', '.moreInfo', function () {
 
     window.localStorage.setItem('movieId', this.dataset.id);
     let movieId = window.localStorage.getItem('movieId');
@@ -115,7 +106,7 @@ $(document).on('click', '.moreInfo', ()=> {
             window.localStorage.setItem('imageUrl_3', data.ImageUrl_3);
             window.localStorage.setItem('imageUrl_4', data.ImageUrl_4);
             window.localStorage.setItem('imageUrl_5', data.ImageUrl_5);
-
+            
             window.location.href = "http://localhost/videoteka/singleMovie.php";
         }
     })

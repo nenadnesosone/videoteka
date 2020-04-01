@@ -46,20 +46,20 @@ require_once 'data/moviedata.php';
             let theCard =
                 `<div class='col-md-6 col-xl-3'>
                 <div class='card border-0'>
-                    <div class='modal'>
-                        <div class='modal-content'>
-                            <button role='button' class='btn btn-small mb-2 watch' data-id='` + movieId + `'">Add To Watchlist</button>
-                            <button class='btn btn-small mb-2 remove' data-id='` + movieId + `'>Remove From Watchlist</button>
-                            <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
-                        </div>
-                    </div>
-                    <img id='poster' src='`+posterUrl+`' alt='Card Image' class='card-img-top' />
-                    <div class='card-body'>
-                        <h6>` + title + `</h6>
-                        <p class='text-muted card-text'>` + leadingActor + `</p>
-                    </div>
+                <div class='modal'>
+                <div class='modal-content'>
+                <button role='button' class='btn btn-small mb-2 watch' data-id='` + movieId + `'">Add To Watchlist</button>
+                <button class='btn btn-small mb-2 remove' data-id='` + movieId + `'>Remove From Watchlist</button>
+                <button role='button' class='btn btn-small moreInfo' data-id='` + movieId + `'><a href='#'>More Info</a></button>
                 </div>
-            </div>`;
+                </div>
+                <img id='poster' src='` + posterUrl + `' alt='Card Image' class='card-img-top' />
+                <div class='card-body'>
+                <h6>` + title + `</h6>
+                <p class='text-muted card-text'>` + leadingActor + `</p>
+                </div>
+                </div>
+                </div>`;
             return theCard;
         }
 
@@ -70,12 +70,13 @@ require_once 'data/moviedata.php';
         let imgPoster = document.querySelector('#poster');
 
         movies.forEach(movie => {
-            let cardContent = createCard(movie.MovieId, movie.PosterUrl,movie.Title, movie.LeadingActor);
+            let cardContent = createCard(movie.MovieId, movie.PosterUrl, movie.Title, movie.LeadingActor);
             allMovies.innerHTML += cardContent;
         });
     </script>
-
-
+    <script type="text/javascript">
+        let userId = "<?php echo $_SESSION['userid'] ?>"
+    </script>
     <script src="js/main.js" type="text/javascript"></script>
 
     <?php
@@ -83,4 +84,5 @@ require_once 'data/moviedata.php';
 
     ?>
 </body>
+
 </html>
