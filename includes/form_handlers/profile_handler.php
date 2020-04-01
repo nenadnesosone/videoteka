@@ -17,16 +17,14 @@ $uploadOK = 1;
 
 if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
     
-    $em =  filter_var(UserData::sanit($_POST['profile_email'], FILTER_SANITIZE_EMAIL)); //uklanja HTML elemente,  razmake, sanitizuje mail
+    $em =  filter_var(UserData::sanit($_POST['profile_email'], FILTER_SANITIZE_EMAIL)); 
        
-    $password = md5(UserData::sanit($_POST['profile_password']));   //uklanja HTML elemente,  razmake  i enkripcija lozinke
+    $password = md5(UserData::sanit($_POST['profile_password']));   
 
-    //provera da li postoji korisnik
     if (!Userdata::CheckUser($em, $password)) {
         array_push($error_array,"Email or password was incorrect!<br>");
         
     }else{
-        // uzimamo podatke iz baze
         $row = UserData::GetUserRow($em, $password);
         $userId = $row['UserId'];
         $fname = $row['FirstName'];
@@ -35,35 +33,30 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
         $password = $row['Password'];
         $userimage = $row['ProfilePicture'];
         if(isset($_POST['delete_button'])){
-            //brisemo podatke iz sesije i brisemo korisnika
             session_destroy();
             Userdata::DeleteOneUser($userId);
         } else {
             if(!empty($_POST['update_fname'])){
 
-                $newfname = ucfirst(strtolower(UserData::sanit($_POST['update_fname']))); //ostavlja samo prvo slovo veliko
+                $newfname = ucfirst(strtolower(UserData::sanit($_POST['update_fname']))); 
                 
-                    //provera duzine imena
                 if (strlen($newfname)>25 || strlen($newfname)<2) {
                     array_push($error_array,  "Your first name must be between 2 and 25 characters");
                 } else {
 
                     $fname = $newfname;
-                    $username = strtolower($newfname . "_" . $lname);// username ce biti napisan malim slovima
+                    $username = strtolower($newfname . "_" . $lname);
 
-                    //povezivanje imena i prezimena u username
                     $username = strtolower($newfname . "_" . $lname);
                     UserData::CheckUserName($username);
                     $i = 0;
-                    // Ako postoji u bazi username, dodati mu broj
                     while (mysqli_num_rows(UserData::CheckUserName($username)) !=0) {
                         $i++;
                         $username = $username . "_" . $i;
                         UserData::CheckUserName($username);
                     }
-                    // menjamo podatke u sesiji
                     $_SESSION['username'] = $username;
-                   // menjamo podatke u bazi
+                   
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your First Name!");
                 }
@@ -71,55 +64,50 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
             if(!empty($_POST['update_lname'])){
 
                
-                $newlname = ucfirst(strtolower(UserData::sanit($_POST['update_lname']))); ///uklanja HTML elemente, razmake i ostavlja samo prvo slovo veliko
+                $newlname = ucfirst(strtolower(UserData::sanit($_POST['update_lname']))); 
 
-                //provera duzine prezimena
                 if (strlen($newlname)>25 || strlen($newlname)<2) {
                     array_push($error_array, "Your last name must be between 2 and 25 characters"); 
                 } else {
 
                     $lname = $newlname;
-                    $username = strtolower($fname . "_" . $lname);// username ce biti napisan malim slovima
+                    $username = strtolower($fname . "_" . $lname);
 
-                    //povezivanje imena i prezimena u username
                     $username = strtolower($fname . "_" . $lname);
                     UserData::CheckUserName($username);
                     $i = 0;
-                    // Ako postoji u bazi username, dodati mu broj
                     while (mysqli_num_rows(UserData::CheckUserName($username)) !=0) {
                         $i++;
                         $username = $username . "_" . $i;
                         UserData::CheckUserName($username);
                     }
-                    // menjamo podatke u sesiji
                     $_SESSION['username'] = $username;
-                    // menjamo podatke u bazi
+                    
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your Last Name!");
                 }
                 
             }
-            // ako su ukucane nove sifre
             if((!empty($_POST['new_password'])) and (!empty($_POST['new_password2']))){
 
-                //Lozinka
-                $newpassword = UserData::sanit($_POST['new_password']); //uklanja HTML elemente
-                $newpassword2 = UserData::sanit($_POST['new_password2']); //uklanja HTML elemente
+                
+                $newpassword = UserData::sanit($_POST['new_password']); 
+                $newpassword2 = UserData::sanit($_POST['new_password2']); 
 
                 if ($newpassword != $newpassword2) {
                     array_push($error_array, "Your passwords do not match");
                 }else if (preg_match('/[^A-Za-z0-9]/', $newpassword)) {
-                    //lozinka moze da sadrzi samo slova i brojeve
+                    
                     array_push($error_array,  "Your password can only contain english characters and numbers");
                 }else if(strlen($newpassword) >30 || strlen($newpassword) < 5) {
-                    //neodgovarajuca duzina lozinke
+                    
                     array_push($error_array, "Your password must be between 5 and 30 characters"); 
                 } else {
-                    $newpassword = md5($newpassword);    //enkripcija lozinke
+                    $newpassword = md5($newpassword);
                     
-                    $password = $newpassword;// tek kad smo sve proverili menjamo lozinku
+                    $password = $newpassword;
 
-                    // menjamo podatke u bazi
+                    
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     array_push($error_array, "You have updated your Password!");
                 }
@@ -135,28 +123,28 @@ if ((isset($_POST['update_button'])) or (isset($_POST['delete_button']))) {
                 $exts = array("jpg", "jpeg", "png");
                 $userphoto = $username. '.'.$file_ext;
                 $image_location = "images/profile_pictures/" .$userphoto;
-                // gde cemo staviti sliku kad je ucitamo
+                
         
-                //proveravamo da li je fajl prazan
+                
                 if($file_size == 0) {
                     $uploadOK = 0;
-                // proveravamo da li je slika odgovarajuce velicine
+                
                 }else if($file_size > 10240){
                     array_push($error_array,"Your image is too large!");
                     $uploadOK = 0;
-                // proveravamo da li je extenzija dobra
+                
                 }else if(in_array($file_ext, $exts) === false){
                     array_push($error_array,"Extention must be JPEG, PNG or JPG!");
                     $uploadOK = 0;
                 } else if($uploadOK !== 0){
                     if(file_exists($image_location)){ 
-                        // brisemo predhodnu sluku ako je bilo takve slike s istim korisnickim imenom
+                        
                         unlink($image_location);
                     }
-                    // vrsi se upload u odredjeni folder
+                    
                     move_uploaded_file($file_tmp, $image_location);
                     $userimage = $image_location;
-                    // menjamo podatke u bazi
+                    
                     UserData::UpdateUser($userId, $fname, $lname, $username, $password, $userimage);
                     $_SESSION['userimage'] = $userimage;
                     array_push($error_array,"You have updated your profile picture!");

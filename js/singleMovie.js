@@ -1,4 +1,3 @@
-//
 
 function showLink() {
     document.getElementById('shareOff').style.display = "none";
@@ -27,12 +26,8 @@ function showSlides(n) {
     let i;
     const slides = document.getElementsByClassName("slides");
     const dots = document.getElementsByClassName("demo");
-    if (n > slides.length) {
-        slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = slides.length
-    }
+    if (n > slides.length) slideIndex = 1
+    if (n < 1) slideIndex = slides.length
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }

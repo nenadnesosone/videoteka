@@ -1,11 +1,9 @@
 <?php
 require_once 'config\config.php';
 
-// klasa uz ciju pomoc cemo pristupati podacima o filmovima
 class MovieData
 {
 
-    //deklarisanje varijabli
     public $movieId;
     public $title;
     public $releaseYear;
@@ -23,7 +21,6 @@ class MovieData
     public $imageUrl_4;
     public $imageUrl_5;
 
-    // funkcija konstruktor
     public function __construct($movieId, $title, $releaseYear, $genre, $director, $leadingActor, $country, $language, $summary, $imdbRating, $posterUrl, $imageUrl_1, $imageUrl_2, $imageUrl_3, $imageUrl_4, $imageUrl_5) // za cinema sql
     {
         $this->movieId = $movieId;
@@ -43,13 +40,11 @@ class MovieData
         $this->imageUrl_4 = $imageUrl_4;
         $this->imageUrl_5 = $imageUrl_5;
     }
-    // funcija koja ce prikupljati podatke o svim filmovima iz baze
 
     public static function GetAllMovies()
     {
-        //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
-        ///odaberemo sve
+        
         $query = "SELECT * FROM movies";
         $result = mysqli_query($db, $query);
         mysqli_set_charset($db, 'utf8');
@@ -64,13 +59,11 @@ class MovieData
         }
     }
 
-    // izvlacenje filmova za watchlistu
     
     public static function GetAllMoviesForWatchlist($data)
     {
-        //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
-        ///odaberemo sve
+        
         $query = "SELECT * FROM movies WHERE movieId IN (".implode(',', $data).")";
         $result = mysqli_query($db, $query);
         mysqli_set_charset($db, 'utf8');
@@ -85,14 +78,11 @@ class MovieData
         }
     }
 
-    // funcija koja ce prikupljati podatke o filmovima iz baze koje je korisnik odabrao
     public static function GetMovie($id)
     {
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
 
         $db = Database::getInstance()->getConnection();
 
-        // odaberemo konkretan film
         $query = "SELECT * FROM movies WHERE movieId=$id";
         $result = mysqli_query($db, $query);
         mysqli_set_charset($db, 'utf8');
@@ -103,11 +93,8 @@ class MovieData
             return [];
         }
     }
-
-    // funkcija za ubacivanje filmova u bazu ako zelimo da je koristimo 
     public static function CreateMovie($newfilm)
     {
-        //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
 
         $title = $newfilm['Title'];
@@ -126,8 +113,7 @@ class MovieData
         $imageUrl_4 = $newfilm['ImageUrl_4'];
         $imageUrl_5 = $newfilm['ImageUrl_5'];
 
-
-        // ubacivanje filmova u bazu 	 	 	
+	 	 	
         $query = "INSERT INTO movies (`MovieId`,`Title`,`ReleaseYear`,`Genre`,`Director`,`LeadingActor`,`Country`,`Language`,`Summary`,`ImdbRating`,`PosterUrl`,`ImageUrl_1`,`ImageUrl_2`,`ImageUrl_3`,`ImageUrl_4`,`ImageUrl_5` ) 
         VALUES (DEFAULT,'$title','$releaseYear','$genre','$director','$leadingActor','$country','$language','$summary','$imdbRating','$posterUrl','$imageUrl_1', '$imageUrl_2', '$imageUrl_3', '$imageUrl_4', '$imageUrl_5')";
 
@@ -139,15 +125,10 @@ class MovieData
         }
     }
 
-    // funkcija za brisanje filmova iz bazu ako zelimo da je koristimo
     public static function DeleteOneMovie($movieId)
     {
-        //povezujemo se s bazom
         $db = Database::getInstance()->getConnection();
-
-        // ovaj deo koda bi bio osetljiv na SQL Injection napade da korisnik moze da ukuca movieId
-
-        // brisanje filmova iz baze 	 	 	 	 	 	 	 	 	 	 	
+ 	 	 	 	 	 	 	 	 	 	
         $query = "DELETE FROM movies WHERE movieId=$movieId";
         $result = mysqli_query($db, $query);
         if ($result) {
@@ -157,7 +138,6 @@ class MovieData
         }
     }
 
-    // pretraga filmova
     public static function FindMovie()
     {
 

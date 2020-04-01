@@ -93,12 +93,6 @@ require_once 'includes/form_handlers/profile_handler.php';
                     <?php if (in_array("You have updated your image!", $error_array)) echo "<span style='color:#14C800;'>You have updated your profile picture!</span><br>"; ?>
                     
                     <?php
-
-                    // if (isset($_POST["newpwd"])) {
-                    //     if ($_POST["newpwd"] == "passwordupdated") {
-                    //         echo '<p class="signupsuccess">Your password has been reset!</p>';
-                    //     }
-                    // }
                     ?> 
                     <a href="reset_password.php" style="color:blue;">Forgot your password?</a>
                 </form>

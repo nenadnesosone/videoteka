@@ -53,7 +53,7 @@ if (isset($_GET["token"]) && isset($_GET["email"]) && isset($_GET["action"]) && 
             if ($error_array!="") {
                 
             }else{
-                $pass1 = mb5($pass1);
+                $pass1 = md5($pass1);
                 mysqli_query($con, "UPDATE users_data SET password = '$pass1' WHERE email = '$email'");
 
                 mysqli_query($con, "DELETE  FROM password_reset WHERE email = '$email'");

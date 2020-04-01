@@ -13,8 +13,8 @@ function viewAllMovies() {
         url: 'http://localhost/videoteka/movies',
         contentType: 'json',
         method: 'GET',
-        success: function(resp) {
-            window.localStorage.setItem('movies', JSON.stringify(resp));
+        success: function(data) {
+            window.localStorage.setItem('movies', JSON.stringify(data));
             window.location.href = 'http://localhost/videoteka/main.php';
         }
     })

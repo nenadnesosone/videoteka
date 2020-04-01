@@ -3,11 +3,10 @@
 if (isset($_POST['login_button'])) {
 
     $email = filter_var(UserData::sanit($_POST['log_email'], FILTER_SANITIZE_EMAIL));
-    $_SESSION['log_email'] = $email; //cuva u sesiji email
+    $_SESSION['log_email'] = $email; 
 
-    $password = md5(UserData::sanit($_POST['log_password']));  //enkripcija lozinke
+    $password = md5(UserData::sanit($_POST['log_password']));  
 
-    //provera da li se uneti podaci slazu sa podacima u bazi
     $check_database_query = mysqli_query($con, "SELECT * FROM users_data WHERE email='$email' AND password='$password'");
     $check_login_query = mysqli_num_rows($check_database_query);
 
@@ -30,5 +29,3 @@ if (isset($_POST['login_button'])) {
 
     }
 }
-
-?>

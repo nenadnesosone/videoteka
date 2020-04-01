@@ -1,122 +1,114 @@
-$(document).ready(function() {
-    //
-    $("#signup").click(function() {
-        $("#first").slideUp("slow", function() {
+$(document).ready(() =>{
+
+    $("#signup").click(() =>{
+        $("#first").slideUp("slow", () =>{
             $("#second").slideDown("slow");
         })
     });
-    //
-    $("#signin").click(function() {
-        $("#second").slideUp("slow", function() {
+    $("#signin").click(() =>{
+        $("#second").slideUp("slow", () =>{
             $("#first").slideDown("slow");
         })
     });
-    
-    //frontend validacija
-    $(document).ready(function () {    
+
+
+    $(document).ready(() =>{
         let errorMessage = document.querySelector('#errorMessage');
-        // reakcija na keyup
-        $('#reg_fname').keyup(function() {
+
+        $('#reg_fname').keyup(() =>{
             let $th = $(this);
-            $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
+            $th.val($th.val().replace(/[^a-zA-Z0-9]/g, () =>{ return ''; }));
             if ($th.val().length > 25 || $th.val().length < 2) {
                 errorMessage.textContent = "Your first name must be between 2 and 25 characters!";
                 return false;
-            }else{
-                errorMessage.textContent ="";
+            } else {
+                errorMessage.textContent = "";
             }
         });
 
-        $('#reg_lname').keyup(function() {
+        $('#reg_lname').keyup(() =>{
             let $th = $(this);
-            $th.val( $th.val().replace(/[^a-zA-Z0-9]/g, function(){ return ''; }) );
+            $th.val($th.val().replace(/[^a-zA-Z0-9]/g, () =>{ return ''; }));
             if ($th.val().length > 25 || $th.val().length < 2) {
                 errorMessage.textContent = "Your last name must be between 2 and 25 characters!";
                 return false;
-            }else{
+            } else {
                 errorMessage.textContent = "";
             }
 
         });
-        $('#reg_email').keyup(function() {
+        $('#reg_email').keyup(() =>{
             let $th = $(this);
-            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") ===-1 || $th.val().lastIndexOf(".") ===-1 ) {
-               errorMessage.textContent = "Invalid email adress!"
-               return false; 
-            }else{
+            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") === -1 || $th.val().lastIndexOf(".") === -1) {
+                errorMessage.textContent = "Invalid email adress!"
+                return false;
+            } else {
                 errorMessage.textContent = "";
             }
 
         });
-        $('#reg_email2').keyup(function() {
+        $('#reg_email2').keyup(() =>{
             let $th = $(this);
-            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") ===-1 || $th.val().lastIndexOf(".") ===-1 ) {
-               errorMessage.textContent = "Invalid email adress!"
-               return false; 
-            }else{
+            if ($th.val().lastIndexOf(".") < $th.val().indexOf("@") || $th.val().indexOf("@") === -1 || $th.val().lastIndexOf(".") === -1) {
+                errorMessage.textContent = "Invalid email adress!"
+                return false;
+            } else {
                 errorMessage.textContent = "";
             }
             if ($th.val() !== $('#reg_email').val()) {
                 errorMessage.textContent = "Emails don't match!"
-            }else{
+            } else {
                 errorMessage.textContent = "";
             }
         });
-        $('#reg_password').keyup(function() {
+        $('#reg_password').keyup(() =>{
             let $th = $(this);
-            if ($th.val().length <5 || $th.val().length >30 ) {
-               errorMessage.textContent = "Your password must be between 5 and 30 characters!";
-               return false; 
-            }else{
+            if ($th.val().length < 5 || $th.val().length > 30) {
+                errorMessage.textContent = "Your password must be between 5 and 30 characters!";
+                return false;
+            } else {
                 errorMessage.textContent = "";
             }
         });
-        $('#reg_password2').keyup(function() {
+        $('#reg_password2').keyup(() =>{
             let $th = $(this);
             if ($th.val() !== $('#reg_password').val()) {
-               errorMessage.textContent = "Passwords don't match!";
-               return false; 
-            }else{
+                errorMessage.textContent = "Passwords don't match!";
+                return false;
+            } else {
                 errorMessage.textContent = "";
             }
         });
     });
 
-    // Reakcija na klik dugmeta
-    $('#login_button').click(() => {
-        // Reference na input elemente iz kojih cemo citati podatke
 
-        let email = $('#log_email').val().trim();
-        let password = $('#log_password').val().trim();
+    $('#button').click(() => {
 
-        // Server url - Konfigurisite ga u skladu sa vasim racunarem
+        let email = $('#email').val().trim();
+        let password = $('#password').val().trim();
+
         let loginServerUrl = 'jwt-api/jwt_login_user.php';
 
-        // Pravimo podatke koji ce biti poslati serveru
         let data = {
             email: email,
             password: password,
         }
 
-        // Vrsimo POST zahtev na server.
-        // Vazno je podatke pretvoriti u JSON string!
         $.ajax({
             type: 'POST',
             url: loginServerUrl,
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
-            success: function(data) {
+            success: (data)=> {
                 localStorage.setItem('token', data.jwt);
                 localStorage.setItem('userId', data.userId);
-                // alert('Sucessfully retrieved token from the server');
+                console.log(data)
             },
-            error: function(e) {
+            error: (e) =>{
                 console.log("Login Failed");
                 console.log(e);
             }
         });
     });
-
-
 
 });
