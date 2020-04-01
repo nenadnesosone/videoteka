@@ -42,6 +42,8 @@ require_once 'data/moviedata.php';
 
 
     <script type="text/javascript">
+
+    
         function createCard(movieId, posterUrl, title, leadingActor) {
             let theCard =
                 `<div class='col-md-6 col-xl-3'>
